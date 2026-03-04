@@ -19,9 +19,21 @@ export default function Newsletter({ settings }: { settings: any }) {
   const layout = settings.layout || 'stacked';
   const bgImage = resolveImage(settings.bg_image);
   const overlayOpacity = settings.overlay_opacity ?? 60;
-  const bgColor = settings.section_bg_color || '#111827';
-  const textColor = settings.section_text_color || '#ffffff';
+  const bgColor = settings.section_bg_color || settings.background_color || '#111827';
+  const textColor = settings.section_text_color || settings.text_color || '#ffffff';
   const accentColor = settings.accent_color || 'var(--color-accent)';
+
+  // Determine button text color based on accent color luminance
+  const getButtonTextColor = (bg: string) => {
+    if (!bg || bg.startsWith('var(')) return '#ffffff';
+    const c = bg.replace('#', '');
+    if (c.length !== 6) return '#ffffff';
+    const r = parseInt(c.slice(0, 2), 16);
+    const g = parseInt(c.slice(2, 4), 16);
+    const b = parseInt(c.slice(4, 6), 16);
+    return (r * 0.299 + g * 0.587 + b * 0.114) > 150 ? '#111827' : '#ffffff';
+  };
+  const buttonTextColor = getButtonTextColor(accentColor);
   const heading = settings.heading || 'Stay in the loop';
   const description = settings.description || 'Subscribe to our newsletter for the latest updates, exclusive offers, and new arrivals.';
   const buttonText = settings.button_text || 'Subscribe';
@@ -83,7 +95,7 @@ export default function Newsletter({ settings }: { settings: any }) {
                     <button
                       type="submit"
                       className="px-6 py-3 rounded-lg font-medium text-sm transition-all hover:opacity-90 shrink-0 flex items-center gap-2"
-                      style={{ backgroundColor: accentColor, color: '#ffffff' }}
+                      style={{ backgroundColor: accentColor, color: buttonTextColor }}
                     >
                       <Send className="h-4 w-4" />
                       {buttonText}
@@ -114,7 +126,7 @@ export default function Newsletter({ settings }: { settings: any }) {
                   <button
                     type="submit"
                     className="px-6 py-3 rounded-lg font-medium text-sm transition-all hover:opacity-90 flex items-center justify-center gap-2"
-                    style={{ backgroundColor: accentColor, color: '#ffffff' }}
+                    style={{ backgroundColor: accentColor, color: buttonTextColor }}
                   >
                     <Send className="h-4 w-4" />
                     {buttonText}
