@@ -34,14 +34,14 @@ export default function ProductHighlight({ settings }: { settings: any }) {
 
   if (!settings.product && !settings.image) {
     return (
-      <section className="py-16 text-center border-dashed border-2 border-gray-200 m-4 rounded-xl">
-        <p className="text-gray-500">Configure Product Highlight (Image + Product)</p>
+      <section className="py-16 text-center border-dashed border-2 m-4 rounded-xl" style={{ borderColor: 'var(--color-border)' }}>
+        <p className="opacity-50">Configure Product Highlight (Image + Product)</p>
       </section>
     );
   }
 
   return (
-    <section className="py-16 md:py-24 bg-white overflow-hidden">
+    <section className="py-16 md:py-24 overflow-hidden" style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-text)' }}>
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
 
@@ -68,35 +68,35 @@ export default function ProductHighlight({ settings }: { settings: any }) {
           {/* Product & Context Side */}
           <div className={`space-y-8 ${isImageRight ? 'lg:order-1' : 'lg:order-2'} max-w-lg mx-auto lg:mx-0`}>
             <div className="space-y-4 text-center lg:text-left">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+              <h2 className="text-3xl md:text-4xl font-bold" style={{ color: 'var(--color-heading)' }}>
                 {settings.title || "Shop the Look"}
               </h2>
-              <p className="text-lg text-gray-600 leading-relaxed">
+              <p className="text-lg leading-relaxed opacity-70">
                 {settings.description || "Pair this item with your everyday style. Crafted for comfort and designed for impact."}
               </p>
             </div>
 
             {/* The Product Card Highlight */}
             {product ? (
-              <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-xl max-w-sm mx-auto lg:mx-0 transition-transform hover:scale-[1.02]">
+              <div className="p-6 rounded-2xl border shadow-xl max-w-sm mx-auto lg:mx-0 transition-transform hover:scale-[1.02]" style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}>
                 <div className="flex gap-4 items-center mb-4">
-                  <div className="h-20 w-20 rounded-lg bg-gray-100 overflow-hidden shrink-0">
+                  <div className="h-20 w-20 rounded-lg overflow-hidden shrink-0" style={{ backgroundColor: 'var(--color-border)' }}>
                     <img src={product.media?.[0]?.url || '/placeholder-product.png'} className="h-full w-full object-cover" alt="" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900 line-clamp-1">{product.title}</h4>
-                    <p className="text-gray-500">{new Intl.NumberFormat('en-NG', { style: 'currency', currency: storeConfig?.currency || 'NGN' }).format(product.price)}</p>
+                    <h4 className="font-bold line-clamp-1" style={{ color: 'var(--color-heading)' }}>{product.title}</h4>
+                    <p className="opacity-60">{new Intl.NumberFormat('en-NG', { style: 'currency', currency: storeConfig?.currency || 'NGN' }).format(product.price)}</p>
                   </div>
                 </div>
                 <Link
                   href={`/products/${product.handle}`}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-black py-4 px-6 text-white font-medium hover:bg-gray-800 transition-colors"
+                  className="flex w-full items-center justify-center gap-2 rounded-xl btn-primary py-4 px-6 font-medium transition-colors"
                 >
                   View Product <ArrowRight size={18} />
                 </Link>
               </div>
             ) : (
-              <div className="animate-pulse h-48 bg-gray-100 rounded-2xl"></div>
+              <div className="animate-pulse h-48 rounded-2xl" style={{ backgroundColor: 'var(--color-border)' }}></div>
             )}
           </div>
 

@@ -35,8 +35,8 @@ interface IconsWithTextProps {
 
 export default function IconsWithText({ settings, blocks }: IconsWithTextProps) {
   const {
-    background_color = '#ffffff',
-    text_color = '#000000',
+    background_color,
+    text_color,
     columns = 3,
     alignment = 'center'
   } = settings;
@@ -48,7 +48,7 @@ export default function IconsWithText({ settings, blocks }: IconsWithTextProps) 
   const alignClass = alignment === 'center' ? 'text-center items-center' : 'text-left items-start';
 
   return (
-    <section className="py-16 px-4 md:px-8" style={{ backgroundColor: background_color, color: text_color }}>
+    <section className="py-16 px-4 md:px-8" style={{ backgroundColor: background_color || 'var(--color-background)', color: text_color || 'var(--color-text)' }}>
       <div className={`max-w-7xl mx-auto grid ${gridClass} gap-16`}>
         {blocks.map((block: any, index: number) => {
           if (block.type !== 'icon_column') return null;

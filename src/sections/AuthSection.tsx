@@ -61,7 +61,7 @@ function LoginFormBlock({ settings }: AuthBlockProps) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="name@example.com"
-          className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
+          className="w-full px-4 py-3 border rounded-lg outline-none transition text-sm"
           required
         />
       </div>
@@ -70,7 +70,7 @@ function LoginFormBlock({ settings }: AuthBlockProps) {
         <div className="flex justify-between items-center mb-1.5 ml-1">
           <label className="block text-sm font-medium text-gray-700">Password</label>
           {settings.show_forgot_password && (
-            <Link href={getStorePermalink(domain, '/account/forgot-password')} className="text-xs text-primary font-medium hover:underline transition-all">
+            <Link href={getStorePermalink(domain, '/account/forgot-password')} className="text-xs font-medium hover:underline transition-all" style={{ color: 'var(--color-link)' }}>
               Forgot password?
             </Link>
           )}
@@ -81,7 +81,7 @@ function LoginFormBlock({ settings }: AuthBlockProps) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
-            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
+            className="w-full px-4 py-3 border rounded-lg outline-none transition text-sm"
             required
           />
           <button
@@ -111,7 +111,7 @@ function LoginFormBlock({ settings }: AuthBlockProps) {
       {settings.show_register_link && store?.accountConfig?.registrationEnabled !== false && (
         <p className="text-center text-sm opacity-60 pt-2">
           Don't have an account?{' '}
-          <Link href={getStorePermalink(domain, '/register')} className="text-primary font-bold hover:underline transition-all underline-offset-4">
+          <Link href={getStorePermalink(domain, '/register')} className="font-bold hover:underline transition-all underline-offset-4" style={{ color: 'var(--color-link)' }}>
             Create account
           </Link>
         </p>
@@ -167,7 +167,7 @@ function RegisterFormBlock({ settings }: AuthBlockProps) {
             value={formData.firstName}
             onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
             placeholder="John"
-            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
+            className="w-full px-4 py-3 border rounded-lg outline-none transition text-sm"
             required
           />
         </div>
@@ -178,7 +178,7 @@ function RegisterFormBlock({ settings }: AuthBlockProps) {
             value={formData.lastName}
             onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
             placeholder="Doe"
-            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
+            className="w-full px-4 py-3 border rounded-lg outline-none transition text-sm"
             required
           />
         </div>
@@ -191,7 +191,7 @@ function RegisterFormBlock({ settings }: AuthBlockProps) {
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           placeholder="name@example.com"
-          className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
+          className="w-full px-4 py-3 border rounded-lg outline-none transition text-sm"
           required
         />
       </div>
@@ -204,7 +204,7 @@ function RegisterFormBlock({ settings }: AuthBlockProps) {
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             placeholder="+234..."
-            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
+            className="w-full px-4 py-3 border rounded-lg outline-none transition text-sm"
             required
           />
         </div>
@@ -218,7 +218,7 @@ function RegisterFormBlock({ settings }: AuthBlockProps) {
             value={formData.password}
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
             placeholder="Min. 8 characters"
-            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
+            className="w-full px-4 py-3 border rounded-lg outline-none transition text-sm"
             required
             minLength={8}
           />
@@ -234,12 +234,12 @@ function RegisterFormBlock({ settings }: AuthBlockProps) {
 
       {settings.show_terms && (
         <label className="flex items-start gap-3 p-1 cursor-pointer group">
-          <input type="checkbox" required className="mt-1 w-4 h-4 rounded text-primary focus:ring-primary/20 accent-primary" style={{ borderColor: 'var(--color-border)' }} />
+          <input type="checkbox" required className="mt-1 w-4 h-4 rounded" style={{ borderColor: 'var(--color-border)', accentColor: 'var(--color-primary)' }} />
           <span className="text-[13px] opacity-60 leading-tight">
             I agree to the{' '}
-            <Link href={getStorePermalink(domain, '/pages/terms')} className="text-primary font-medium hover:underline">Terms of Service</Link>
+            <Link href={getStorePermalink(domain, '/pages/terms')} className="font-medium hover:underline" style={{ color: 'var(--color-link)' }}>Terms of Service</Link>
             {' '}and{' '}
-            <Link href={getStorePermalink(domain, '/pages/privacy')} className="text-primary font-medium hover:underline">Privacy Policy</Link>
+            <Link href={getStorePermalink(domain, '/pages/privacy')} className="font-medium hover:underline" style={{ color: 'var(--color-link)' }}>Privacy Policy</Link>
           </span>
         </label>
       )}
@@ -261,7 +261,7 @@ function RegisterFormBlock({ settings }: AuthBlockProps) {
       {settings.show_login_link && (
         <p className="text-center text-sm opacity-60 pt-2">
           Already have an account?{' '}
-          <Link href={getStorePermalink(domain, '/login')} className="text-primary font-bold hover:underline transition-all underline-offset-4">
+          <Link href={getStorePermalink(domain, '/login')} className="font-bold hover:underline transition-all underline-offset-4" style={{ color: 'var(--color-link)' }}>
             Sign in
           </Link>
         </p>
@@ -305,7 +305,7 @@ function ForgotPasswordFormBlock({ settings, onSuccess }: AuthBlockProps) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="name@example.com"
-          className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
+          className="w-full px-4 py-3 border rounded-lg outline-none transition text-sm"
           required
         />
       </div>
@@ -325,7 +325,7 @@ function ForgotPasswordFormBlock({ settings, onSuccess }: AuthBlockProps) {
       </button>
 
       <div className="text-center pt-2">
-        <Link href={getStorePermalink(domain, '/login')} className="text-sm font-medium text-primary hover:underline transition-all underline-offset-4">
+        <Link href={getStorePermalink(domain, '/login')} className="text-sm font-medium hover:underline transition-all underline-offset-4" style={{ color: 'var(--color-link)' }}>
           Back to Login
         </Link>
       </div>
@@ -371,7 +371,7 @@ function OtpVerificationFormBlock({ settings, state, onSuccess }: AuthBlockProps
           value={code}
           onChange={(e) => setCode(e.target.value.replace(/[^0-9]/g, ''))}
           placeholder="000 000"
-          className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-center text-2xl font-bold tracking-[0.5em] font-mono"
+          className="w-full px-4 py-3 border rounded-lg outline-none transition text-center text-2xl font-bold tracking-[0.5em] font-mono"
           style={{ borderColor: 'var(--color-border)', color: 'var(--color-heading)' }}
           required
         />
@@ -395,7 +395,7 @@ function OtpVerificationFormBlock({ settings, state, onSuccess }: AuthBlockProps
         <button
           type="button"
           onClick={() => window.location.reload()}
-          className="text-sm font-medium text-primary hover:underline transition-all underline-offset-4"
+          className="text-sm font-medium hover:underline transition-all underline-offset-4" style={{ color: 'var(--color-link)' }}
         >
           Resend Code
         </button>
@@ -450,7 +450,7 @@ function ResetPasswordFormBlock({ settings, state }: AuthBlockProps) {
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             placeholder="Min. 8 characters"
-            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
+            className="w-full px-4 py-3 border rounded-lg outline-none transition text-sm"
             required
             minLength={8}
           />
@@ -471,7 +471,7 @@ function ResetPasswordFormBlock({ settings, state }: AuthBlockProps) {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           placeholder="Repeat password"
-          className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
+          className="w-full px-4 py-3 border rounded-lg outline-none transition text-sm"
           required
         />
       </div>
@@ -505,7 +505,7 @@ function AuthHeaderBlock({ settings }: { settings: any }) {
           {store?.storeLogo ? (
             <img src={store.storeLogo} alt={store.name} className="h-10 object-contain" />
           ) : (
-            <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary text-xl font-bold">
+            <div className="h-12 w-12 rounded-xl flex items-center justify-center text-xl font-bold" style={{ backgroundColor: 'var(--color-border)', color: 'var(--color-primary)' }}>
               {store?.name?.[0] || 'S'}
             </div>
           )}

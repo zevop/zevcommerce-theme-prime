@@ -28,8 +28,8 @@ export default function ImageWithText({ settings, blocks }: ImageWithTextProps) 
     image_position = 'left',
     image_width = 'medium', // small | medium | large
     height = 'medium',
-    background_color = '#ffffff',
-    text_color = '#000000',
+    background_color,
+    text_color,
     mobile_stack = 'image_first'
   } = settings;
 
@@ -61,14 +61,14 @@ export default function ImageWithText({ settings, blocks }: ImageWithTextProps) 
   return (
     <section className={`w-full flex ${contentOrder} ${mobileOrder} overflow-hidden`} style={heightStyles[height]}>
       {/* Image Side */}
-      <div className={`w-full ${currentWidth.image} bg-gray-100 relative min-h-[300px]`}>
+      <div className={`w-full ${currentWidth.image} relative min-h-[300px]`} style={{ backgroundColor: 'var(--color-border)' }}>
         {imageUrl ? (
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${imageUrl})` }}
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center text-gray-400 bg-gray-200">
+          <div className="absolute inset-0 flex items-center justify-center opacity-40">
             <span className="text-lg font-medium">No Image Selected</span>
           </div>
         )}
@@ -77,7 +77,7 @@ export default function ImageWithText({ settings, blocks }: ImageWithTextProps) 
       {/* Content Side */}
       <div
         className={`w-full ${currentWidth.text} flex flex-col justify-center p-8 lg:p-16`}
-        style={{ backgroundColor: background_color, color: text_color }}
+        style={{ backgroundColor: background_color || 'var(--color-background)', color: text_color || 'var(--color-text)' }}
       >
         <div className="max-w-xl mx-auto w-full">
           <BlockRenderer blocks={blocks} sectionSettings={settings} className="flex flex-col gap-6" />

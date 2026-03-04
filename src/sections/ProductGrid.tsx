@@ -2,8 +2,8 @@ import { BlockRenderer } from '@zevcommerce/storefront-api';
 
 export default function ProductGrid({ settings, blocks }: { settings: any, blocks: any[] }) {
   const {
-    background_color = '#ffffff',
-    text_color = '#111827',
+    background_color,
+    text_color,
     padding_top = 80,
     padding_bottom = 80,
     width = 'container'
@@ -16,8 +16,8 @@ export default function ProductGrid({ settings, blocks }: { settings: any, block
   };
 
   const style = {
-    backgroundColor: background_color,
-    color: text_color,
+    backgroundColor: background_color || 'var(--color-background)',
+    color: text_color || 'var(--color-text)',
     paddingTop: `${padding_top}px`,
     paddingBottom: `${padding_bottom}px`
   };
