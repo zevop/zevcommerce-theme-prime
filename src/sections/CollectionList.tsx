@@ -64,11 +64,11 @@ export default function CollectionList({ settings, blocks = [] }: { settings: an
         {/* Grid / Bento / Editorial Layouts */}
         {(layout === 'grid' || layout === 'bento' || layout === 'editorial') && (
           <div className={`
-            grid gap-6
+            grid
             ${layout === 'grid' ? gridClasses : ''}
             ${layout === 'grid' && mobileLayout === 'stack' ? 'grid-cols-1' : ''}
             ${layout === 'grid' && mobileLayout === 'carousel' ? 'flex overflow-x-auto snap-x md:grid md:overflow-visible' : ''}
-          `}>
+          `} style={{ gap: 'var(--grid-gap, 24px)' }}>
             {blocks.map((block: any, index: number) => {
               // Bento Logic: First item spans 2 rows/cols if we have enough items
               const isBentoHero = layout === 'bento' && index === 0;

@@ -9,9 +9,10 @@ import {
 } from '@zevcommerce/storefront-api';
 
 export default function RecommendedProducts({ settings }: { settings: any }) {
-  const { storeConfig } = useTheme();
+  const { storeConfig, theme } = useTheme();
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const mobileColumns = theme?.settings?.productCards?.mobileColumns || 2;
 
   // In a real scenario, this might take a productId context to find related items.
   // For now, we'll implement it as "You may also like" -> Featured Collection or Latest Products
@@ -58,13 +59,13 @@ export default function RecommendedProducts({ settings }: { settings: any }) {
         )}
 
         {loading ? (
-          <div className={`grid grid-cols-2 ${gridColsClass} gap-6`}>
+          <div className={`grid grid-cols-${mobileColumns} ${gridColsClass} gap-6`}>
             {[...Array(columns)].map((_, i) => (
               <div key={i} className="aspect-[3/4] rounded-xl animate-pulse" style={{ backgroundColor: 'var(--color-border)' }}></div>
             ))}
           </div>
         ) : (
-          <div className={`grid grid-cols-2 ${gridColsClass} gap-x-6 gap-y-10`}>
+          <div className={`grid grid-cols-${mobileColumns} ${gridColsClass} gap-x-6 gap-y-10`}>
             {products.map(product => (
               <ProductCard
                 key={product.id}

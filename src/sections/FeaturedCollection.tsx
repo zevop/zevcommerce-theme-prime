@@ -22,7 +22,7 @@ const scrollContainer = (container: HTMLElement | null, direction: 'left' | 'rig
 };
 
 export default function FeaturedCollection({ settings }: { settings: any }) {
-  const { storeConfig } = useTheme();
+  const { storeConfig, theme } = useTheme();
   const [products, setProducts] = useState<any[]>([]);
   const [collectionInfo, setCollectionInfo] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -33,6 +33,7 @@ export default function FeaturedCollection({ settings }: { settings: any }) {
   const limit = parseInt(settings.limit || '8');
   const columns = parseInt(settings.columns || '4');
   const layout = settings.layout || 'grid';
+  const mobileColumns = theme?.settings?.productCards?.mobileColumns || 2;
 
   // Visual Settings
   const aspectRatio = settings.aspect_ratio || 'portrait';
@@ -108,7 +109,7 @@ export default function FeaturedCollection({ settings }: { settings: any }) {
       <div className={`container mx-auto px-4 ${sectionPadding}`}>
         <div className="animate-pulse space-y-8">
           <div className="h-8 w-1/4 rounded" style={{ backgroundColor: 'var(--color-border)' }}></div>
-          <div className={`grid grid-cols-2 ${gridColsClass} gap-6`}>
+          <div className={`grid grid-cols-${mobileColumns} ${gridColsClass} gap-6`}>
             {[...Array(columns)].map((_, i) => (
               <div key={i} className="aspect-[3/4] rounded-xl" style={{ backgroundColor: 'var(--color-border)' }}></div>
             ))}
@@ -168,7 +169,7 @@ export default function FeaturedCollection({ settings }: { settings: any }) {
 
         {/* GRID LAYOUT */}
         {layout === 'grid' && (
-          <div className={`grid grid-cols-2 md:grid-cols-3 ${gridColsClass} ${gapClass}`}>
+          <div className={`grid grid-cols-${mobileColumns} md:grid-cols-3 ${gridColsClass}`} style={{ gap: 'var(--grid-gap, 24px)' }}>
             {products.map(product => (
               <ProductCard
                 key={product.id}
@@ -250,7 +251,7 @@ export default function FeaturedCollection({ settings }: { settings: any }) {
             </div>
 
             {/* Product Grid */}
-            <div className={`lg:col-span-7 xl:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-6`}>
+            <div className={`lg:col-span-7 xl:col-span-8 grid grid-cols-${mobileColumns} md:grid-cols-3 gap-6`}>
               {products.map(product => (
                 <ProductCard
                   key={product.id}

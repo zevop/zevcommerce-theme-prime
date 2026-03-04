@@ -1,6 +1,7 @@
 'use client';
 
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useTheme } from '@zevcommerce/storefront-api';
 
 interface SectionWrapperProps {
   settings: Record<string, any>;
@@ -48,19 +49,17 @@ export function SectionWrapper({
   animation,
   noReveal = false,
 }: SectionWrapperProps) {
-  const animStyle = animation || settings.animation || 'fade-up';
+  const { theme } = useTheme();
+  const animStyle = animation || settings.animation || theme?.settings?.animations?.scrollReveal || 'fade-up';
+  const animDuration = theme?.settings?.animations?.scrollRevealDuration || 600;
   const shouldAnimate = !noReveal && animStyle !== 'none';
   const { ref, isVisible } = useScrollReveal({ once: true });
 
   // Build background style
   const style: React.CSSProperties = {};
 
-  if (settings.padding_top !== undefined) {
-    style.paddingTop = `${settings.padding_top}px`;
-  }
-  if (settings.padding_bottom !== undefined) {
-    style.paddingBottom = `${settings.padding_bottom}px`;
-  }
+  style.paddingTop = settings.padding_top !== undefined ? `${settings.padding_top}px` : 'var(--section-spacing)';
+  style.paddingBottom = settings.padding_bottom !== undefined ? `${settings.padding_bottom}px` : 'var(--section-spacing)';
 
   // Gradient takes priority over solid color
   if (settings.gradient_start && settings.gradient_end) {
@@ -90,8 +89,8 @@ export function SectionWrapper({
   return (
     <Tag
       ref={shouldAnimate ? ref : undefined}
-      className={`transition-all duration-700 ease-out ${animClass} ${className}`.trim()}
-      style={style}
+      className={`transition-all ease-out ${animClass} ${className}`.trim()}
+      style={{ ...style, transitionDuration: `${animDuration}ms` }}
     >
       {children}
     </Tag>

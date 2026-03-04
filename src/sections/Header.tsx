@@ -250,7 +250,7 @@ export default function Header({ settings }: { settings: any }) {
   // Transparent mode logic
   const isTransparent = transparent_on_hero && !isScrolled && !isSearchOpen;
   const headerBg = isTransparent ? 'transparent' : (backgroundColor || 'var(--color-background)');
-  const headerText = isTransparent ? '#ffffff' : (textColor || 'var(--color-text)');
+  const headerText = isTransparent ? (settings.transparentTextColor || '#ffffff') : (textColor || 'var(--color-text)');
 
   // Border style
   const borderClass = isTransparent
@@ -482,6 +482,8 @@ export const schema = {
     },
     { type: 'checkbox', id: 'sticky', label: 'Sticky Header', default: true },
     { type: 'checkbox', id: 'transparent_on_hero', label: 'Transparent over Hero', default: false },
+    { type: 'color', id: 'transparentTextColor', label: 'Transparent Text Color', default: '#ffffff',
+      show_if: { id: 'transparent_on_hero', value: true } },
     { type: 'color', id: 'backgroundColor', label: 'Background Color' },
     { type: 'color', id: 'textColor', label: 'Text Color' },
     {

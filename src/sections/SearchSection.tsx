@@ -105,12 +105,13 @@ function SearchFiltersBlock({ settings }: { settings: any }) {
 
 // Search Results Block
 function SearchResultsBlock({ settings, query, results, loading }: { settings: any; query: string; results: any[]; loading: boolean }) {
-  const { storeConfig } = useTheme();
+  const { storeConfig, theme } = useTheme();
   const columns = settings.columns || 4;
+  const mobileColumns = theme?.settings?.productCards?.mobileColumns || 2;
 
   if (loading) {
     return (
-      <div className={`grid grid-cols-2 md:grid-cols-${columns} gap-6`}>
+      <div className={`grid grid-cols-${mobileColumns} md:grid-cols-${columns} gap-6`}>
         {Array.from({ length: 8 }).map((_, i) => (
           <div key={i} className="animate-pulse">
             <div className="aspect-square rounded-xl mb-4" style={{ backgroundColor: 'var(--color-border)' }} />
@@ -150,7 +151,7 @@ function SearchResultsBlock({ settings, query, results, loading }: { settings: a
       {settings.show_count && (
         <p className="text-sm opacity-60 mb-6" style={{ color: 'var(--color-text)' }}>{results.length} results for &ldquo;{query}&rdquo;</p>
       )}
-      <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-${columns} gap-x-6 gap-y-10`}>
+      <div className={`grid grid-cols-${mobileColumns} md:grid-cols-3 lg:grid-cols-${columns} gap-x-6 gap-y-10`}>
         {results.map((product) => (
           <ProductCard
             key={product.id}

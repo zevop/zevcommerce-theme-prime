@@ -5,6 +5,13 @@ export default function Footer({ settings, blocks }: { settings: any, blocks: an
   const { storeConfig } = useTheme();
   const { description, backgroundColor = '#F9FAFB', textColor = '#374151', alignment = 'left' } = settings;
   const storeName = storeConfig?.name || 'Store';
+  const logoSrc = storeConfig?.storeLogo;
+
+  const colCount = parseInt(settings.columnCount || '3');
+  const columnIndices = Array.from({ length: colCount }, (_, i) => i + 1);
+
+  const brandColSpan = colCount === 2 ? 'md:col-span-6' : 'md:col-span-4';
+  const linkColSpan = colCount === 2 ? 'md:col-span-3' : 'md:col-span-2';
 
   return (
     <footer className={`pt-20 pb-16 text-${alignment}`} style={{ backgroundColor, color: textColor }}>
@@ -14,7 +21,10 @@ export default function Footer({ settings, blocks }: { settings: any, blocks: an
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
           {/* Column 0: Brand — wider for more presence */}
-          <div className="md:col-span-4 space-y-4">
+          <div className={`${brandColSpan} space-y-4`}>
+            {settings.showLogo && logoSrc && (
+              <img src={logoSrc} alt={storeName} className="h-10 w-auto object-contain" />
+            )}
             <h3 className="font-bold text-lg tracking-tight" style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-heading)' }}>
               {storeName}
             </h3>
@@ -26,9 +36,9 @@ export default function Footer({ settings, blocks }: { settings: any, blocks: an
             <BlockRenderer blocks={blocks} columnIndex={0} />
           </div>
 
-          {/* Columns 1-3: Dynamic Blocks */}
-          {[1, 2, 3].map((idx) => (
-            <div key={idx} className="md:col-span-2 space-y-4 first:md:col-start-7">
+          {/* Dynamic Link Columns */}
+          {columnIndices.map((idx) => (
+            <div key={idx} className={`${linkColSpan} space-y-4`}>
               <BlockRenderer blocks={blocks} columnIndex={idx} />
             </div>
           ))}
@@ -70,7 +80,15 @@ export const schema = {
         { value: 'right', label: 'Right' },
       ],
       default: 'left',
-    }
+    },
+    { type: 'checkbox', id: 'showLogo', label: 'Show Store Logo', default: false },
+    {
+      type: 'select', id: 'columnCount', label: 'Link Columns', default: '3',
+      options: [
+        { value: '2', label: '2 Columns' },
+        { value: '3', label: '3 Columns' },
+      ],
+    },
   ],
   blocks: getSharedBlocks([
     {

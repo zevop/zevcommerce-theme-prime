@@ -25,7 +25,9 @@ export default function ProductGrid({ settings, blocks }: { settings: any, block
   return (
     <section style={style}>
       <div className={maxWidthClasses[width as keyof typeof maxWidthClasses]}>
-        <BlockRenderer blocks={blocks} sectionSettings={settings} className="flex flex-col gap-8" />
+        <div className="flex flex-col" style={{ gap: 'var(--grid-gap, 24px)' }}>
+          <BlockRenderer blocks={blocks} sectionSettings={settings} />
+        </div>
       </div>
     </section>
   );

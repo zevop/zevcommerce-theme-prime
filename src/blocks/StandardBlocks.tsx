@@ -1466,7 +1466,7 @@ export function ProductGridItemsBlock({ settings, sectionSettings }: { settings:
   const collectionSlug = settings.collection || sectionSettings?.collection;
   const limit = settings.limit || sectionSettings?.limit || 8;
   const columnsDesktop = settings.columns_desktop || sectionSettings?.columns || 4;
-  const columnsMobile = settings.columns_mobile || sectionSettings?.columns_mobile || 2;
+  const columnsMobile = settings.columns_mobile || sectionSettings?.columns_mobile || storeConfig?.theme?.settings?.productCards?.mobileColumns || 2;
   const aspectRatio = settings.image_ratio || sectionSettings?.image_ratio || 'portrait';
   const objectFit = settings.image_fit || sectionSettings?.image_fit || 'cover';
   const showVendor = settings.show_vendor ?? sectionSettings?.show_vendor ?? false;
@@ -1514,7 +1514,7 @@ export function ProductGridItemsBlock({ settings, sectionSettings }: { settings:
   }
 
   return (
-    <div className={`grid grid-cols-${columnsMobile} md:grid-cols-${columnsDesktop} gap-x-6 gap-y-10`}>
+    <div className={`grid grid-cols-${columnsMobile} md:grid-cols-${columnsDesktop}`} style={{ gap: 'var(--grid-gap, 24px)' }}>
       {products.map((product: any) => (
         <ProductCard
           key={product.id}
