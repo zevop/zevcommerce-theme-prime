@@ -17,19 +17,21 @@ function SearchBarBlock({ settings, onSearch }: { settings: any; onSearch: (quer
   return (
     <form onSubmit={handleSubmit} className="relative max-w-2xl mx-auto">
       <div className="relative">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 opacity-40" style={{ color: 'var(--color-text)' }} />
         <input
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={settings.placeholder || 'Search products...'}
-          className="w-full pl-12 pr-12 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-lg"
+          className="w-full pl-12 pr-12 py-4 border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-lg"
+          style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)', color: 'var(--color-heading)' }}
         />
         {query && (
           <button
             type="button"
             onClick={() => { setQuery(''); onSearch(''); }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            className="absolute right-4 top-1/2 -translate-y-1/2 opacity-40 hover:opacity-70"
+            style={{ color: 'var(--color-text)' }}
           >
             <X className="w-5 h-5" />
           </button>
@@ -46,10 +48,11 @@ function SearchFiltersBlock({ settings }: { settings: any }) {
   if (!settings.show_filters) return null;
 
   return (
-    <div className="flex items-center justify-between py-4 border-b border-gray-100">
+    <div className="flex items-center justify-between py-4 border-b" style={{ borderColor: 'var(--color-border)' }}>
       <button
         onClick={() => setShowFilters(!showFilters)}
-        className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-gray-900"
+        className="flex items-center gap-2 text-sm font-medium opacity-70 hover:opacity-100"
+        style={{ color: 'var(--color-heading)' }}
       >
         <Filter className="w-4 h-4" />
         Filters
@@ -57,7 +60,10 @@ function SearchFiltersBlock({ settings }: { settings: any }) {
       </button>
 
       <div className="flex items-center gap-4">
-        <select className="text-sm border border-gray-200 rounded-lg px-3 py-2">
+        <select
+          className="text-sm border rounded-lg px-3 py-2"
+          style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)', color: 'var(--color-heading)' }}
+        >
           <option>Sort by: Featured</option>
           <option>Price: Low to High</option>
           <option>Price: High to Low</option>
@@ -66,25 +72,25 @@ function SearchFiltersBlock({ settings }: { settings: any }) {
       </div>
 
       {showFilters && (
-        <div className="absolute left-0 right-0 top-full bg-white border-t border-gray-100 p-6 shadow-lg z-10">
+        <div className="absolute left-0 right-0 top-full border-t p-6 shadow-lg z-10" style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}>
           <div className="grid grid-cols-4 gap-8">
             <div>
-              <h4 className="font-medium text-gray-900 mb-3">Category</h4>
+              <h4 className="font-medium mb-3" style={{ color: 'var(--color-heading)' }}>Category</h4>
               <div className="space-y-2">
                 {['All', 'Clothing', 'Shoes', 'Accessories'].map(cat => (
-                  <label key={cat} className="flex items-center gap-2 text-sm text-gray-600">
-                    <input type="checkbox" className="rounded border-gray-300" />
+                  <label key={cat} className="flex items-center gap-2 text-sm opacity-70" style={{ color: 'var(--color-text)' }}>
+                    <input type="checkbox" className="rounded" style={{ borderColor: 'var(--color-border)' }} />
                     {cat}
                   </label>
                 ))}
               </div>
             </div>
             <div>
-              <h4 className="font-medium text-gray-900 mb-3">Price</h4>
+              <h4 className="font-medium mb-3" style={{ color: 'var(--color-heading)' }}>Price</h4>
               <div className="space-y-2">
                 {['Under ₦5,000', '₦5,000 - ₦20,000', '₦20,000 - ₦50,000', 'Over ₦50,000'].map(price => (
-                  <label key={price} className="flex items-center gap-2 text-sm text-gray-600">
-                    <input type="checkbox" className="rounded border-gray-300" />
+                  <label key={price} className="flex items-center gap-2 text-sm opacity-70" style={{ color: 'var(--color-text)' }}>
+                    <input type="checkbox" className="rounded" style={{ borderColor: 'var(--color-border)' }} />
                     {price}
                   </label>
                 ))}
@@ -107,9 +113,9 @@ function SearchResultsBlock({ settings, query, results, loading }: { settings: a
       <div className={`grid grid-cols-2 md:grid-cols-${columns} gap-6`}>
         {Array.from({ length: 8 }).map((_, i) => (
           <div key={i} className="animate-pulse">
-            <div className="bg-gray-100 aspect-square rounded-xl mb-4" />
-            <div className="h-4 bg-gray-100 rounded w-3/4 mb-2" />
-            <div className="h-4 bg-gray-100 rounded w-1/4" />
+            <div className="aspect-square rounded-xl mb-4" style={{ backgroundColor: 'var(--color-border)' }} />
+            <div className="h-4 rounded w-3/4 mb-2" style={{ backgroundColor: 'var(--color-border)' }} />
+            <div className="h-4 rounded w-1/4" style={{ backgroundColor: 'var(--color-border)' }} />
           </div>
         ))}
       </div>
@@ -119,9 +125,9 @@ function SearchResultsBlock({ settings, query, results, loading }: { settings: a
   if (!query) {
     return (
       <div className="text-center py-16">
-        <Search className="w-16 h-16 mx-auto text-gray-300 mb-4" />
-        <h2 className="text-xl font-semibold text-gray-900 mb-2">Search our store</h2>
-        <p className="text-gray-500">Enter a search term to find products</p>
+        <Search className="w-16 h-16 mx-auto mb-4 opacity-20" style={{ color: 'var(--color-text)' }} />
+        <h2 className="text-xl font-semibold mb-2" style={{ color: 'var(--color-heading)' }}>Search our store</h2>
+        <p className="opacity-60" style={{ color: 'var(--color-text)' }}>Enter a search term to find products</p>
       </div>
     );
   }
@@ -129,9 +135,9 @@ function SearchResultsBlock({ settings, query, results, loading }: { settings: a
   if (results.length === 0) {
     return (
       <div className="text-center py-16">
-        <Search className="w-16 h-16 mx-auto text-gray-300 mb-4" />
-        <h2 className="text-xl font-semibold text-gray-900 mb-2">No results found</h2>
-        <p className="text-gray-500 mb-6">We couldn't find anything for "{query}"</p>
+        <Search className="w-16 h-16 mx-auto mb-4 opacity-20" style={{ color: 'var(--color-text)' }} />
+        <h2 className="text-xl font-semibold mb-2" style={{ color: 'var(--color-heading)' }}>No results found</h2>
+        <p className="opacity-60 mb-6" style={{ color: 'var(--color-text)' }}>We couldn't find anything for &ldquo;{query}&rdquo;</p>
         <Link href="/collections" className="text-primary font-medium hover:underline">
           Browse all products
         </Link>
@@ -142,7 +148,7 @@ function SearchResultsBlock({ settings, query, results, loading }: { settings: a
   return (
     <div>
       {settings.show_count && (
-        <p className="text-sm text-gray-500 mb-6">{results.length} results for "{query}"</p>
+        <p className="text-sm opacity-60 mb-6" style={{ color: 'var(--color-text)' }}>{results.length} results for &ldquo;{query}&rdquo;</p>
       )}
       <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-${columns} gap-x-6 gap-y-10`}>
         {results.map((product) => (
@@ -205,10 +211,10 @@ export default function SearchSection({ settings, blocks }: { settings: any; blo
   const activeBlocks = blocks && blocks.length > 0 ? blocks : defaultBlocks;
 
   return (
-    <section className="py-12 bg-white min-h-[60vh]">
+    <section className="py-12 min-h-[60vh]" style={{ backgroundColor: 'var(--color-background)' }}>
       <div className="container mx-auto px-4">
         {settings.show_title && (
-          <h1 className="text-3xl font-bold text-center mb-8" style={{ color: settings.title_color }}>
+          <h1 className="text-3xl font-bold text-center mb-8" style={{ color: settings.title_color || 'var(--color-heading)', fontFamily: 'var(--font-heading)' }}>
             {settings.title || 'Search'}
           </h1>
         )}

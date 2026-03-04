@@ -130,7 +130,7 @@ function AccountNavBlock({ settings, activeTab, onTabChange, sectionSettings }: 
               "w-full flex items-center justify-between px-4 py-3 text-left transition-all group",
               isActive
                 ? (settings.use_soft_active ? "font-semibold" : "text-white font-medium")
-                : "hover:bg-gray-50",
+                : "",
               isActive && getShadowClass(settings.active_shadow)
             )}
             style={{
@@ -158,7 +158,7 @@ function AccountNavBlock({ settings, activeTab, onTabChange, sectionSettings }: 
 
       <div className="border-t my-4" style={{ borderColor: 'var(--color-border)' }} />
 
-      <button className="w-full flex items-center gap-3 px-4 py-3 text-left text-red-600 hover:bg-red-50 transition-all" style={{ borderRadius: `${borderRadius}px` }}>
+      <button className="w-full flex items-center gap-3 px-4 py-3 text-left text-red-600 transition-all hover:opacity-70" style={{ borderRadius: `${borderRadius}px` }}>
         <LogOut className="w-5 h-5" />
         <span style={{ fontSize: `${settings.font_size || 14}px` }}>Sign Out</span>
       </button>
@@ -205,31 +205,34 @@ function ProfileBlock({ settings, sectionSettings }: { settings: any, sectionSet
           <form className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-gray-400 uppercase mb-1">First Name</label>
+                <label className="block text-xs font-semibold uppercase mb-1 opacity-50" style={{ color: 'var(--color-text)' }}>First Name</label>
                 <input
                   type="text"
                   value={formData.firstName}
                   onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary outline-none transition"
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-1 focus:ring-primary focus:border-primary outline-none transition"
+                  style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)', color: 'var(--color-heading)' }}
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-gray-400 uppercase mb-1">Last Name</label>
+                <label className="block text-xs font-semibold uppercase mb-1 opacity-50" style={{ color: 'var(--color-text)' }}>Last Name</label>
                 <input
                   type="text"
                   value={formData.lastName}
                   onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary outline-none transition"
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-1 focus:ring-primary focus:border-primary outline-none transition"
+                  style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)', color: 'var(--color-heading)' }}
                 />
               </div>
             </div>
             <div>
-              <label className="block text-xs font-semibold text-gray-400 uppercase mb-1">Email</label>
+              <label className="block text-xs font-semibold uppercase mb-1 opacity-50" style={{ color: 'var(--color-text)' }}>Email</label>
               <input
                 type="email"
                 readOnly
                 value={formData.email}
-                className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg cursor-not-allowed text-gray-400"
+                className="w-full px-4 py-2 border rounded-lg cursor-not-allowed opacity-50"
+                style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-border)', color: 'var(--color-text)' }}
               />
             </div>
             <button
@@ -243,19 +246,19 @@ function ProfileBlock({ settings, sectionSettings }: { settings: any, sectionSet
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
             <div>
-              <p className="text-xs font-semibold text-gray-400 uppercase">First Name</p>
-              <p className="text-gray-900 font-medium mt-1">{formData.firstName}</p>
+              <p className="text-xs font-semibold uppercase opacity-50" style={{ color: 'var(--color-text)' }}>First Name</p>
+              <p className="font-medium mt-1" style={{ color: 'var(--color-heading)' }}>{formData.firstName}</p>
             </div>
             <div>
-              <p className="text-xs font-semibold text-gray-400 uppercase">Last Name</p>
-              <p className="text-gray-900 font-medium mt-1">{formData.lastName}</p>
+              <p className="text-xs font-semibold uppercase opacity-50" style={{ color: 'var(--color-text)' }}>Last Name</p>
+              <p className="font-medium mt-1" style={{ color: 'var(--color-heading)' }}>{formData.lastName}</p>
             </div>
             <div>
-              <p className="text-xs font-semibold text-gray-400 uppercase">Email Address</p>
-              <p className="text-gray-900 font-medium mt-1">{formData.email}</p>
+              <p className="text-xs font-semibold uppercase opacity-50" style={{ color: 'var(--color-text)' }}>Email Address</p>
+              <p className="font-medium mt-1" style={{ color: 'var(--color-heading)' }}>{formData.email}</p>
             </div>
             <div>
-              <p className="text-xs font-semibold text-gray-400 uppercase">Status</p>
+              <p className="text-xs font-semibold uppercase opacity-50" style={{ color: 'var(--color-text)' }}>Status</p>
               <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-green-50 text-green-700 border border-green-100 mt-1">
                 Verified
               </span>
@@ -312,7 +315,7 @@ function OrdersBlock({ settings, sectionSettings, hideFilters = false }: { setti
       case 'processing': return 'bg-yellow-50 text-yellow-700 border-yellow-100';
       case 'shipped': return 'bg-blue-50 text-blue-700 border-blue-100';
       case 'cancelled': return 'bg-red-50 text-red-700 border-red-100';
-      default: return 'bg-gray-50 text-gray-700 border-gray-100';
+      default: return 'border opacity-70';
     }
   };
 
@@ -340,7 +343,8 @@ function OrdersBlock({ settings, sectionSettings, hideFilters = false }: { setti
                   placeholder="Order ID..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="px-4 py-2 border border-gray-200 rounded-lg text-sm bg-white outline-none focus:border-primary w-48 transition-all"
+                  className="px-4 py-2 border rounded-lg text-sm outline-none focus:border-primary w-48 transition-all"
+                  style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)', color: 'var(--color-heading)' }}
                 />
               </div>
             )}
@@ -348,7 +352,8 @@ function OrdersBlock({ settings, sectionSettings, hideFilters = false }: { setti
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white outline-none focus:border-primary appearance-none min-w-[110px]"
+              className="px-3 py-2 border rounded-lg text-sm outline-none focus:border-primary appearance-none min-w-[110px]"
+              style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)', color: 'var(--color-heading)' }}
             >
               <option value="all">All States</option>
               <option value="delivered">Delivered</option>
@@ -360,7 +365,7 @@ function OrdersBlock({ settings, sectionSettings, hideFilters = false }: { setti
 
       {hideFilters && (
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-bold" style={{ color: settings.dashboard_title_color || '#111827' }}>
+          <h2 className="text-lg font-bold" style={{ color: settings.dashboard_title_color || 'var(--color-heading)' }}>
             {settings.dashboard_title || 'Recent Orders'}
           </h2>
           <button onClick={() => window.dispatchEvent(new CustomEvent('switch-tab', { detail: 'orders' }))} className="text-sm text-primary font-medium hover:underline">
@@ -387,10 +392,10 @@ function OrdersBlock({ settings, sectionSettings, hideFilters = false }: { setti
               </thead>
               <tbody className="divide-y" style={{ borderColor: rowBorderColor }}>
                 {paginatedOrders.map((order) => (
-                  <tr key={order.id} className="hover:bg-gray-50/50 transition-colors">
+                  <tr key={order.id} className="transition-colors hover:opacity-80">
                     <td className="px-6 py-4">
                       <span className="font-bold" style={{ color: rowTextColor }}>{order.id}</span>
-                      <p className="text-[10px] text-gray-400 mt-0.5">{order.items} items</p>
+                      <p className="text-[10px] mt-0.5 opacity-50" style={{ color: 'var(--color-text)' }}>{order.items} items</p>
                     </td>
                     <td className="px-6 py-4 text-sm" style={{ color: rowTextColor }}>
                       {new Date(order.date).toLocaleDateString(undefined, { dateStyle: 'medium' })}
@@ -406,7 +411,8 @@ function OrdersBlock({ settings, sectionSettings, hideFilters = false }: { setti
                     <td className="px-6 py-4 text-center">
                       <Link
                         href={`/account/orders/${order.id}`}
-                        className="text-gray-300 hover:text-primary transition-colors p-1"
+                        className="opacity-30 hover:opacity-100 transition-opacity p-1"
+                        style={{ color: 'var(--color-text)' }}
                       >
                         <Eye className="w-4 h-4" />
                       </Link>
@@ -418,26 +424,28 @@ function OrdersBlock({ settings, sectionSettings, hideFilters = false }: { setti
           </div>
         ) : (
           <div className="p-12 text-center">
-            <Package className="w-10 h-10 mx-auto text-gray-200 mb-3" />
-            <h3 className="text-base font-bold text-gray-900">No orders found</h3>
-            <p className="text-sm text-gray-400 max-w-[200px] mx-auto">Try adjusting your filters.</p>
+            <Package className="w-10 h-10 mx-auto mb-3 opacity-20" style={{ color: 'var(--color-text)' }} />
+            <h3 className="text-base font-bold" style={{ color: 'var(--color-heading)' }}>No orders found</h3>
+            <p className="text-sm opacity-50 max-w-[200px] mx-auto" style={{ color: 'var(--color-text)' }}>Try adjusting your filters.</p>
           </div>
         )}
 
         {!hideFilters && totalPages > 1 && (
-          <div className="px-6 py-4 border-t border-gray-100 flex items-center justify-between bg-gray-50/20">
+          <div className="px-6 py-4 border-t flex items-center justify-between" style={{ borderColor: 'var(--color-border)' }}>
             <button
               disabled={currentPage === 1}
               onClick={() => setCurrentPage(p => p - 1)}
-              className="text-xs font-bold text-gray-400 hover:text-primary disabled:opacity-30 uppercase tracking-widest transition-colors"
+              className="text-xs font-bold hover:opacity-100 disabled:opacity-30 uppercase tracking-widest transition-opacity opacity-50"
+              style={{ color: 'var(--color-text)' }}
             >
               Prev
             </button>
-            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Page {currentPage} of {totalPages}</span>
+            <span className="text-[10px] font-bold uppercase tracking-widest opacity-50" style={{ color: 'var(--color-text)' }}>Page {currentPage} of {totalPages}</span>
             <button
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage(p => p + 1)}
-              className="text-xs font-bold text-gray-400 hover:text-primary disabled:opacity-30 uppercase tracking-widest transition-colors"
+              className="text-xs font-bold hover:opacity-100 disabled:opacity-30 uppercase tracking-widest transition-opacity opacity-50"
+              style={{ color: 'var(--color-text)' }}
             >
               Next
             </button>
@@ -522,7 +530,7 @@ function AddressesBlock({ settings, sectionSettings }: { settings: any, sectionS
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-bold" style={{ color: 'var(--color-heading)', fontFamily: 'var(--font-heading)' }}>{settings.title || 'Saved Addresses'}</h2>
         {!settings.hide_add_button && (
-          <button className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-semibold hover:bg-gray-50 transition-colors">
+          <button className="flex items-center gap-2 px-4 py-2 border rounded-lg text-sm font-semibold hover:opacity-70 transition-opacity" style={{ borderColor: 'var(--color-border)', color: 'var(--color-heading)' }}>
             <Plus className="w-4 h-4" />
             Add New
           </button>
@@ -542,12 +550,12 @@ function AddressesBlock({ settings, sectionSettings }: { settings: any, sectionS
                 <h3 className="font-bold" style={{ color: titleColor }}>{addr.name}</h3>
               </div>
               {addr.isDefault && (
-                <span className="px-2 py-0.5 bg-gray-50 text-gray-400 text-[10px] font-bold uppercase rounded border border-gray-100">Default</span>
+                <span className="px-2 py-0.5 text-[10px] font-bold uppercase rounded border opacity-50" style={{ borderColor: 'var(--color-border)', color: 'var(--color-text)' }}>Default</span>
               )}
             </div>
             <p className="text-xs leading-relaxed mb-6" style={{ color: textColor }}>{addr.address}</p>
-            <div className="flex items-center gap-4 pt-4 border-t border-gray-50">
-              <button className="text-[10px] font-bold text-gray-400 uppercase tracking-widest hover:text-primary transition-colors">Edit Info</button>
+            <div className="flex items-center gap-4 pt-4 border-t" style={{ borderColor: 'var(--color-border)' }}>
+              <button className="text-[10px] font-bold uppercase tracking-widest hover:opacity-100 transition-opacity opacity-50" style={{ color: 'var(--color-text)' }}>Edit Info</button>
               <button className="text-[10px] font-bold text-red-400 uppercase tracking-widest hover:text-red-600 transition-colors">Remove</button>
             </div>
           </div>
@@ -598,7 +606,7 @@ export default function AccountSection({ settings, blocks }: { settings: any; bl
       style={{
         paddingTop: `${settings.padding_top}px`,
         paddingBottom: `${settings.padding_bottom}px`,
-        backgroundColor: settings.background_color || '#FFFFFF'
+        backgroundColor: settings.background_color || 'var(--color-background)'
       }}
     >
       <div

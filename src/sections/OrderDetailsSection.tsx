@@ -56,7 +56,8 @@ function OrderHeaderBlock({ settings, order }: { settings: any, order: any }) {
     <div className="mb-8">
       <button
         onClick={() => router.back()}
-        className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900 mb-6 transition-colors"
+        className="flex items-center gap-2 text-sm opacity-60 hover:opacity-100 mb-6 transition-opacity"
+        style={{ color: 'var(--color-text)' }}
       >
         <ArrowLeft className="w-4 h-4" />
         {settings.back_label || 'Back to Orders'}
@@ -64,7 +65,7 @@ function OrderHeaderBlock({ settings, order }: { settings: any, order: any }) {
 
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
+          <h1 className="text-3xl font-bold flex items-center gap-3" style={{ color: 'var(--color-heading)', fontFamily: 'var(--font-heading)' }}>
             Order #{order.orderNumber}
             <span
               className="text-sm px-3 py-1 rounded-full font-medium border"
@@ -77,16 +78,11 @@ function OrderHeaderBlock({ settings, order }: { settings: any, order: any }) {
               {order.paymentStatus}
             </span>
           </h1>
-          <p className="text-gray-500 mt-2 flex items-center gap-2">
+          <p className="mt-2 flex items-center gap-2 opacity-60" style={{ color: 'var(--color-text)' }}>
             <Clock className="w-4 h-4" />
             Placed on {new Date(order.createdAt).toLocaleDateString()} at {new Date(order.createdAt).toLocaleTimeString()}
           </p>
         </div>
-
-        {/* Action Button (e.g. Reorder or Download Invoice - Placeholder) */}
-        {/* <button className="px-6 py-2.5 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition">
-          Download Invoice
-        </button> */}
       </div>
     </div>
   );
@@ -96,36 +92,36 @@ function OrderItemsBlock({ settings, order }: { settings: any, order: any }) {
   const formatPrice = useCurrencyFormatter();
 
   return (
-    <div className="bg-white rounded-xl border border-gray-100 overflow-hidden mb-8">
-      <div className="px-6 py-4 border-b border-gray-100 bg-gray-50/50">
-        <h3 className="font-semibold text-gray-900 flex items-center gap-2">
-          <Package className="w-5 h-5 text-gray-400" />
+    <div className="rounded-xl border overflow-hidden mb-8" style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}>
+      <div className="px-6 py-4 border-b" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-border)' }}>
+        <h3 className="font-semibold flex items-center gap-2" style={{ color: 'var(--color-heading)' }}>
+          <Package className="w-5 h-5 opacity-40" style={{ color: 'var(--color-text)' }} />
           {settings.title || 'Items'} ({order.items?.length || 0})
         </h3>
       </div>
-      <div className="divide-y divide-gray-100">
+      <div className="divide-y" style={{ borderColor: 'var(--color-border)' }}>
         {order.items?.map((item: any, idx: number) => (
-          <div key={idx} className="p-6 flex items-start gap-4 hover:bg-gray-50/30 transition">
+          <div key={idx} className="p-6 flex items-start gap-4 transition hover:opacity-80" style={{ borderColor: 'var(--color-border)' }}>
             {settings.show_images && (
-              <div className="w-20 h-20 bg-gray-100 rounded-lg flex-shrink-0 relative overflow-hidden">
+              <div className="w-20 h-20 rounded-lg flex-shrink-0 relative overflow-hidden" style={{ backgroundColor: 'var(--color-border)' }}>
                 {item.image ? (
                   <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-gray-300">
+                  <div className="w-full h-full flex items-center justify-center opacity-20" style={{ color: 'var(--color-text)' }}>
                     <Package className="w-8 h-8" />
                   </div>
                 )}
               </div>
             )}
             <div className="flex-1 min-w-0">
-              <h4 className="font-medium text-gray-900 truncate">{item.name}</h4>
-              <p className="text-sm text-gray-500 mt-1">Quantity: {item.quantity}</p>
-              {item.variantName && <p className="text-xs text-gray-400 mt-1">{item.variantName}</p>}
+              <h4 className="font-medium truncate" style={{ color: 'var(--color-heading)' }}>{item.name}</h4>
+              <p className="text-sm mt-1 opacity-60" style={{ color: 'var(--color-text)' }}>Quantity: {item.quantity}</p>
+              {item.variantName && <p className="text-xs mt-1 opacity-40" style={{ color: 'var(--color-text)' }}>{item.variantName}</p>}
             </div>
             <div className="text-right">
-              <p className="font-bold text-gray-900">{formatPrice(item.price * item.quantity)}</p>
+              <p className="font-bold" style={{ color: 'var(--color-heading)' }}>{formatPrice(item.price * item.quantity)}</p>
               {item.quantity > 1 && (
-                <p className="text-xs text-gray-500 mt-1">{formatPrice(item.price)} each</p>
+                <p className="text-xs mt-1 opacity-60" style={{ color: 'var(--color-text)' }}>{formatPrice(item.price)} each</p>
               )}
             </div>
           </div>
@@ -139,29 +135,29 @@ function OrderSummaryBlock({ settings, order }: { settings: any, order: any }) {
   const formatPrice = useCurrencyFormatter();
 
   return (
-    <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
-      <div className="px-6 py-4 border-b border-gray-100 bg-gray-50/50">
-        <h3 className="font-semibold text-gray-900 flex items-center gap-2">
-          <CreditCard className="w-5 h-5 text-gray-400" />
+    <div className="rounded-xl border overflow-hidden" style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}>
+      <div className="px-6 py-4 border-b" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-border)' }}>
+        <h3 className="font-semibold flex items-center gap-2" style={{ color: 'var(--color-heading)' }}>
+          <CreditCard className="w-5 h-5 opacity-40" style={{ color: 'var(--color-text)' }} />
           {settings.title || 'Summary'}
         </h3>
       </div>
       <div className="p-6 space-y-3">
-        <div className="flex justify-between text-sm text-gray-600">
+        <div className="flex justify-between text-sm opacity-70" style={{ color: 'var(--color-text)' }}>
           <span>Subtotal</span>
           <span>{formatPrice(order.itemsTotal || 0)}</span>
         </div>
-        <div className="flex justify-between text-sm text-gray-600">
+        <div className="flex justify-between text-sm opacity-70" style={{ color: 'var(--color-text)' }}>
           <span>Shipping</span>
           <span>{formatPrice(order.shippingTotal || 0)}</span>
         </div>
-        <div className="flex justify-between text-sm text-gray-600">
+        <div className="flex justify-between text-sm opacity-70" style={{ color: 'var(--color-text)' }}>
           <span>Tax</span>
           <span>{formatPrice(order.taxTotal || 0)}</span>
         </div>
         <div
-          className="border-t border-gray-100 pt-3 flex justify-between font-bold text-lg text-gray-900"
-          style={{ color: settings.total_color }}
+          className="border-t pt-3 flex justify-between font-bold text-lg"
+          style={{ color: settings.total_color || 'var(--color-heading)', borderColor: 'var(--color-border)' }}
         >
           <span>Total</span>
           <span>{formatPrice(order.totalAmount)}</span>
@@ -178,39 +174,39 @@ function OrderAddressBlock({ settings, order }: { settings: any, order: any }) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-      <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-100 bg-gray-50/50">
-          <h3 className="font-semibold text-gray-900 flex items-center gap-2">
-            <MapPin className="w-5 h-5 text-gray-400" />
+      <div className="rounded-xl border overflow-hidden" style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}>
+        <div className="px-6 py-4 border-b" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-border)' }}>
+          <h3 className="font-semibold flex items-center gap-2" style={{ color: 'var(--color-heading)' }}>
+            <MapPin className="w-5 h-5 opacity-40" style={{ color: 'var(--color-text)' }} />
             {settings.shipping_title || 'Shipping Address'}
           </h3>
         </div>
-        <div className="p-6 text-sm text-gray-600 leading-relaxed">
-          <p className="font-medium text-gray-900 mb-1">{shipping.firstName || order.customer?.firstName} {shipping.lastName || order.customer?.lastName}</p>
+        <div className="p-6 text-sm leading-relaxed opacity-70" style={{ color: 'var(--color-text)' }}>
+          <p className="font-medium mb-1 opacity-100" style={{ color: 'var(--color-heading)' }}>{shipping.firstName || order.customer?.firstName} {shipping.lastName || order.customer?.lastName}</p>
           <p>{shipping.address1}</p>
           {shipping.address2 && <p>{shipping.address2}</p>}
           <p>{shipping.city}, {shipping.province}</p>
           <p>{shipping.country}</p>
-          <p className="mt-2 text-gray-500">{shipping.phone || order.customer?.phone}</p>
+          <p className="mt-2 opacity-60">{shipping.phone || order.customer?.phone}</p>
         </div>
       </div>
 
       {/* Optional: Show Billing if different, or just generic Info */}
-      <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-100 bg-gray-50/50">
-          <h3 className="font-semibold text-gray-900 flex items-center gap-2">
-            <Truck className="w-5 h-5 text-gray-400" />
+      <div className="rounded-xl border overflow-hidden" style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}>
+        <div className="px-6 py-4 border-b" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-border)' }}>
+          <h3 className="font-semibold flex items-center gap-2" style={{ color: 'var(--color-heading)' }}>
+            <Truck className="w-5 h-5 opacity-40" style={{ color: 'var(--color-text)' }} />
             {settings.delivery_title || 'Delivery Info'}
           </h3>
         </div>
-        <div className="p-6 text-sm text-gray-600 leading-relaxed">
-          <p className="mb-2"><span className="font-medium text-gray-900">Method:</span> Standard Delivery</p>
+        <div className="p-6 text-sm leading-relaxed opacity-70" style={{ color: 'var(--color-text)' }}>
+          <p className="mb-2"><span className="font-medium" style={{ color: 'var(--color-heading)' }}>Method:</span> Standard Delivery</p>
           <p className="mb-2">
-            <span className="font-medium text-gray-900">Status: </span>
+            <span className="font-medium" style={{ color: 'var(--color-heading)' }}>Status: </span>
             <span className="capitalize">{order.fulfillmentStatus || 'Unfulfilled'}</span>
           </p>
           {order.trackingNumber && (
-            <p><span className="font-medium text-gray-900">Tracking:</span> {order.trackingNumber}</p>
+            <p><span className="font-medium" style={{ color: 'var(--color-heading)' }}>Tracking:</span> {order.trackingNumber}</p>
           )}
         </div>
       </div>
@@ -254,8 +250,8 @@ export default function OrderDetailsSection({ settings, blocks }: { settings: an
     return (
       <div className="min-h-[50vh] flex flex-col items-center justify-center text-center p-8">
         <XCircle className="w-12 h-12 text-red-500 mb-4" />
-        <h2 className="text-xl font-bold text-gray-900 mb-2">Order Not Found</h2>
-        <p className="text-gray-500 max-w-md">We couldn't find the order you're looking for.</p>
+        <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--color-heading)' }}>Order Not Found</h2>
+        <p className="opacity-60 max-w-md" style={{ color: 'var(--color-text)' }}>We couldn't find the order you're looking for.</p>
         <button
           onClick={() => router.push('/account')}
           className="mt-6 text-primary font-medium hover:underline flex items-center gap-2"
@@ -282,11 +278,11 @@ export default function OrderDetailsSection({ settings, blocks }: { settings: an
 
   return (
     <section
-      className="py-12 bg-gray-50 min-h-screen"
+      className="py-12 min-h-screen"
       style={{
         paddingTop: `${settings.padding_top}px`,
         paddingBottom: `${settings.padding_bottom}px`,
-        backgroundColor: settings.background_color
+        backgroundColor: settings.background_color || 'var(--color-background)'
       }}
     >
       <div

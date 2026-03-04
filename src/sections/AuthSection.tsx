@@ -55,13 +55,13 @@ function LoginFormBlock({ settings }: AuthBlockProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1.5 ml-1">Email Address</label>
+        <label className="block text-sm font-medium mb-1.5 ml-1 opacity-70">Email Address</label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="name@example.com"
-          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
+          className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
           required
         />
       </div>
@@ -81,13 +81,13 @@ function LoginFormBlock({ settings }: AuthBlockProps) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
+            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
             required
           />
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-1"
+            className="absolute right-3 top-1/2 -translate-y-1/2 opacity-40 hover:opacity-70 p-1"
           >
             {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
           </button>
@@ -109,7 +109,7 @@ function LoginFormBlock({ settings }: AuthBlockProps) {
       </button>
 
       {settings.show_register_link && store?.accountConfig?.registrationEnabled !== false && (
-        <p className="text-center text-sm text-gray-600 pt-2">
+        <p className="text-center text-sm opacity-60 pt-2">
           Don't have an account?{' '}
           <Link href={getStorePermalink(domain, '/register')} className="text-primary font-bold hover:underline transition-all underline-offset-4">
             Create account
@@ -161,71 +161,71 @@ function RegisterFormBlock({ settings }: AuthBlockProps) {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5 ml-1">First Name</label>
+          <label className="block text-sm font-medium mb-1.5 ml-1 opacity-70">First Name</label>
           <input
             type="text"
             value={formData.firstName}
             onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
             placeholder="John"
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
+            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
             required
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5 ml-1">Last Name</label>
+          <label className="block text-sm font-medium mb-1.5 ml-1 opacity-70">Last Name</label>
           <input
             type="text"
             value={formData.lastName}
             onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
             placeholder="Doe"
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
+            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
             required
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1.5 ml-1">Email Address</label>
+        <label className="block text-sm font-medium mb-1.5 ml-1 opacity-70">Email Address</label>
         <input
           type="email"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           placeholder="name@example.com"
-          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
+          className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
           required
         />
       </div>
 
       {requiredFields.includes('phone') && (
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5 ml-1">Phone Number</label>
+          <label className="block text-sm font-medium mb-1.5 ml-1 opacity-70">Phone Number</label>
           <input
             type="tel"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             placeholder="+234..."
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
+            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
             required
           />
         </div>
       )}
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1.5 ml-1">Password</label>
+        <label className="block text-sm font-medium mb-1.5 ml-1 opacity-70">Password</label>
         <div className="relative">
           <input
             type={showPassword ? 'text' : 'password'}
             value={formData.password}
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
             placeholder="Min. 8 characters"
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
+            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
             required
             minLength={8}
           />
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-1"
+            className="absolute right-3 top-1/2 -translate-y-1/2 opacity-40 hover:opacity-70 p-1"
           >
             {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
           </button>
@@ -234,8 +234,8 @@ function RegisterFormBlock({ settings }: AuthBlockProps) {
 
       {settings.show_terms && (
         <label className="flex items-start gap-3 p-1 cursor-pointer group">
-          <input type="checkbox" required className="mt-1 w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary/20 accent-primary" />
-          <span className="text-[13px] text-gray-500 leading-tight">
+          <input type="checkbox" required className="mt-1 w-4 h-4 rounded text-primary focus:ring-primary/20 accent-primary" style={{ borderColor: 'var(--color-border)' }} />
+          <span className="text-[13px] opacity-60 leading-tight">
             I agree to the{' '}
             <Link href={getStorePermalink(domain, '/pages/terms')} className="text-primary font-medium hover:underline">Terms of Service</Link>
             {' '}and{' '}
@@ -259,7 +259,7 @@ function RegisterFormBlock({ settings }: AuthBlockProps) {
       </button>
 
       {settings.show_login_link && (
-        <p className="text-center text-sm text-gray-600 pt-2">
+        <p className="text-center text-sm opacity-60 pt-2">
           Already have an account?{' '}
           <Link href={getStorePermalink(domain, '/login')} className="text-primary font-bold hover:underline transition-all underline-offset-4">
             Sign in
@@ -299,13 +299,13 @@ function ForgotPasswordFormBlock({ settings, onSuccess }: AuthBlockProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1.5 ml-1">Email Address</label>
+        <label className="block text-sm font-medium mb-1.5 ml-1 opacity-70">Email Address</label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="name@example.com"
-          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
+          className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
           required
         />
       </div>
@@ -360,18 +360,19 @@ function OtpVerificationFormBlock({ settings, state, onSuccess }: AuthBlockProps
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="text-center mb-6">
-        <p className="text-sm text-gray-500">We've sent a 6-digit code to <span className="font-semibold text-gray-900">{state?.email}</span></p>
+        <p className="text-sm opacity-60" style={{ color: 'var(--color-text)' }}>We've sent a 6-digit code to <span className="font-semibold opacity-100" style={{ color: 'var(--color-heading)' }}>{state?.email}</span></p>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1.5 ml-1 text-center font-mono tracking-widest uppercase">Enter 6-digit Code</label>
+        <label className="block text-sm font-medium mb-1.5 ml-1 opacity-70 text-center font-mono tracking-widest uppercase">Enter 6-digit Code</label>
         <input
           type="text"
           maxLength={6}
           value={code}
           onChange={(e) => setCode(e.target.value.replace(/[^0-9]/g, ''))}
           placeholder="000 000"
-          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-center text-2xl font-bold tracking-[0.5em] font-mono"
+          className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-center text-2xl font-bold tracking-[0.5em] font-mono"
+          style={{ borderColor: 'var(--color-border)', color: 'var(--color-heading)' }}
           required
         />
       </div>
@@ -442,21 +443,21 @@ function ResetPasswordFormBlock({ settings, state }: AuthBlockProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1.5 ml-1">New Password</label>
+        <label className="block text-sm font-medium mb-1.5 ml-1 opacity-70">New Password</label>
         <div className="relative">
           <input
             type={showPassword ? 'text' : 'password'}
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             placeholder="Min. 8 characters"
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
+            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
             required
             minLength={8}
           />
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-1"
+            className="absolute right-3 top-1/2 -translate-y-1/2 opacity-40 hover:opacity-70 p-1"
           >
             {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
           </button>
@@ -464,13 +465,13 @@ function ResetPasswordFormBlock({ settings, state }: AuthBlockProps) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1.5 ml-1">Confirm New Password</label>
+        <label className="block text-sm font-medium mb-1.5 ml-1 opacity-70">Confirm New Password</label>
         <input
           type={showPassword ? 'text' : 'password'}
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           placeholder="Repeat password"
-          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
+          className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition text-sm"
           required
         />
       </div>
@@ -510,11 +511,11 @@ function AuthHeaderBlock({ settings }: { settings: any }) {
           )}
         </div>
       )}
-      <h1 className="text-2xl font-bold text-gray-900 tracking-tight" style={{ color: settings.title_color }}>
+      <h1 className="text-2xl font-bold tracking-tight" style={{ color: settings.title_color || 'var(--color-heading)', fontFamily: 'var(--font-heading)' }}>
         {settings.title || 'Welcome'}
       </h1>
       {settings.subtitle && (
-        <p className="text-gray-500 mt-2 text-sm">{settings.subtitle}</p>
+        <p className="mt-2 text-sm opacity-60" style={{ color: 'var(--color-text)' }}>{settings.subtitle}</p>
       )}
     </div>
   );
@@ -526,16 +527,16 @@ function SocialAuthBlock({ settings }: { settings: any }) {
     <div className="space-y-4 pt-4">
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-gray-100" />
+          <div className="w-full border-t" style={{ borderColor: 'var(--color-border)' }} />
         </div>
         <div className="relative flex justify-center text-[12px] uppercase tracking-wider font-semibold">
-          <span className="px-3 bg-white text-gray-400">Or continue with</span>
+          <span className="px-3 opacity-40" style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-text)' }}>Or continue with</span>
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-3">
         {settings.show_google && (
-          <button className="flex items-center justify-center gap-2 py-2.5 px-4 border border-gray-100 rounded-lg hover:bg-gray-50 transition text-sm font-medium text-gray-700">
+          <button className="flex items-center justify-center gap-2 py-2.5 px-4 border rounded-lg hover:opacity-70 transition text-sm font-medium">
             <svg className="w-4 h-4" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
               <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
@@ -546,7 +547,7 @@ function SocialAuthBlock({ settings }: { settings: any }) {
           </button>
         )}
         {settings.show_apple && (
-          <button className="flex items-center justify-center gap-2 py-2.5 px-4 border border-gray-100 rounded-lg hover:bg-gray-50 transition text-sm font-medium text-gray-700">
+          <button className="flex items-center justify-center gap-2 py-2.5 px-4 border rounded-lg hover:opacity-70 transition text-sm font-medium">
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
               <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
             </svg>
@@ -619,18 +620,18 @@ export default function AuthSection({ settings, blocks }: { settings: any; block
   }
 
   return (
-    <section className="min-h-[85vh] flex items-center justify-center py-12 px-4 bg-gray-50/50">
+    <section className="min-h-[85vh] flex items-center justify-center py-12 px-4" style={{ backgroundColor: 'var(--color-background)' }}>
       <div className="w-full max-w-[440px] mx-auto">
-        <div className="bg-white rounded-[24px] shadow-xl shadow-gray-200/50 border border-gray-100 p-8 md:p-10">
+        <div className="rounded-[24px] shadow-xl border p-8 md:p-10" style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}>
           {!contextSettings?.loginEnabled && mode === 'login' ? (
             <div className="text-center py-8">
-              <h2 className="text-xl font-bold text-gray-900 mb-2">Login Disabled</h2>
-              <p className="text-gray-500">Customer login is currently disabled for this store.</p>
+              <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--color-heading)' }}>Login Disabled</h2>
+              <p className="opacity-60" style={{ color: 'var(--color-text)' }}>Customer login is currently disabled for this store.</p>
             </div>
           ) : (mode === 'register' && contextSettings?.registrationEnabled === false) ? (
             <div className="text-center py-8">
-              <h2 className="text-xl font-bold text-gray-900 mb-2">Registration Closed</h2>
-              <p className="text-gray-500">New account registration is currently disabled.</p>
+              <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--color-heading)' }}>Registration Closed</h2>
+              <p className="opacity-60" style={{ color: 'var(--color-text)' }}>New account registration is currently disabled.</p>
             </div>
           ) : (
             functionalBlocks.map((block, idx) => {
