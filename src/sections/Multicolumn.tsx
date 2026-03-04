@@ -104,7 +104,7 @@ export default function Multicolumn({ settings, blocks }: MulticolumnProps) {
           <div className={`mt-12 ${alignClass}`}>
             <Link
               href={button_link}
-              className="btn-primary inline-block px-8 py-3 font-bold rounded-lg transition-colors"
+              className="btn-primary inline-block px-8 py-3 font-bold transition-colors"
             >
               {button_text}
             </Link>

@@ -12,12 +12,13 @@ import {
 } from '@zevcommerce/storefront-api';
 import { ArrowLeft, Package, MapPin, CreditCard, Clock, CheckCircle, XCircle, Truck } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
+import { formatPrice } from '../helpers/format-price';
 
 // Helper to format currency
 const useCurrencyFormatter = () => {
   const { storeConfig } = useTheme();
   const currency = storeConfig?.currency || 'NGN';
-  return (amount: number) => new Intl.NumberFormat('en-NG', { style: 'currency', currency }).format(amount);
+  return (amount: number) => formatPrice(amount, currency);
 };
 
 // --- BLOCKS ---

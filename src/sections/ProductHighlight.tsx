@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useTheme, getProduct, ProductCard } from '@zevcommerce/storefront-api';
 import { ArrowRight } from 'lucide-react';
+import { formatPrice } from '../helpers/format-price';
 
 export default function ProductHighlight({ settings }: { settings: any }) {
   const { storeConfig } = useTheme();
@@ -85,12 +86,12 @@ export default function ProductHighlight({ settings }: { settings: any }) {
                   </div>
                   <div>
                     <h4 className="font-bold line-clamp-1" style={{ color: 'var(--color-heading)' }}>{product.title}</h4>
-                    <p className="opacity-60">{new Intl.NumberFormat('en-NG', { style: 'currency', currency: storeConfig?.currency || 'NGN' }).format(product.price)}</p>
+                    <p className="opacity-60">{formatPrice(product.price, storeConfig?.currency || 'NGN')}</p>
                   </div>
                 </div>
                 <Link
                   href={`/products/${product.handle}`}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl btn-primary py-4 px-6 font-medium transition-colors"
+                  className="flex w-full items-center justify-center gap-2 btn-primary py-4 px-6 font-medium transition-colors"
                 >
                   View Product <ArrowRight size={18} />
                 </Link>

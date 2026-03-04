@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useTheme, getProduct, cn } from '@zevcommerce/storefront-api';
 import { Plus } from 'lucide-react';
+import { formatPrice } from '../helpers/format-price';
 
 // Single Hotspot Component
 function HotspotDot({ block, domain }: { block: any, domain: string }) {
@@ -55,7 +56,7 @@ function HotspotDot({ block, domain }: { block: any, domain: string }) {
           <div className="flex flex-col justify-center min-w-0">
             <h4 className="font-bold text-sm truncate" style={{ color: 'var(--color-heading)' }}>{product.title}</h4>
             <span className="opacity-50 text-xs mt-1">
-              {new Intl.NumberFormat('en-NG', { style: 'currency', currency: storeConfig?.currency || 'NGN' }).format(product.price)}
+              {formatPrice(product.price, storeConfig?.currency || 'NGN')}
             </span>
             <Link
               href={`/products/${product.handle}`}

@@ -12,6 +12,7 @@ import {
   resolveMenuUrl, cn, getStorePermalink,
   API_ORIGIN,
 } from '@zevcommerce/storefront-api';
+import { formatPrice } from '../helpers/format-price';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 // Helper to resolve alignment classes
@@ -428,19 +429,16 @@ export function ProductPriceBlock({ settings, sectionSettings }: { settings: any
   const alignment = settings.enable_custom_alignment ? settings.alignment : (sectionSettings?.alignment || 'left');
   const flexAlign = getFlexAlignmentClass(alignment);
 
-  const formatPrice = (amount: number) =>
-    new Intl.NumberFormat('en-NG', { style: 'currency', currency }).format(amount);
-
   return (
     <div className={`flex items-baseline gap-3 mb-6 ${flexAlign}`}>
       <span
         className="text-2xl font-bold"
         style={{ color: (compareAt && compareAt > price) ? (settings.sale_color || '#EF4444') : (settings.price_color || sectionSettings?.text_color || 'var(--color-heading)') }}
       >
-        {formatPrice(price)}
+        {formatPrice(price, currency)}
       </span>
       {(settings.show_compare_at ?? true) && compareAt && compareAt > price && (
-        <span className="text-lg line-through font-medium opacity-40">{formatPrice(compareAt)}</span>
+        <span className="text-lg line-through font-medium opacity-40">{formatPrice(compareAt, currency)}</span>
       )}
     </div>
   );
@@ -830,7 +828,7 @@ export function CartSummaryBlock({ settings, sectionSettings }: { settings: any,
               </span>
             </div>
 
-            <button className="w-full btn-primary px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-3 shadow-xl active:scale-[0.98]">
+            <button className="w-full btn-primary px-8 py-4 font-black text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-3 shadow-xl active:scale-[0.98]">
               Checkout
               <ArrowRight size={18} />
             </button>
@@ -1186,23 +1184,23 @@ export function ContactFormBlock({ settings, sectionSettings }: { settings: any,
       <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
         <div>
           <label className="block text-xs font-medium opacity-50 mb-1 uppercase tracking-wider">Full Name</label>
-          <input type="text" className="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-current outline-none transition-shadow text-sm" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }} placeholder="John Doe" />
+          <input type="text" className="w-full px-4 py-2 border focus:ring-2 focus:ring-current outline-none transition-shadow text-sm" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }} placeholder="John Doe" />
         </div>
         <div>
           <label className="block text-xs font-medium opacity-50 mb-1 uppercase tracking-wider">Email Address</label>
-          <input type="email" className="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-current outline-none transition-shadow text-sm" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }} placeholder="john@example.com" />
+          <input type="email" className="w-full px-4 py-2 border focus:ring-2 focus:ring-current outline-none transition-shadow text-sm" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }} placeholder="john@example.com" />
         </div>
         {settings.show_phone && (
           <div>
             <label className="block text-xs font-medium opacity-50 mb-1 uppercase tracking-wider">Phone Number</label>
-            <input type="tel" className="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-current outline-none transition-shadow text-sm" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }} placeholder="+1 (555) 000-0000" />
+            <input type="tel" className="w-full px-4 py-2 border focus:ring-2 focus:ring-current outline-none transition-shadow text-sm" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }} placeholder="+1 (555) 000-0000" />
           </div>
         )}
         <div>
           <label className="block text-xs font-medium opacity-50 mb-1 uppercase tracking-wider">Message</label>
-          <textarea className="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-current outline-none transition-shadow text-sm min-h-[100px]" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }} placeholder="How can we help you?"></textarea>
+          <textarea className="w-full px-4 py-2 border focus:ring-2 focus:ring-current outline-none transition-shadow text-sm min-h-[100px]" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }} placeholder="How can we help you?"></textarea>
         </div>
-        <button type="submit" className="w-full btn-primary font-bold py-3 rounded-lg transition-colors">
+        <button type="submit" className="w-full btn-primary font-bold py-3 transition-colors">
           {settings.button_text || 'Send Message'}
         </button>
       </form>
@@ -1222,7 +1220,7 @@ export function EmailSignupBlock({ settings, sectionSettings }: { settings: any,
           style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }}
           required
         />
-        <button type="submit" className="btn-primary px-6 py-2 rounded-lg font-bold transition-colors text-sm">
+        <button type="submit" className="btn-primary px-6 py-2 font-bold transition-colors text-sm">
           {settings.button_text || 'Join'}
         </button>
       </form>
@@ -1717,6 +1715,7 @@ export function PaymentInstructionsBlock({ settings, sectionSettings }: { settin
 }
 
 export function GiftCardCodesBlock({ settings, sectionSettings }: { settings: any, sectionSettings?: any }) {
+  const { storeConfig } = useTheme();
   const searchParams = useSearchParams();
   const gcParam = searchParams.get('gc');
 
@@ -1755,7 +1754,7 @@ export function GiftCardCodesBlock({ settings, sectionSettings }: { settings: an
                   {gc.code}
                 </p>
                 <p className="text-xs opacity-50 mt-0.5">
-                  Value: {new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', maximumFractionDigits: 0 }).format(gc.denomination)}
+                  Value: {formatPrice(gc.denomination, storeConfig?.currency || 'NGN')}
                   {gc.expiresAt && ` · Expires ${new Date(gc.expiresAt).toLocaleDateString()}`}
                 </p>
               </div>
@@ -1781,7 +1780,7 @@ export function ContinueShoppingBlock({ settings, sectionSettings }: { settings:
     <div className="text-center">
       <Link
         href={getStorePermalink(storeConfig?.handle, '/')}
-        className="btn-primary px-10 py-4 rounded-xl font-bold uppercase tracking-widest text-sm transition-all shadow-xl shadow-black/10 active:scale-[0.98] inline-block"
+        className="btn-primary px-10 py-4 font-bold uppercase tracking-widest text-sm transition-all shadow-xl shadow-black/10 active:scale-[0.98] inline-block"
       >
         {settings.button_text || 'Continue Shopping'}
       </Link>

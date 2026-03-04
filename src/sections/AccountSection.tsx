@@ -9,6 +9,7 @@ import {
   getMyOrders,
   cn,
 } from '@zevcommerce/storefront-api';
+import { formatPrice } from '../helpers/format-price';
 import {
   User, Package, MapPin, CreditCard, LogOut,
   ChevronRight, Eye, Search, Filter, Calendar,
@@ -306,9 +307,6 @@ function OrdersBlock({ settings, sectionSettings, hideFilters = false }: { setti
 
   const totalPages = Math.ceil(filteredOrders.length / itemsPerPage);
 
-  const formatPrice = (amount: number) =>
-    new Intl.NumberFormat('en-NG', { style: 'currency', currency }).format(amount);
-
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
       case 'delivered': return 'bg-green-50 text-green-700 border-green-100';
@@ -406,7 +404,7 @@ function OrdersBlock({ settings, sectionSettings, hideFilters = false }: { setti
                       </span>
                     </td>
                     <td className="px-6 py-4 text-right font-bold" style={{ color: rowTextColor }}>
-                      {formatPrice(order.total)}
+                      {formatPrice(order.total, currency)}
                     </td>
                     <td className="px-6 py-4 text-center">
                       <Link
