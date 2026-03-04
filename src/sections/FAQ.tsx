@@ -19,13 +19,13 @@ function QuestionItem({ block, isOpen, onClick }: { block: any, isOpen: boolean,
   const { question, answer } = block.settings;
 
   return (
-    <div className="border-b border-gray-200 last:border-0 hover:bg-black/5 transition-colors duration-200">
+    <div className="border-b last:border-0 transition-colors duration-200" style={{ borderColor: 'var(--color-border)' }}>
       <button
         onClick={onClick}
-        className="w-full py-5 px-4 flex items-center justify-between text-left group"
+        className="w-full py-6 px-5 flex items-center justify-between text-left group"
       >
-        <span className="font-semibold text-lg pr-4 group-hover:underline decoration-1 underline-offset-4">{question}</span>
-        <span className="shrink-0 text-gray-500 transition-transform duration-300">
+        <span className="font-semibold text-lg pr-4" style={{ color: 'var(--color-heading)' }}>{question}</span>
+        <span className="shrink-0 opacity-40 transition-transform duration-300" style={{ color: 'var(--color-text)' }}>
           {isOpen ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
         </span>
       </button>
@@ -33,7 +33,7 @@ function QuestionItem({ block, isOpen, onClick }: { block: any, isOpen: boolean,
         className={`grid transition-[grid-template-rows] duration-300 ease-out ${isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
       >
         <div className="overflow-hidden">
-          <div className="px-4 pb-6 text-gray-600 leading-relaxed whitespace-pre-wrap">
+          <div className="px-5 pb-6 leading-relaxed whitespace-pre-wrap opacity-70" style={{ color: 'var(--color-text)' }}>
             {answer}
           </div>
         </div>
@@ -70,12 +70,12 @@ export default function FAQ({ settings, blocks }: FAQProps) {
         {(title || description) && (
           <div className="text-center mb-12 max-w-2xl mx-auto">
             {title && <h2 className="text-3xl md:text-4xl font-bold mb-4">{title}</h2>}
-            {description && <p className="text-gray-600 text-lg">{description}</p>}
+            {description && <p className="text-lg opacity-70" style={{ color: 'var(--color-text)' }}>{description}</p>}
           </div>
         )}
 
         {/* List */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden text-black">
+        <div className="rounded-2xl shadow-sm border overflow-hidden" style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}>
           {blocks.map((block: any, index: number) => {
             if (block.type !== 'question') return null;
             return (
@@ -88,7 +88,7 @@ export default function FAQ({ settings, blocks }: FAQProps) {
             );
           })}
           {blocks.length === 0 && (
-            <div className="p-8 text-center text-gray-400">Add questions to this section</div>
+            <div className="p-8 text-center opacity-40" style={{ color: 'var(--color-text)' }}>Add questions to this section</div>
           )}
         </div>
       </div>

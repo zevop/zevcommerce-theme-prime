@@ -36,34 +36,34 @@
       "variantSelectedBorder": "#111827"
     },
     "typography": {
-      "headingFont": "Outfit",
+      "headingFont": "Playfair Display",
       "bodyFont": "Inter",
       "subheadingFont": "Inter",
       "accentFont": "Playfair Display",
       "p": {
         "size": "16px",
-        "lineHeight": "1.6",
+        "lineHeight": "1.7",
         "letterSpacing": "normal",
         "case": "default"
       },
       "h1": {
         "font": "heading",
-        "size": "48px",
+        "size": "56px",
         "lineHeight": "1.1",
         "letterSpacing": "-0.02em",
         "case": "default"
       },
       "h2": {
         "font": "heading",
-        "size": "36px",
-        "lineHeight": "1.2",
+        "size": "42px",
+        "lineHeight": "1.15",
         "letterSpacing": "-0.01em",
         "case": "default"
       },
       "h3": {
         "font": "heading",
-        "size": "30px",
-        "lineHeight": "1.3",
+        "size": "32px",
+        "lineHeight": "1.25",
         "letterSpacing": "-0.01em",
         "case": "default"
       },
@@ -91,8 +91,8 @@
     },
     "layout": {
       "containerWidth": "1280px",
-      "sectionSpacing": "64px",
-      "sectionSpacingMobile": "40px",
+      "sectionSpacing": "96px",
+      "sectionSpacingMobile": "56px",
       "gridGap": "32px"
     },
     "animations": {
@@ -103,11 +103,11 @@
       "staggerChildren": true
     },
     "buttons": {
-      "primaryRadius": "6px",
+      "primaryRadius": "0px",
       "primaryBorderThickness": "0px",
       "primaryFont": "body",
       "primaryCase": "default",
-      "secondaryRadius": "6px",
+      "secondaryRadius": "0px",
       "secondaryBorderThickness": "1px",
       "secondaryFont": "body",
       "secondaryCase": "default",
@@ -115,8 +115,8 @@
     },
     "badges": {
       "position": "top_left",
-      "radius": "4px",
-      "saleBg": "#DC2626",
+      "radius": "0px",
+      "saleBg": "#111827",
       "saleText": "#ffffff",
       "soldOutBg": "#9CA3AF",
       "soldOutText": "#ffffff",
@@ -186,16 +186,17 @@
     "hero_1": {
       "type": "hero",
       "settings": {
-        "height": "large",
+        "height": "full",
         "alignment": "center",
-        "vertical_alignment": "center"
+        "vertical_alignment": "center",
+        "content_max_width": "wide"
       },
       "blocks": [
         {
           "type": "heading",
           "settings": {
             "text": "Welcome to {{store_name}}",
-            "size": "h1"
+            "size": "jumbo"
           }
         },
         {
@@ -216,8 +217,8 @@
     "product_grid_1": {
       "type": "product-grid",
       "settings": {
-        "padding_top": 80,
-        "padding_bottom": 80,
+        "padding_top": 96,
+        "padding_bottom": 96,
         "image_ratio": "portrait"
       },
       "blocks": [
@@ -244,8 +245,8 @@
       "settings": {
         "title": "",
         "columns": "3",
-        "padding_top": 48,
-        "padding_bottom": 48
+        "padding_top": 64,
+        "padding_bottom": 64
       },
       "blocks": [
         {
@@ -277,8 +278,8 @@
     "image_with_text_1": {
       "type": "image_with_text",
       "settings": {
-        "padding_top": 80,
-        "padding_bottom": 80
+        "padding_top": 96,
+        "padding_bottom": 96
       },
       "blocks": [
         {

@@ -82,15 +82,15 @@ export default function Hero({ settings, blocks }: { settings: any; blocks: any[
       >
         {/* Image side */}
         <div
-          className={`relative w-full md:w-1/2 min-h-[300px] md:min-h-0 bg-gray-900 ${layout === 'split_reverse' ? 'md:order-2' : ''}`}
-          style={bgImage ? { backgroundImage: `url("${bgImage}")`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}
+          className={`relative w-full md:w-1/2 min-h-[300px] md:min-h-0 ${layout === 'split_reverse' ? 'md:order-2' : ''}`}
+          style={bgImage ? { backgroundImage: `url("${bgImage}")`, backgroundSize: 'cover', backgroundPosition: 'center' } : { backgroundColor: 'var(--color-primary)' }}
         >
           {bgImage && <div className="absolute inset-0" style={{ backgroundColor: overlayColor, opacity: overlayOpacity / 100 }} />}
         </div>
 
         {/* Content side */}
         <div
-          className={`relative w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 py-16 ${layout === 'split_reverse' ? 'md:order-1' : ''}`}
+          className={`relative w-full md:w-1/2 flex flex-col justify-center px-8 md:px-20 py-20 ${layout === 'split_reverse' ? 'md:order-1' : ''}`}
           style={{ backgroundColor: settings.section_bg_color || 'var(--color-background)', color: 'var(--color-text)' }}
         >
           <div className={`${contentMaxWidth} transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
@@ -110,8 +110,8 @@ export default function Hero({ settings, blocks }: { settings: any; blocks: any[
     return (
       <div
         ref={ref}
-        className="relative w-full py-12 md:py-16 bg-gray-900 text-white"
-        style={sectionStyle}
+        className="relative w-full py-12 md:py-16 text-white"
+        style={{ backgroundColor: settings.section_bg_color || 'var(--color-primary)', ...sectionStyle }}
       >
         {!settings.section_bg_color && (
           <div className="absolute inset-0" style={{ backgroundColor: overlayColor, opacity: overlayOpacity / 100 }} />
@@ -131,8 +131,8 @@ export default function Hero({ settings, blocks }: { settings: any; blocks: any[
   return (
     <div
       ref={ref}
-      className={`relative flex flex-col items-center w-full bg-gray-900 text-white ${heightMap[height] || ''} ${verticalAlignMap[verticalAlignment] || 'justify-center'}`}
-      style={sectionStyle}
+      className={`relative flex flex-col items-center w-full text-white ${heightMap[height] || ''} ${verticalAlignMap[verticalAlignment] || 'justify-center'}`}
+      style={{ backgroundColor: settings.section_bg_color || 'var(--color-primary)', ...sectionStyle }}
     >
       {/* Overlay */}
       {!settings.section_bg_color && (
@@ -140,7 +140,7 @@ export default function Hero({ settings, blocks }: { settings: any; blocks: any[
       )}
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 py-20">
+      <div className="relative z-10 container mx-auto px-4 py-24 md:py-32">
         <div className={`transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
           <BlockRenderer
             blocks={processedBlocks}
@@ -148,7 +148,7 @@ export default function Hero({ settings, blocks }: { settings: any; blocks: any[
             className={
               layout === 'spread'
                 ? 'w-full flex flex-col md:flex-row md:items-end md:justify-between gap-6'
-                : `w-full flex flex-col ${alignmentMap[alignment] || 'items-center text-center'} ${contentMaxWidth} ${alignment === 'center' ? 'mx-auto' : ''} gap-4`
+                : `w-full flex flex-col ${alignmentMap[alignment] || 'items-center text-center'} ${contentMaxWidth} ${alignment === 'center' ? 'mx-auto' : ''} gap-6`
             }
           />
         </div>

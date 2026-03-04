@@ -40,12 +40,13 @@ function NavDropdown({ item, domain, textColor }: { item: any; domain: string; t
       </button>
 
       <div className="absolute top-full left-0 pt-2 opacity-0 translate-y-2 invisible group-hover/menu:opacity-100 group-hover/menu:translate-y-0 group-hover/menu:visible transition-all duration-200 z-[100]">
-        <div className="bg-white border border-gray-100 shadow-xl rounded-lg py-2 min-w-[200px]">
+        <div className="border shadow-xl rounded-lg py-2 min-w-[200px]" style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}>
           {item.children.map((child: any) => (
             <Link
               key={child.id}
               href={resolveMenuUrl(child, domain)}
-              className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+              className="block px-4 py-2.5 text-sm transition-colors hover:opacity-70"
+              style={{ color: 'var(--color-text)' }}
             >
               {child.title}
             </Link>
@@ -94,11 +95,12 @@ function MobileMenu({
 
       {/* Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-[300px] max-w-[85vw] bg-white z-[201] shadow-2xl transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`fixed top-0 right-0 h-full w-[300px] max-w-[85vw] z-[201] shadow-2xl transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        style={{ backgroundColor: 'var(--color-background)' }}
       >
-        <div className="flex items-center justify-between p-4 border-b border-gray-100">
-          <span className="text-sm font-semibold uppercase tracking-wider text-gray-400">Menu</span>
-          <button onClick={onClose} className="p-2 rounded-full hover:bg-gray-100 transition-colors">
+        <div className="flex items-center justify-between p-4 border-b" style={{ borderColor: 'var(--color-border)' }}>
+          <span className="text-sm font-semibold uppercase tracking-wider opacity-40" style={{ color: 'var(--color-text)' }}>Menu</span>
+          <button onClick={onClose} className="p-2 rounded-full transition-colors" style={{ color: 'var(--color-text)' }}>
             <X className="h-5 w-5" />
           </button>
         </div>

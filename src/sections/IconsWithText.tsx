@@ -49,7 +49,7 @@ export default function IconsWithText({ settings, blocks }: IconsWithTextProps) 
 
   return (
     <section className="py-16 px-4 md:px-8" style={{ backgroundColor: background_color, color: text_color }}>
-      <div className={`max-w-7xl mx-auto grid ${gridClass} gap-12`}>
+      <div className={`max-w-7xl mx-auto grid ${gridClass} gap-16`}>
         {blocks.map((block: any, index: number) => {
           if (block.type !== 'icon_column') return null;
 
@@ -58,17 +58,17 @@ export default function IconsWithText({ settings, blocks }: IconsWithTextProps) 
 
           return (
             <div key={block.id || index} className={`flex flex-col ${alignClass}`}>
-              <div className="mb-4 p-3 bg-black/5 rounded-full inline-block">
-                <IconComponent className="w-8 h-8 opacity-80" />
+              <div className="mb-5 p-4 rounded-full inline-block" style={{ backgroundColor: 'var(--color-border)' }}>
+                <IconComponent className="w-7 h-7 opacity-70" style={{ color: 'var(--color-heading)' }} />
               </div>
-              {heading && <h3 className="text-xl font-bold mb-3">{heading}</h3>}
-              {text && <p className="text-gray-600 leading-relaxed" style={{ color: text_color ? text_color : undefined, opacity: 0.8 }}>{text}</p>}
+              {heading && <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--color-heading)' }}>{heading}</h3>}
+              {text && <p className="leading-relaxed opacity-70" style={{ color: 'var(--color-text)' }}>{text}</p>}
             </div>
           )
         })}
       </div>
       {blocks.length === 0 && (
-        <div className="text-center text-gray-400 py-12">Add icon blocks to display features</div>
+        <div className="text-center opacity-40 py-12" style={{ color: 'var(--color-text)' }}>Add icon blocks to display features</div>
       )}
     </section>
   );

@@ -11,7 +11,8 @@ function StarRating({ rating }: { rating: number }) {
       {[1, 2, 3, 4, 5].map((i) => (
         <Star
           key={i}
-          className={`h-4 w-4 ${i <= rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`}
+          className="h-4 w-4"
+          style={i <= rating ? { fill: 'var(--color-heading)', color: 'var(--color-heading)' } : { color: 'var(--color-border)' }}
         />
       ))}
     </div>
@@ -74,7 +75,7 @@ export default function Testimonials({ settings, blocks }: { settings: any; bloc
 
   if (testimonials.length === 0) {
     return (
-      <SectionWrapper settings={settings} className="py-16 text-center text-gray-400">
+      <SectionWrapper settings={settings} className="py-16 text-center opacity-40" style={{ color: 'var(--color-text)' }}>
         <p>Add testimonial blocks to display customer reviews.</p>
       </SectionWrapper>
     );
@@ -95,7 +96,7 @@ export default function Testimonials({ settings, blocks }: { settings: any; bloc
               const s = block.settings || {};
               const avatar = resolveImage(s.avatar);
               return (
-                <div key={block._id || i} className="rounded-xl p-8 border border-gray-100" style={{ backgroundColor: 'var(--color-background)' }}>
+                <div key={block._id || i} className="rounded-xl p-8 border" style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}>
                   {showQuoteMark && (
                     <Quote className="h-8 w-8 mb-4 opacity-20" style={{ color: accentColor }} />
                   )}
@@ -166,15 +167,17 @@ export default function Testimonials({ settings, blocks }: { settings: any; bloc
             <>
               <button
                 onClick={goPrev}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 p-2 rounded-full border border-gray-200 bg-white/80 hover:bg-white transition-colors shadow-sm hidden md:block"
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 p-2 rounded-full border transition-colors shadow-sm hidden md:block"
+                style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)', color: 'var(--color-text)' }}
               >
-                <ChevronLeft className="h-5 w-5 text-gray-600" />
+                <ChevronLeft className="h-5 w-5" />
               </button>
               <button
                 onClick={goNext}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 p-2 rounded-full border border-gray-200 bg-white/80 hover:bg-white transition-colors shadow-sm hidden md:block"
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 p-2 rounded-full border transition-colors shadow-sm hidden md:block"
+                style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)', color: 'var(--color-text)' }}
               >
-                <ChevronRight className="h-5 w-5 text-gray-600" />
+                <ChevronRight className="h-5 w-5" />
               </button>
 
               {/* Dots */}
@@ -183,8 +186,8 @@ export default function Testimonials({ settings, blocks }: { settings: any; bloc
                   <button
                     key={i}
                     onClick={() => goTo(i)}
-                    className={`h-2 rounded-full transition-all duration-300 ${i === currentIndex ? 'w-8' : 'w-2 bg-gray-300 hover:bg-gray-400'}`}
-                    style={i === currentIndex ? { backgroundColor: accentColor } : undefined}
+                    className={`h-2 rounded-full transition-all duration-300 ${i === currentIndex ? 'w-8' : 'w-2'}`}
+                    style={{ backgroundColor: i === currentIndex ? accentColor : 'var(--color-border)' }}
                   />
                 ))}
               </div>

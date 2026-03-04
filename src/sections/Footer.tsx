@@ -7,9 +7,9 @@ export default function Footer({ settings, blocks }: { settings: any, blocks: an
   const storeName = storeConfig?.name || 'Store';
 
   return (
-    <footer className={`pt-16 pb-12 text-${alignment}`} style={{ backgroundColor, color: textColor }}>
+    <footer className={`pt-20 pb-16 text-${alignment}`} style={{ backgroundColor, color: textColor }}>
       {/* Top accent border */}
-      <div className="h-px w-full mb-16" style={{ background: `linear-gradient(90deg, transparent, var(--color-border), transparent)` }} />
+      <div className="h-px w-full mb-20" style={{ background: `linear-gradient(90deg, transparent, var(--color-border), transparent)` }} />
 
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">

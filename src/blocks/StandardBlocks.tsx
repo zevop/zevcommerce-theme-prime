@@ -106,7 +106,7 @@ export function TextBlock({ settings, sectionSettings }: { settings: any, sectio
   if (style.display === 'inline-block') {
     return (
       <div className={`mb-4 ${alignClass}`}>
-        <div className="whitespace-pre-wrap text-gray-600" style={style}>
+        <div className="whitespace-pre-wrap opacity-70" style={{ color: 'var(--color-text)', ...style }}>
           {settings.text || 'Add your text here.'}
         </div>
       </div>
@@ -115,8 +115,8 @@ export function TextBlock({ settings, sectionSettings }: { settings: any, sectio
 
   return (
     <div
-      className={`text-gray-600 mb-4 whitespace-pre-wrap ${alignClass}`}
-      style={style}
+      className={`mb-4 whitespace-pre-wrap opacity-70 ${alignClass}`}
+      style={{ color: 'var(--color-text)', ...style }}
     >
       {settings.text || 'Add your text here.'}
     </div>
@@ -135,7 +135,7 @@ export function ButtonBlock({ settings, sectionSettings }: { settings: any, sect
     <div className={`mb-4 flex ${flexAlignKey}`}>
       <Link
         href={settings.link || '#'}
-        className={`px-6 py-2 transition-colors inline-block font-medium ${style === 'primary' ? 'btn-primary' : 'btn-secondary'}`}
+        className={`px-8 py-3 transition-colors inline-block font-medium ${style === 'primary' ? 'btn-primary' : 'btn-secondary'}`}
         style={{
           backgroundColor: bgColor,
           color: textColor
@@ -148,7 +148,7 @@ export function ButtonBlock({ settings, sectionSettings }: { settings: any, sect
 }
 
 export function ImageBlock({ settings, sectionSettings }: { settings: any, sectionSettings?: any }) {
-  if (!settings.image) return <div className="bg-gray-100 aspect-video flex items-center justify-center text-gray-400 mb-4 rounded">No image selected</div>;
+  if (!settings.image) return <div className="aspect-video flex items-center justify-center opacity-40 mb-4 rounded" style={{ backgroundColor: 'var(--color-border)', color: 'var(--color-text)' }}>No image selected</div>;
 
   const aspectRatio = settings.aspect_ratio || 'original';
   const widthDesktop = settings.width_desktop || 100;
@@ -198,7 +198,7 @@ export function VideoBlock({ settings, sectionSettings }: { settings: any, secti
 
   if (!url) {
     return (
-      <div className={`bg-gray-100 ${aspectClass} flex items-center justify-center text-gray-400 mb-4 rounded`}>
+      <div className={`${aspectClass} flex items-center justify-center opacity-40 mb-4 rounded`} style={{ backgroundColor: 'var(--color-border)', color: 'var(--color-text)' }}>
         Select a video source
       </div>
     );
@@ -282,17 +282,17 @@ export function CollectionBlock({ settings, sectionSettings }: { settings: any, 
 
   if (!collectionSlug) {
     return (
-      <div className="mb-4 p-4 border border-dashed border-gray-300 rounded text-center bg-gray-50">
-        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider block mb-1">Collection</span>
-        <h3 className="text-lg font-medium text-gray-400">Select Collection</h3>
+      <div className="mb-4 p-4 border border-dashed rounded text-center" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }}>
+        <span className="text-xs font-semibold uppercase tracking-wider block mb-1 opacity-50" style={{ color: 'var(--color-text)' }}>Collection</span>
+        <h3 className="text-lg font-medium opacity-40" style={{ color: 'var(--color-text)' }}>Select Collection</h3>
       </div>
     );
   }
 
   if (isLoading) {
     return (
-      <div className="mb-4 p-8 flex items-center justify-center border border-gray-100 rounded bg-gray-50">
-        <Loader2 className="animate-spin text-gray-300" />
+      <div className="mb-4 p-8 flex items-center justify-center border rounded" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }}>
+        <Loader2 className="animate-spin opacity-30" style={{ color: 'var(--color-text)' }} />
       </div>
     );
   }
@@ -300,7 +300,7 @@ export function CollectionBlock({ settings, sectionSettings }: { settings: any, 
   return (
     <div className="mb-8">
       <div className="text-center mb-6">
-        <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Collection</span>
+        <span className="text-xs font-semibold uppercase tracking-wider opacity-40" style={{ color: 'var(--color-text)' }}>Collection</span>
         <h3 className="text-xl font-bold">{settings.title_override || collection?.title || 'Collection'}</h3>
       </div>
 
@@ -1062,7 +1062,7 @@ export function ProductListBlock({ settings, sectionSettings }: { settings: any,
     <div className="mb-8">
       {settings.collection && (
         <div className="text-center mb-6">
-          <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Collection</span>
+          <span className="text-xs font-semibold uppercase tracking-wider opacity-40" style={{ color: 'var(--color-text)' }}>Collection</span>
           <h3 className="text-xl font-bold">{settings.collection}</h3>
         </div>
       )}
