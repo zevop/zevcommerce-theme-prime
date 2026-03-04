@@ -88,7 +88,7 @@ export default function Header({ settings }: { settings: any }) {
           // Dynamically import API to avoid server-side issues if needed, or just use it.
           // Since this is client component, direct import is fine if api is isomorphic or client-safe.
           // Assuming getProducts handles the fetch.
-          const { getProducts } = await import('@/lib/api');
+          const { getProducts } = await import('@zevcommerce/storefront-api');
           const { data } = await getProducts(domain, 1, 5, searchQuery);
           setSuggestions(data);
           setShowSuggestions(true);
