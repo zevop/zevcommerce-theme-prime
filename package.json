@@ -1,6 +1,6 @@
 {
   "name": "@zevcommerce/theme-prime",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Prime — The default ZevCommerce theme. Clean, modern, and feature-rich.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

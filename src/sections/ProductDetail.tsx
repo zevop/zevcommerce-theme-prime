@@ -15,10 +15,7 @@ const resolveImageUrl = (url: string | null | undefined) => {
   if (!url) return '/placeholder-product.jpg';
   if (url.startsWith('http') || url.startsWith('data:')) return url;
 
-  // Resolve relative paths against backend URL
-  // We assume NEXT_PUBLIC_API_URL includes /api/v1/storefront suffix, which we need to strip
   const apiBase = API_ORIGIN;
-  // Remove path suffix to get origin (simple approximation or URL parsing)
   try {
     const urlObj = new URL(apiBase);
     return `${urlObj.origin}${url.startsWith('/') ? '' : '/'}${url}`;
@@ -27,12 +24,9 @@ const resolveImageUrl = (url: string | null | undefined) => {
   }
 };
 
-// Product blocks migrated to StandardBlocks.tsx
-
 // Main ProductDetail Section
 function ProductDetailContent({ settings, blocks }: { settings: any; blocks?: any[] }) {
   const { product } = useProduct();
-  // Default blocks if none provided
   const defaultBlocks = [
     { type: 'product_images', settings: { layout: 'stacked', enable_zoom: true, show_thumbnails: true } },
     { type: 'product_title', settings: { show_vendor: true } },
@@ -47,13 +41,15 @@ function ProductDetailContent({ settings, blocks }: { settings: any; blocks?: an
   const infoBlocks = activeBlocks.filter(b => !['product_images'].includes(b.type));
 
   return (
-    <section className="py-12 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div>
+    <section className="py-8 md:py-16" style={{ backgroundColor: 'var(--color-background)' }}>
+      <div className="container mx-auto px-4 max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+          {/* Image column */}
+          <div className="lg:sticky lg:top-28 lg:self-start">
             <BlockRenderer blocks={mediaBlocks} sectionSettings={settings} />
           </div>
-          <div className="space-y-6">
+          {/* Info column — more breathing room */}
+          <div className="space-y-8 lg:py-4">
             <BlockRenderer blocks={infoBlocks} sectionSettings={settings} />
           </div>
         </div>
@@ -65,14 +61,11 @@ function ProductDetailContent({ settings, blocks }: { settings: any; blocks?: an
 // Inner component to handle data fetching if needed
 function ProductDetailWithValues({ settings, blocks, productSlug }: { settings: any; blocks?: any[]; productSlug?: string }) {
   const { storeConfig } = useTheme();
-  const { product: contextProduct, loading: contextLoading } = useProduct(); // Renamed to avoid conflict
+  const { product: contextProduct, loading: contextLoading } = useProduct();
   const [localProduct, setLocalProduct] = useState<any>(null);
   const [loading, setLoading] = useState(false);
 
-  // Determine if we should use the product from the context or fetch locally
-  // We fetch locally if a specific product_handle is set in settings (Legacy support removed but logic kept for slug prop), 
-  // or if no product is available from context
-  const shouldFetchLocally = (!contextProduct && !contextLoading) && !!productSlug; // Removed settings.product_handle check
+  const shouldFetchLocally = (!contextProduct && !contextLoading) && !!productSlug;
 
   useEffect(() => {
     if (!shouldFetchLocally) return;
@@ -99,7 +92,6 @@ function ProductDetailWithValues({ settings, blocks, productSlug }: { settings: 
     fetchProduct();
   }, [storeConfig?.handle, productSlug, shouldFetchLocally]);
 
-  // If fetching locally, provide the local product via a new ProductDataProvider
   if (shouldFetchLocally) {
     return (
       <ProductDataProvider product={localProduct} loading={loading}>
@@ -108,7 +100,6 @@ function ProductDetailWithValues({ settings, blocks, productSlug }: { settings: 
     );
   }
 
-  // Otherwise, use the product from the parent context
   return <ProductDetailContent settings={settings} blocks={blocks} />;
 }
 
@@ -134,7 +125,6 @@ export const schema = {
   blocks: [
     {
       type: 'product_images',
-
       name: 'Product Images',
       settings: [
         { type: 'select', id: 'layout', label: 'Gallery Layout', options: [{ value: 'stacked', label: 'Stacked' }, { value: 'carousel', label: 'Carousel' }], default: 'stacked' },

@@ -3,8 +3,10 @@ import { useTheme, BlockRenderer } from '@zevcommerce/storefront-api';
 
 export default function CheckoutSection({ settings, blocks }: { settings: any, blocks: any[] }) {
   return (
-    <div className="min-h-screen bg-white">
-      <main className="container mx-auto px-4 py-8 md:py-16">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--color-background)' }}>
+      {/* Progress accent */}
+      <div className="h-0.5 w-full" style={{ background: 'linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-border) 50%)' }} />
+      <main className="container mx-auto px-4 py-8 md:py-16 max-w-5xl">
         <BlockRenderer blocks={blocks} sectionSettings={settings} />
       </main>
     </div>

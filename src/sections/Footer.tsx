@@ -4,17 +4,22 @@ import { getSharedBlocks, withColumnSettings } from '../blocks/schemas';
 export default function Footer({ settings, blocks }: { settings: any, blocks: any[] }) {
   const { storeConfig } = useTheme();
   const { description, backgroundColor = '#F9FAFB', textColor = '#374151', alignment = 'left' } = settings;
-  const storeName = storeConfig?.name || 'Intech Commerce';
+  const storeName = storeConfig?.name || 'Store';
 
   return (
-    <footer className={`pt-16 pb-12 border-t border-gray-100 text-${alignment}`} style={{ backgroundColor, color: textColor }}>
+    <footer className={`pt-16 pb-12 text-${alignment}`} style={{ backgroundColor, color: textColor }}>
+      {/* Top accent border */}
+      <div className="h-px w-full mb-16" style={{ background: `linear-gradient(90deg, transparent, var(--color-border), transparent)` }} />
+
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          {/* Column 0: Standard Brand/Info or Blocks */}
-          <div className="space-y-4">
-            <h3 className="font-bold text-lg" style={{ color: textColor }}>{storeName}</h3>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+          {/* Column 0: Brand — wider for more presence */}
+          <div className="md:col-span-4 space-y-4">
+            <h3 className="font-bold text-lg tracking-tight" style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-heading)' }}>
+              {storeName}
+            </h3>
             {description && (
-              <p className="text-sm max-w-xs leading-relaxed opacity-80 mb-6" style={{ color: textColor }}>
+              <p className="text-sm max-w-xs leading-relaxed opacity-60" style={{ color: textColor }}>
                 {description}
               </p>
             )}
@@ -23,7 +28,7 @@ export default function Footer({ settings, blocks }: { settings: any, blocks: an
 
           {/* Columns 1-3: Dynamic Blocks */}
           {[1, 2, 3].map((idx) => (
-            <div key={idx} className="space-y-4">
+            <div key={idx} className="md:col-span-2 space-y-4 first:md:col-start-7">
               <BlockRenderer blocks={blocks} columnIndex={idx} />
             </div>
           ))}

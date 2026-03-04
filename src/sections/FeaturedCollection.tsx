@@ -123,18 +123,18 @@ export default function FeaturedCollection({ settings }: { settings: any }) {
   }
 
   return (
-    <section className={`bg-white ${sectionPadding} overflow-hidden`}>
+    <section className={`${sectionPadding} overflow-hidden`} style={{ backgroundColor: 'var(--color-background)' }}>
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="flex items-end justify-between mb-8 md:mb-12">
+        <div className="flex items-end justify-between mb-10 md:mb-14">
           <div className="max-w-2xl">
             {(settings.title || collectionInfo?.title) && (
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
+              <h2 className="font-bold tracking-tight" style={{ color: 'var(--color-heading)', fontFamily: 'var(--font-heading)', fontSize: 'var(--h2-font-size)' }}>
                 {settings.title || collectionInfo?.title}
               </h2>
             )}
             {settings.show_description && (settings.description || collectionInfo?.description) && (
-              <p className="mt-4 text-lg text-gray-600 line-clamp-2">
+              <p className="mt-3 text-base opacity-60 line-clamp-2" style={{ color: 'var(--color-text)' }}>
                 {settings.description || collectionInfo?.description}
               </p>
             )}
@@ -143,9 +143,10 @@ export default function FeaturedCollection({ settings }: { settings: any }) {
           {settings.show_view_all && (
             <Link
               href={`/collections/${collectionInfo?.handle}`}
-              className="hidden md:flex items-center gap-2 text-primary font-medium hover:text-primary/80 transition-colors"
+              className="hidden md:flex items-center gap-2 text-sm font-semibold transition-colors hover:opacity-70"
+              style={{ color: 'var(--color-heading)' }}
             >
-              View all <ArrowRight size={16} />
+              View all <ArrowRight size={15} />
             </Link>
           )}
 

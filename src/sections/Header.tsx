@@ -301,7 +301,7 @@ export default function Header({ settings }: { settings: any }) {
                   <button onClick={openCart} className="relative p-2 rounded-full hover:bg-black/5 transition-colors">
                     <ShoppingBag className="h-5 w-5" />
                     {items.length > 0 && (
-                      <span className="absolute top-0.5 right-0 text-white text-[10px] min-w-[18px] h-[18px] rounded-full flex items-center justify-center px-1 border-2" style={{ backgroundColor: 'var(--color-accent)', borderColor: headerBg }}>
+                      <span className="absolute -top-0.5 -right-0.5 text-white text-[10px] font-bold min-w-[18px] h-[18px] rounded-full flex items-center justify-center px-1 leading-none shadow-sm" style={{ backgroundColor: 'var(--color-accent)' }}>
                         {items.length}
                       </span>
                     )}

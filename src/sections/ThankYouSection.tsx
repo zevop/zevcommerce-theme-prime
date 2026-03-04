@@ -5,9 +5,26 @@ import { BlockRenderer } from '@zevcommerce/storefront-api';
 
 export default function ThankYouSection({ settings, blocks }: { settings: any, blocks: any[] }) {
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-text)', fontFamily: 'var(--font-body)' }}>
-      <main className="flex-1 flex flex-col items-center justify-center p-4 text-center max-w-2xl mx-auto py-12 md:py-24">
-        <BlockRenderer blocks={blocks} sectionSettings={settings} />
+    <div className="min-h-[80vh] flex flex-col" style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-text)', fontFamily: 'var(--font-body)' }}>
+      {/* Decorative accent bar */}
+      <div className="h-1 w-full" style={{ background: 'linear-gradient(90deg, var(--color-accent), var(--color-primary))' }} />
+
+      <main className="flex-1 flex flex-col items-center justify-center px-4 py-16 md:py-24">
+        <div className="w-full max-w-xl mx-auto">
+          {/* Card container */}
+          <div className="rounded-2xl shadow-sm border p-8 md:p-12 text-center space-y-2" style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}>
+            <BlockRenderer blocks={blocks} sectionSettings={settings} />
+          </div>
+
+          {/* Reassurance strip */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4 md:gap-6 text-xs opacity-40" style={{ color: 'var(--color-text)' }}>
+            <span>Secure Checkout</span>
+            <span className="hidden md:block w-1 h-1 rounded-full bg-current" />
+            <span>Confirmation Sent</span>
+            <span className="hidden md:block w-1 h-1 rounded-full bg-current" />
+            <span>Track Your Order</span>
+          </div>
+        </div>
       </main>
     </div>
   );
