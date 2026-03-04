@@ -116,27 +116,30 @@ function MobileMenu({
                   <Link
                     href={resolveMenuUrl(item, domain)}
                     onClick={onClose}
-                    className="flex-1 px-6 py-3.5 text-[15px] font-medium text-gray-800 hover:bg-gray-50 transition-colors"
+                    className="flex-1 px-6 py-3.5 text-[15px] font-medium transition-colors hover:opacity-70"
+                    style={{ color: 'var(--color-text)' }}
                   >
                     {item.title}
                   </Link>
                   {hasChildren && (
                     <button
                       onClick={() => setExpandedItem(isExpanded ? null : item.id)}
-                      className="px-4 py-3.5 text-gray-400 hover:text-gray-800 transition-colors"
+                      className="px-4 py-3.5 opacity-40 hover:opacity-80 transition-colors"
+                      style={{ color: 'var(--color-text)' }}
                     >
                       <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} />
                     </button>
                   )}
                 </div>
                 {hasChildren && isExpanded && (
-                  <div className="bg-gray-50">
+                  <div style={{ backgroundColor: 'var(--color-border)' }}>
                     {item.children.map((child: any) => (
                       <Link
                         key={child.id}
                         href={resolveMenuUrl(child, domain)}
                         onClick={onClose}
-                        className="block px-10 py-3 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+                        className="block px-10 py-3 text-sm opacity-70 hover:opacity-100 transition-colors"
+                        style={{ color: 'var(--color-text)' }}
                       >
                         {child.title}
                       </Link>
@@ -152,7 +155,8 @@ function MobileMenu({
             <Link
               href={getStorePermalink(domain, '/account')}
               onClick={onClose}
-              className="flex items-center gap-3 px-6 py-3.5 mt-2 border-t border-gray-100 text-[15px] font-medium text-gray-800 hover:bg-gray-50 transition-colors"
+              className="flex items-center gap-3 px-6 py-3.5 mt-2 border-t text-[15px] font-medium hover:opacity-70 transition-colors"
+              style={{ borderColor: 'var(--color-border)', color: 'var(--color-text)' }}
             >
               <User className="h-4 w-4" />
               My Account
@@ -245,14 +249,14 @@ export default function Header({ settings }: { settings: any }) {
 
   // Transparent mode logic
   const isTransparent = transparent_on_hero && !isScrolled && !isSearchOpen;
-  const headerBg = isTransparent ? 'transparent' : (backgroundColor || '#ffffff');
+  const headerBg = isTransparent ? 'transparent' : (backgroundColor || 'var(--color-background)');
   const headerText = isTransparent ? '#ffffff' : (textColor || 'var(--color-text)');
 
   // Border style
   const borderClass = isTransparent
     ? ''
     : borderStyle === 'solid'
-      ? 'border-b border-gray-200'
+      ? 'border-b'
       : borderStyle === 'shadow'
         ? 'shadow-sm'
         : '';
@@ -261,13 +265,13 @@ export default function Header({ settings }: { settings: any }) {
     <>
       <header
         className={`${sticky ? 'sticky top-0' : 'relative'} z-50 w-full transition-all duration-300 ${borderClass}`}
-        style={{ backgroundColor: headerBg, color: headerText }}
+        style={{ backgroundColor: headerBg, color: headerText, borderColor: isTransparent ? 'transparent' : 'var(--color-border)' }}
       >
         {/* Centered layout: logo on top */}
         {headerLayout === 'centered' ? (
           <div className="container mx-auto px-4">
             {/* Logo row */}
-            <div className="flex items-center justify-center py-4 border-b border-gray-100/20">
+            <div className="flex items-center justify-center py-4 border-b" style={{ borderColor: 'var(--color-border)' }}>
               <Link href={getStorePermalink(domain, '/')} className="inline-block">
                 {logoSrc ? (
                   <img src={logoSrc} alt={storeName} className="w-auto object-contain" style={{ height: `${logoHeight}px` }} />
@@ -344,55 +348,56 @@ export default function Header({ settings }: { settings: any }) {
             )}
 
             {/* Search Overlay */}
-            <div className={`absolute inset-0 z-10 flex items-center px-4 transition-all duration-300 ${isSearchOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`} style={{ backgroundColor: backgroundColor || '#ffffff' }}>
+            <div className={`absolute inset-0 z-10 flex items-center px-4 transition-all duration-300 ${isSearchOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`} style={{ backgroundColor: backgroundColor || 'var(--color-background)' }}>
               <div className="w-full max-w-2xl mx-auto relative">
                 <form onSubmit={handleSearch} className="relative flex items-center w-full">
-                  <Search className="absolute left-0 h-5 w-5 text-gray-400 pointer-events-none" />
+                  <Search className="absolute left-0 h-5 w-5 opacity-40 pointer-events-none" />
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search our store..."
-                    className="w-full pl-8 pr-12 py-2 text-lg border-b-2 border-gray-200 focus:border-gray-900 outline-none bg-transparent placeholder:text-gray-300 transition-colors"
+                    className="w-full pl-8 pr-12 py-2 text-lg border-b-2 focus:border-current outline-none bg-transparent placeholder:opacity-30 transition-colors"
+                    style={{ borderColor: 'var(--color-border)' }}
                     autoFocus={isSearchOpen}
                   />
                   <button
                     type="button"
                     onClick={() => { setIsSearchOpen(false); setSuggestions([]); }}
-                    className="absolute right-0 p-2 text-gray-400 hover:text-black transition-colors"
+                    className="absolute right-0 p-2 opacity-40 hover:opacity-100 transition-colors"
                   >
                     <X className="h-5 w-5" />
                   </button>
                 </form>
 
                 {showSuggestions && suggestions.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-50">
+                  <div className="absolute top-full left-0 right-0 mt-2 rounded-xl shadow-2xl border overflow-hidden z-50" style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}>
                     <div className="py-2">
-                      <h3 className="px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">Products</h3>
+                      <h3 className="px-4 py-2 text-xs font-semibold opacity-40 uppercase tracking-wider">Products</h3>
                       {suggestions.map((product) => (
                         <Link
                           key={product.id}
                           href={getStorePermalink(domain, `/products/${product.slug}`)}
                           onClick={() => { setIsSearchOpen(false); setSuggestions([]); }}
-                          className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors"
+                          className="flex items-center gap-3 px-4 py-3 hover:opacity-80 transition-colors"
                         >
-                          <div className="h-10 w-10 bg-gray-100 rounded-md overflow-hidden relative shrink-0">
+                          <div className="h-10 w-10 rounded-md overflow-hidden relative shrink-0" style={{ backgroundColor: 'var(--color-border)' }}>
                             {product.media?.[0]?.url ? (
                               <img src={product.media[0].url} alt={product.title} className="object-cover w-full h-full" />
                             ) : (
-                              <ShoppingBag className="h-5 w-5 text-gray-400 m-auto mt-2.5" />
+                              <ShoppingBag className="h-5 w-5 opacity-40 m-auto mt-2.5" />
                             )}
                           </div>
                           <div>
-                            <p className="text-sm font-medium text-gray-900 line-clamp-1">{product.title}</p>
-                            <p className="text-xs text-gray-500">{storeConfig?.currency || '₦'}{parseFloat(product.variants?.[0]?.price || '0').toLocaleString()}</p>
+                            <p className="text-sm font-medium line-clamp-1" style={{ color: 'var(--color-heading)' }}>{product.title}</p>
+                            <p className="text-xs opacity-50">{storeConfig?.currency || '₦'}{parseFloat(product.variants?.[0]?.price || '0').toLocaleString()}</p>
                           </div>
                         </Link>
                       ))}
                       <button
                         onClick={() => handleSearch()}
-                        className="w-full text-left px-4 py-3 text-sm font-medium hover:bg-gray-50 transition-colors border-t border-gray-100"
-                        style={{ color: 'var(--color-accent)' }}
+                        className="w-full text-left px-4 py-3 text-sm font-medium hover:opacity-70 transition-colors border-t"
+                        style={{ borderColor: 'var(--color-border)', color: 'var(--color-accent)' }}
                       >
                         View all results for &quot;{searchQuery}&quot;
                       </button>

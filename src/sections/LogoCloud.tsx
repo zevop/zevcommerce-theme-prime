@@ -19,7 +19,7 @@ export default function LogoCloud({ settings, blocks }: { settings: any; blocks:
 
   if (logos.length === 0) {
     return (
-      <SectionWrapper settings={settings} className="py-12 text-center text-gray-400">
+      <SectionWrapper settings={settings} className="py-12 text-center opacity-40">
         <p>Add logo blocks to display partner logos.</p>
       </SectionWrapper>
     );
@@ -52,10 +52,10 @@ export default function LogoCloud({ settings, blocks }: { settings: any; blocks:
               />
             ) : (
               <div
-                className="flex items-center justify-center bg-gray-100 rounded-lg px-6"
-                style={{ height: `${logoHeight}px`, minWidth: '100px' }}
+                className="flex items-center justify-center rounded-lg px-6"
+                style={{ height: `${logoHeight}px`, minWidth: '100px', backgroundColor: 'var(--color-border)' }}
               >
-                <span className="text-xs text-gray-400 font-medium">{alt}</span>
+                <span className="text-xs opacity-40 font-medium">{alt}</span>
               </div>
             );
 

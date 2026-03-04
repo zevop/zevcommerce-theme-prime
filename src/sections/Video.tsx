@@ -57,7 +57,7 @@ export default function VideoSection({ settings }: VideoProps) {
 
   return (
     <section className={containerClass}>
-      <div className={`relative w-full overflow-hidden bg-gray-100 ${!full_width ? 'rounded-xl' : ''} ${heightClass}`}>
+      <div className={`relative w-full overflow-hidden ${!full_width ? 'rounded-xl' : ''} ${heightClass}`} style={{ backgroundColor: 'var(--color-border)' }}>
 
         {(!isPlaying && imageUrl) && (
           <div className="absolute inset-0 z-10 w-full h-full">
@@ -67,8 +67,8 @@ export default function VideoSection({ settings }: VideoProps) {
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 flex items-center justify-center bg-black/20 group cursor-pointer" onClick={handlePlay}>
-              <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110">
-                <Play className="w-8 h-8 text-black fill-black ml-1" />
+              <div className="w-20 h-20 rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110" style={{ backgroundColor: 'var(--color-background)' }}>
+                <Play className="w-8 h-8 ml-1" style={{ color: 'var(--color-text)', fill: 'var(--color-text)' }} />
               </div>
             </div>
           </div>

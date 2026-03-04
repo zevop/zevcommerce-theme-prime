@@ -69,9 +69,9 @@ export default function FeaturedCollection({ settings }: { settings: any }) {
 
   if (!collectionHandle) {
     return (
-      <section className="py-16 bg-gray-50 border-y border-dashed border-gray-200">
+      <section className="py-16 border-y border-dashed" style={{ backgroundColor: 'var(--color-border)', borderColor: 'var(--color-border)' }}>
         <div className="container mx-auto px-4 text-center">
-          <h3 className="text-lg font-medium text-gray-400">Select a collection to display</h3>
+          <h3 className="text-lg font-medium opacity-40">Select a collection to display</h3>
         </div>
       </section>
     );
@@ -99,17 +99,18 @@ export default function FeaturedCollection({ settings }: { settings: any }) {
     5: 'lg:grid-cols-5'
   }[columns as 2 | 3 | 4 | 5] || 'lg:grid-cols-4';
 
-  const cardStyleClass = showBorder ? 'border border-gray-200 shadow-sm' : '';
+  const cardStyleClass = showBorder ? 'border shadow-sm' : '';
+  const cardStyleInline = showBorder ? { borderColor: 'var(--color-border)' } : undefined;
 
   // Loading State
   if (loading) {
     return (
       <div className={`container mx-auto px-4 ${sectionPadding}`}>
         <div className="animate-pulse space-y-8">
-          <div className="h-8 bg-gray-200 w-1/4 rounded"></div>
+          <div className="h-8 w-1/4 rounded" style={{ backgroundColor: 'var(--color-border)' }}></div>
           <div className={`grid grid-cols-2 ${gridColsClass} gap-6`}>
             {[...Array(columns)].map((_, i) => (
-              <div key={i} className="aspect-[3/4] bg-gray-100 rounded-xl"></div>
+              <div key={i} className="aspect-[3/4] rounded-xl" style={{ backgroundColor: 'var(--color-border)' }}></div>
             ))}
           </div>
         </div>
@@ -153,10 +154,10 @@ export default function FeaturedCollection({ settings }: { settings: any }) {
           {/* Carousel Controls */}
           {layout === 'carousel' && (
             <div className="flex gap-2 md:hidden">
-              <button onClick={() => scrollContainer(scrollRef.current, 'left')} className="p-2 rounded-full border border-gray-200 hover:bg-gray-50">
+              <button onClick={() => scrollContainer(scrollRef.current, 'left')} className="p-2 rounded-full border hover:opacity-80" style={{ borderColor: 'var(--color-border)' }}>
                 <ChevronLeft size={20} />
               </button>
-              <button onClick={() => scrollContainer(scrollRef.current, 'right')} className="p-2 rounded-full border border-gray-200 hover:bg-gray-50">
+              <button onClick={() => scrollContainer(scrollRef.current, 'right')} className="p-2 rounded-full border hover:opacity-80" style={{ borderColor: 'var(--color-border)' }}>
                 <ChevronRight size={20} />
               </button>
             </div>
@@ -188,13 +189,15 @@ export default function FeaturedCollection({ settings }: { settings: any }) {
             {/* Desktop Nav Arrows */}
             <button
               onClick={() => scrollContainer(scrollRef.current, 'left')}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 z-10 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hidden md:flex"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 z-10 w-12 h-12 rounded-full shadow-lg border flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hidden md:flex"
+              style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}
             >
               <ChevronLeft size={24} />
             </button>
             <button
               onClick={() => scrollContainer(scrollRef.current, 'right')}
-              className="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 z-10 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hidden md:flex"
+              className="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 z-10 w-12 h-12 rounded-full shadow-lg border flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hidden md:flex"
+              style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}
             >
               <ChevronRight size={24} />
             </button>
@@ -227,7 +230,7 @@ export default function FeaturedCollection({ settings }: { settings: any }) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Featured Item (First Product or Collection Image) */}
             <div className="lg:col-span-5 xl:col-span-4 sticky top-24">
-              <div className={`relative overflow-hidden ${borderRadius === 'full' ? 'rounded-3xl' : `rounded-${borderRadius === 'none' ? 'none' : '2xl'}`} aspect-[3/4] bg-gray-100`}>
+              <div className={`relative overflow-hidden ${borderRadius === 'full' ? 'rounded-3xl' : `rounded-${borderRadius === 'none' ? 'none' : '2xl'}`} aspect-[3/4]`} style={{ backgroundColor: 'var(--color-border)' }}>
                 <img
                   src={collectionInfo?.image?.url || products[0]?.media?.[0]?.url || '/placeholder-collection.jpg'}
                   className="w-full h-full object-cover"
@@ -265,7 +268,8 @@ export default function FeaturedCollection({ settings }: { settings: any }) {
           <div className="mt-12 text-center md:hidden">
             <Link
               href={`/collections/${collectionInfo?.handle}`}
-              className="inline-flex h-12 items-center justify-center rounded-full border border-gray-200 px-8 text-sm font-medium transition-colors hover:bg-gray-50 bg-white shadow-sm"
+              className="inline-flex h-12 items-center justify-center rounded-full border px-8 text-sm font-medium transition-colors hover:opacity-80 shadow-sm"
+              style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }}
             >
               View all products
             </Link>

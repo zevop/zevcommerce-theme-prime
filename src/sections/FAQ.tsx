@@ -47,8 +47,8 @@ export default function FAQ({ settings, blocks }: FAQProps) {
     title,
     description,
     width = 'medium',
-    background_color = '#ffffff',
-    text_color = '#000000'
+    background_color = 'var(--color-background)',
+    text_color = 'var(--color-text)'
   } = settings;
 
   const widthClasses = {

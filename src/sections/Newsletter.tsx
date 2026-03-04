@@ -19,19 +19,19 @@ export default function Newsletter({ settings }: { settings: any }) {
   const layout = settings.layout || 'stacked';
   const bgImage = resolveImage(settings.bg_image);
   const overlayOpacity = settings.overlay_opacity ?? 60;
-  const bgColor = settings.section_bg_color || settings.background_color || '#111827';
-  const textColor = settings.section_text_color || settings.text_color || '#ffffff';
+  const bgColor = settings.section_bg_color || settings.background_color || 'var(--color-text)';
+  const textColor = settings.section_text_color || settings.text_color || 'var(--color-background)';
   const accentColor = settings.accent_color || 'var(--color-accent)';
 
   // Determine button text color based on accent color luminance
   const getButtonTextColor = (bg: string) => {
-    if (!bg || bg.startsWith('var(')) return '#ffffff';
+    if (!bg || bg.startsWith('var(')) return 'var(--color-background)';
     const c = bg.replace('#', '');
-    if (c.length !== 6) return '#ffffff';
+    if (c.length !== 6) return 'var(--color-background)';
     const r = parseInt(c.slice(0, 2), 16);
     const g = parseInt(c.slice(2, 4), 16);
     const b = parseInt(c.slice(4, 6), 16);
-    return (r * 0.299 + g * 0.587 + b * 0.114) > 150 ? '#111827' : '#ffffff';
+    return (r * 0.299 + g * 0.587 + b * 0.114) > 150 ? 'var(--color-text)' : 'var(--color-background)';
   };
   const buttonTextColor = getButtonTextColor(accentColor);
   const heading = settings.heading || 'Stay in the loop';

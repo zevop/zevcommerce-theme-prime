@@ -67,7 +67,7 @@ export default function SlideshowInset({ settings, blocks }: SlideshowInsetProps
 
   return (
     <section className={containerClass}>
-      <div className={`relative w-full overflow-hidden bg-gray-100 group ${radiusClass} ${heightClasses}`}>
+      <div className={`relative w-full overflow-hidden group ${radiusClass} ${heightClasses}`} style={{ backgroundColor: 'var(--color-border)' }}>
         {/* Slides */}
         <div
           className="flex transition-transform duration-700 ease-out h-full"
@@ -97,7 +97,7 @@ export default function SlideshowInset({ settings, blocks }: SlideshowInsetProps
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full bg-gray-300 flex items-center justify-center text-gray-500 text-lg">
+                  <div className="w-full h-full flex items-center justify-center opacity-50 text-lg" style={{ backgroundColor: 'var(--color-border)' }}>
                     Select an image for slide {index + 1}
                   </div>
                 )}
@@ -113,7 +113,8 @@ export default function SlideshowInset({ settings, blocks }: SlideshowInsetProps
                     {button_label && button_link && (
                       <Link
                         href={button_link}
-                        className="inline-block px-8 py-3 bg-white text-black font-bold rounded-lg hover:bg-gray-200 transition-colors"
+                        className="inline-block px-8 py-3 font-bold rounded-lg hover:opacity-80 transition-colors"
+                        style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-text)' }}
                       >
                         {button_label}
                       </Link>
@@ -132,13 +133,13 @@ export default function SlideshowInset({ settings, blocks }: SlideshowInsetProps
               onClick={prevSlide}
               className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center hover:bg-white/50 transition-colors z-10 opacity-0 group-hover:opacity-100"
             >
-              <ArrowLeft className="w-6 h-6 text-black" />
+              <ArrowLeft className="w-6 h-6" style={{ color: 'var(--color-text)' }} />
             </button>
             <button
               onClick={nextSlide}
               className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center hover:bg-white/50 transition-colors z-10 opacity-0 group-hover:opacity-100"
             >
-              <ArrowRight className="w-6 h-6 text-black" />
+              <ArrowRight className="w-6 h-6" style={{ color: 'var(--color-text)' }} />
             </button>
           </>
         )}

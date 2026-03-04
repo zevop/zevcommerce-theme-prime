@@ -92,7 +92,7 @@ export default function Countdown({ settings, blocks }: { settings: any; blocks:
 
   if (!targetDate) {
     return (
-      <SectionWrapper settings={settings} className="py-12 text-center text-gray-400">
+      <SectionWrapper settings={settings} className="py-12 text-center opacity-40">
         <p>Set a target date to start the countdown.</p>
       </SectionWrapper>
     );

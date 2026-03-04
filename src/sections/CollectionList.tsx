@@ -123,7 +123,7 @@ function TextLinkItem({ settings }: { settings: any }) {
   return (
     <Link
       href={collection ? `/search/${collection.slug}` : '#'}
-      className="text-lg md:text-xl font-medium hover:text-gray-600 transition-colors flex items-center gap-2 group"
+      className="text-lg md:text-xl font-medium hover:opacity-60 transition-all flex items-center gap-2 group"
     >
       {title}
       <ArrowRight className={`h-4 w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all font-bold ${settings.icon_position === 'left' ? 'order-first' : ''}`} />
@@ -149,9 +149,10 @@ function SpotlightLayout({ blocks }: { blocks: any[] }) {
             key={block.id || index}
             onClick={() => setActiveParams(block.settings)}
             className={`w-full text-left p-4 rounded-xl transition-all ${activeParams === block.settings
-              ? 'bg-black text-white shadow-lg scale-105'
-              : 'bg-gray-50 hover:bg-gray-100 text-gray-500'
+              ? 'btn-primary shadow-lg scale-105'
+              : 'opacity-50 hover:opacity-80'
               }`}
+            style={activeParams !== block.settings ? { backgroundColor: 'var(--color-border)' } : undefined}
           >
             <span className="text-lg font-bold block">
               {block.settings.title || 'Collection'}

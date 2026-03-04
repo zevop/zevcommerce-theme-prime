@@ -79,14 +79,14 @@ export default function FeaturedBlog({ settings }: FeaturedBlogProps) {
 
   if (!blog_handle) {
     return (
-      <div className={`text-center bg-gray-50 border-2 border-dashed border-gray-200 rounded-lg p-12 ${paddingClasses[section_padding]}`}>
-        <p className="text-gray-500">Select a blog to display posts.</p>
+      <div className={`text-center border-2 border-dashed rounded-lg p-12 ${paddingClasses[section_padding]}`} style={{ backgroundColor: 'var(--color-border)', borderColor: 'var(--color-border)' }}>
+        <p className="opacity-50">Select a blog to display posts.</p>
       </div>
     );
   }
 
   if (isLoading) {
-    return <div className={`h-96 w-full animate-pulse bg-gray-100 ${paddingClasses[section_padding]}`} />;
+    return <div className={`h-96 w-full animate-pulse ${paddingClasses[section_padding]}`} style={{ backgroundColor: 'var(--color-border)' }} />;
   }
 
   // Layout Renderers
@@ -128,13 +128,15 @@ export default function FeaturedBlog({ settings }: FeaturedBlogProps) {
       {/* Navigation Arrows */}
       <button
         onClick={() => scroll('left')}
-        className="absolute left-0 top-1/3 -translate-y-1/2 -ml-4 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hidden sm:block"
+        className="absolute left-0 top-1/3 -translate-y-1/2 -ml-4 backdrop-blur-sm p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hidden sm:block"
+        style={{ backgroundColor: 'color-mix(in srgb, var(--color-background) 90%, transparent)' }}
       >
         <ChevronLeft className="w-5 h-5" />
       </button>
       <button
         onClick={() => scroll('right')}
-        className="absolute right-0 top-1/3 -translate-y-1/2 -mr-4 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity hidden sm:block"
+        className="absolute right-0 top-1/3 -translate-y-1/2 -mr-4 backdrop-blur-sm p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity hidden sm:block"
+        style={{ backgroundColor: 'color-mix(in srgb, var(--color-background) 90%, transparent)' }}
       >
         <ChevronRight className="w-5 h-5" />
       </button>
@@ -161,15 +163,15 @@ export default function FeaturedBlog({ settings }: FeaturedBlogProps) {
         <div className="lg:col-span-5 flex flex-col gap-8">
           {otherPosts.slice(0, 3).map((post: any) => (
             <div key={post.id} className="flex gap-4 items-start group">
-              <div className="w-24 h-24 flex-shrink-0 bg-gray-100 rounded-md overflow-hidden relative">
+              <div className="w-24 h-24 flex-shrink-0 rounded-md overflow-hidden relative" style={{ backgroundColor: 'var(--color-border)' }}>
                 {post.image && <img src={post.image} className="w-full h-full object-cover group-hover:scale-105 transition-transform" alt={post.title} />}
               </div>
               <div>
-                <h4 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2">
+                <h4 className="font-bold group-hover:text-blue-600 transition-colors line-clamp-2" style={{ color: 'var(--color-heading)' }}>
                   <Link href={`/blogs/${post.blog?.handle}/${post.slug}`}>{post.title}</Link>
                 </h4>
                 {show_date && (
-                  <span className="text-xs text-gray-500 mt-1 block">
+                  <span className="text-xs opacity-50 mt-1 block">
                     {new Date(post.publishedAt).toLocaleDateString()}
                   </span>
                 )}
@@ -184,7 +186,7 @@ export default function FeaturedBlog({ settings }: FeaturedBlogProps) {
   return (
     <section className={`w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto ${paddingClasses[section_padding]}`}>
       <div className="flex justify-between items-end mb-8 sm:mb-12">
-        {title && <h2 className="text-3xl font-bold tracking-tight text-gray-900">{title}</h2>}
+        {title && <h2 className="text-3xl font-bold tracking-tight" style={{ color: 'var(--color-heading)' }}>{title}</h2>}
         {view_all_label && (
           <Link href={`/blogs/${blog_handle}`} className="hidden sm:flex items-center text-sm font-semibold text-blue-600 hover:text-blue-500">
             {view_all_label} <ArrowRight className="ml-1 w-4 h-4" />

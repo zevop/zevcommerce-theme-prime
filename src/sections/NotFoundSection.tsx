@@ -19,7 +19,7 @@ function NotFoundMessageBlock({ settings }: { settings: any }) {
       >
         {settings.title || 'Page not found'}
       </h2>
-      <p className="text-gray-500 max-w-md mx-auto">
+      <p className="opacity-50 max-w-md mx-auto">
         {settings.description || "Sorry, we couldn't find the page you're looking for. It might have been moved or deleted."}
       </p>
     </div>
@@ -42,7 +42,8 @@ function NotFoundActionsBlock({ settings }: { settings: any }) {
       {settings.show_back_button && (
         <button
           onClick={() => window.history.back()}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold border border-gray-200 text-gray-700 hover:bg-gray-50 transition"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold border hover:opacity-80 transition"
+          style={{ borderColor: 'var(--color-border)', color: 'var(--color-text)' }}
         >
           <ArrowLeft className="w-4 h-4" />
           Go Back
@@ -59,12 +60,13 @@ function NotFoundSearchBlock({ settings }: { settings: any }) {
   return (
     <div className="mt-8 max-w-md mx-auto">
       <form action="/search" className="relative">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 opacity-40" />
         <input
           type="search"
           name="q"
           placeholder={settings.search_placeholder || 'Try searching...'}
-          className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition"
+          className="w-full pl-12 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-current/20 focus:border-current outline-none transition"
+          style={{ borderColor: 'var(--color-border)' }}
         />
       </form>
     </div>
@@ -83,13 +85,14 @@ function NotFoundLinksBlock({ settings }: { settings: any }) {
 
   return (
     <div className="mt-12 text-center">
-      <p className="text-sm text-gray-500 mb-4">Or check out these popular pages:</p>
+      <p className="text-sm opacity-50 mb-4">Or check out these popular pages:</p>
       <div className="flex flex-wrap justify-center gap-3">
         {links.map((link: any, idx: number) => (
           <Link
             key={idx}
             href={link.url}
-            className="px-4 py-2 rounded-full border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+            className="px-4 py-2 rounded-full border text-sm font-medium hover:opacity-80 transition"
+            style={{ borderColor: 'var(--color-border)', color: 'var(--color-text)' }}
           >
             {link.label}
           </Link>
@@ -121,7 +124,7 @@ export default function NotFoundSection({ settings, blocks }: { settings: any; b
   return (
     <section
       className="min-h-[70vh] flex items-center justify-center py-16"
-      style={{ backgroundColor: settings.bg_color || '#ffffff' }}
+      style={{ backgroundColor: settings.bg_color || 'var(--color-background)' }}
     >
       <div className="container mx-auto px-4">
         {activeBlocks.map((block, idx) => {

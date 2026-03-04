@@ -94,8 +94,8 @@ export default function Carousel({ settings, blocks }: CarouselProps) {
                   style={{ backgroundImage: `url(${bgImage})` }}
                 />
               ) : (
-                <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-                  <span className="text-gray-400">Add Image</span>
+                <div className="absolute inset-0 flex items-center justify-center" style={{ backgroundColor: 'var(--color-border)' }}>
+                  <span className="opacity-40">Add Image</span>
                 </div>
               )}
 
@@ -122,7 +122,8 @@ export default function Carousel({ settings, blocks }: CarouselProps) {
                   {block.settings.button_text && (
                     <a
                       href={block.settings.button_link || '#'}
-                      className="inline-block px-8 py-3 bg-white text-black font-medium text-sm hover:bg-gray-100 transition-colors"
+                      className="inline-block px-8 py-3 font-medium text-sm hover:opacity-80 transition-colors"
+                      style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-text)' }}
                     >
                       {block.settings.button_text}
                     </a>

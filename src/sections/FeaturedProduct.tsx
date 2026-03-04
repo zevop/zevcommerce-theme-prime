@@ -23,11 +23,11 @@ function FeaturedProductContent({ settings, blocks }: { settings: any, blocks?: 
     return (
       <div className="container mx-auto px-4 py-16">
         <div className="animate-pulse grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="aspect-square bg-gray-100 rounded-xl"></div>
+          <div className="aspect-square rounded-xl" style={{ backgroundColor: 'var(--color-border)' }}></div>
           <div className="space-y-4 py-8">
-            <div className="h-8 w-2/3 bg-gray-100 rounded"></div>
-            <div className="h-4 w-1/3 bg-gray-100 rounded"></div>
-            <div className="h-24 w-full bg-gray-100 rounded"></div>
+            <div className="h-8 w-2/3 rounded" style={{ backgroundColor: 'var(--color-border)' }}></div>
+            <div className="h-4 w-1/3 rounded" style={{ backgroundColor: 'var(--color-border)' }}></div>
+            <div className="h-24 w-full rounded" style={{ backgroundColor: 'var(--color-border)' }}></div>
           </div>
         </div>
       </div>
@@ -55,7 +55,7 @@ function FeaturedProductContent({ settings, blocks }: { settings: any, blocks?: 
               <BlockRenderer blocks={mediaBlocks} sectionSettings={settings} />
             ) : (
               <div className={cn(
-                "relative overflow-hidden bg-gray-50 shadow-2xl shadow-black/5 ring-1 ring-black/5",
+                "relative overflow-hidden shadow-2xl shadow-black/5 ring-1 ring-black/5",
                 settings.image_radius === 'full' ? 'rounded-full aspect-square' : `rounded-${settings.image_radius || '3xl'} aspect-square`,
                 "max-w-xl mx-auto group"
               )}>
@@ -106,8 +106,8 @@ export default function FeaturedProduct({ settings, blocks }: { settings: any, b
 
   if (!settings.product) {
     return (
-      <div className="py-24 text-center bg-gray-50 border-dashed border-2 border-gray-100 m-8 rounded-3xl">
-        <p className="text-gray-400 font-medium tracking-wide">Select a product to feature</p>
+      <div className="py-24 text-center border-dashed border-2 m-8 rounded-3xl" style={{ backgroundColor: 'var(--color-border)', borderColor: 'var(--color-border)' }}>
+        <p className="opacity-40 font-medium tracking-wide">Select a product to feature</p>
       </div>
     );
   }

@@ -18,8 +18,8 @@ export default function PullQuote({ settings }: PullQuoteProps) {
     quote = 'This is a quote that highlights something important.',
     author = 'Author Name',
     text_size = 'large',
-    background_color = '#ffffff',
-    text_color = '#000000',
+    background_color = 'var(--color-background)',
+    text_color = 'var(--color-text)',
     show_icon = true
   } = settings;
 

@@ -77,7 +77,7 @@ export default function Stats({ settings, blocks }: { settings: any; blocks: any
 
   if (stats.length === 0) {
     return (
-      <SectionWrapper settings={settings} className="py-12 text-center text-gray-400">
+      <SectionWrapper settings={settings} className="py-12 text-center opacity-40">
         <p>Add stat blocks to display numbers.</p>
       </SectionWrapper>
     );

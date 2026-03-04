@@ -20,7 +20,7 @@ export default function ImageCompare({ settings }: ImageCompareProps) {
     before_image,
     after_image,
     height = 'medium',
-    slider_color = '#ffffff',
+    slider_color = 'var(--color-background)',
     show_labels = true,
     before_label = 'Before',
     after_label = 'After'
@@ -73,8 +73,8 @@ export default function ImageCompare({ settings }: ImageCompareProps) {
 
   if (!beforeUrl || !afterUrl) {
     return (
-      <div className={`w-full bg-gray-100 flex items-center justify-center border-dashed border-2 border-gray-300 ${heightStyles[height]}`}>
-        <div className="text-center text-gray-500">
+      <div className={`w-full flex items-center justify-center border-dashed border-2 ${heightStyles[height]}`} style={{ backgroundColor: 'var(--color-border)', borderColor: 'var(--color-border)' }}>
+        <div className="text-center opacity-50">
           <p>Select both Before and After images to see comparison.</p>
         </div>
       </div>
@@ -111,7 +111,7 @@ export default function ImageCompare({ settings }: ImageCompareProps) {
       >
         <div className="w-1 h-full" style={{ backgroundColor: slider_color }} />
         <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg absolute" style={{ backgroundColor: slider_color }}>
-          <ArrowLeftRight className="w-5 h-5 text-black/70" />
+          <ArrowLeftRight className="w-5 h-5" style={{ color: 'var(--color-text)', opacity: 0.7 }} />
         </div>
       </div>
 

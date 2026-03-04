@@ -51,16 +51,16 @@ export default function RecommendedProducts({ settings }: { settings: any }) {
   }[columns] || 'lg:grid-cols-4';
 
   return (
-    <section className="py-16 bg-white border-t border-gray-100">
+    <section className="py-16 border-t" style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}>
       <div className="container mx-auto px-4">
         {settings.heading && (
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900">{settings.heading}</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-8" style={{ color: 'var(--color-heading)' }}>{settings.heading}</h2>
         )}
 
         {loading ? (
           <div className={`grid grid-cols-2 ${gridColsClass} gap-6`}>
             {[...Array(columns)].map((_, i) => (
-              <div key={i} className="aspect-[3/4] bg-gray-100 rounded-xl animate-pulse"></div>
+              <div key={i} className="aspect-[3/4] rounded-xl animate-pulse" style={{ backgroundColor: 'var(--color-border)' }}></div>
             ))}
           </div>
         ) : (

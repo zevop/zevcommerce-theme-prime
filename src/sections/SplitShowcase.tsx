@@ -58,14 +58,14 @@ export default function SplitShowcase({ settings, blocks }: { settings: any, blo
   return (
     <section className={`w-full flex ${contentOrder} ${mobileOrder} overflow-hidden`} style={getHeightStyle()}>
       {/* Image Side */}
-      <div className={`w-full ${getImageWidthClass()} bg-gray-100 relative min-h-[300px]`}>
+      <div className={`w-full ${getImageWidthClass()} relative min-h-[300px]`} style={{ backgroundColor: 'var(--color-border)' }}>
         {imageUrl ? (
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${imageUrl})` }}
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center text-gray-400 bg-gray-200">
+          <div className="absolute inset-0 flex items-center justify-center opacity-40" style={{ backgroundColor: 'var(--color-border)' }}>
             <span className="text-lg font-medium">No Image Selected</span>
           </div>
         )}

@@ -15,7 +15,7 @@ export default function Tabs({ settings, blocks }: { settings: any; blocks: any[
 
   if (tabs.length === 0) {
     return (
-      <SectionWrapper settings={settings} className="py-12 text-center text-gray-400">
+      <SectionWrapper settings={settings} className="py-12 text-center opacity-40">
         <p>Add tab blocks to create tabbed content.</p>
       </SectionWrapper>
     );
@@ -33,7 +33,7 @@ export default function Tabs({ settings, blocks }: { settings: any; blocks: any[
         )}
 
         {/* Tab bar */}
-        <div className={`flex ${alignClass} gap-1 mb-8 ${tabStyle === 'underline' ? 'border-b border-gray-200' : ''}`}>
+        <div className={`flex ${alignClass} gap-1 mb-8 ${tabStyle === 'underline' ? 'border-b' : ''}`} style={tabStyle === 'underline' ? { borderColor: 'var(--color-border)' } : undefined}>
           {tabs.map((block, i) => {
             const isActive = i === activeIndex;
             const s = block.settings || {};
@@ -43,7 +43,7 @@ export default function Tabs({ settings, blocks }: { settings: any; blocks: any[
                 <button
                   key={block._id || i}
                   onClick={() => setActiveIndex(i)}
-                  className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${isActive ? 'text-white shadow-sm' : 'hover:bg-gray-100'}`}
+                  className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${isActive ? 'text-white shadow-sm' : 'hover:opacity-80'}`}
                   style={isActive ? { backgroundColor: activeColor, color: '#fff' } : { color: textColor }}
                 >
                   {s.title || `Tab ${i + 1}`}
@@ -56,8 +56,8 @@ export default function Tabs({ settings, blocks }: { settings: any; blocks: any[
                 <button
                   key={block._id || i}
                   onClick={() => setActiveIndex(i)}
-                  className={`px-5 py-2.5 text-sm font-medium transition-all duration-200 border ${isActive ? 'border-b-transparent -mb-[1px] bg-white' : 'border-transparent hover:text-gray-900'} rounded-t-lg`}
-                  style={isActive ? { color: activeColor, borderColor: 'var(--color-border)' } : { color: textColor }}
+                  className={`px-5 py-2.5 text-sm font-medium transition-all duration-200 border ${isActive ? 'border-b-transparent -mb-[1px]' : 'border-transparent hover:opacity-100'} rounded-t-lg`}
+                  style={isActive ? { color: activeColor, borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' } : { color: textColor }}
                 >
                   {s.title || `Tab ${i + 1}`}
                 </button>
@@ -69,7 +69,7 @@ export default function Tabs({ settings, blocks }: { settings: any; blocks: any[
               <button
                 key={block._id || i}
                 onClick={() => setActiveIndex(i)}
-                className={`px-5 py-3 text-sm font-medium transition-all duration-200 border-b-2 -mb-[1px] ${isActive ? '' : 'border-transparent hover:border-gray-300'}`}
+                className={`px-5 py-3 text-sm font-medium transition-all duration-200 border-b-2 -mb-[1px] ${isActive ? '' : 'border-transparent hover:opacity-80'}`}
                 style={isActive ? { color: activeColor, borderColor: activeColor } : { color: textColor }}
               >
                 {s.title || `Tab ${i + 1}`}

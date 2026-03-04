@@ -50,7 +50,7 @@ export default function Slideshow({ settings, blocks }: { settings: any, blocks:
   return (
     <div className={`py-8 ${isInsect ? '' : 'w-full'}`}>
       <div className={containerClass}>
-        <div className={`relative w-full bg-gray-100 ${heightClass} ${slideRadius} flex overflow-x-auto snap-x snap-mandatory scrollbar-hide`}>
+        <div className={`relative w-full ${heightClass} ${slideRadius} flex overflow-x-auto snap-x snap-mandatory scrollbar-hide`} style={{ backgroundColor: 'var(--color-border)' }}>
           {blocks.map((block, index) => {
             // Resolve slide settings
             const bSettings = block.settings || {};
@@ -77,14 +77,14 @@ export default function Slideshow({ settings, blocks }: { settings: any, blocks:
               <div
                 key={index}
                 className={`w-full flex-shrink-0 flex flex-col p-10 snap-center bg-cover bg-center bg-no-repeat relative ${alignClass}`}
-                style={{ ...bgStyle, backgroundColor: '#f3f4f6' }}
+                style={{ ...bgStyle, backgroundColor: 'var(--color-border)' }}
               >
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-black" style={{ opacity: (bSettings.overlay_opacity || 20) / 100 }}></div>
 
                 {/* Content */}
                 <div className="relative z-10 max-w-2xl w-full p-6">
-                  <div className={`${style === 'layered' ? 'bg-white p-8 shadow-lg text-gray-900 rounded-lg' : 'text-white'}`}>
+                  <div className={`${style === 'layered' ? 'p-8 shadow-lg rounded-lg' : 'text-white'}`} style={style === 'layered' ? { backgroundColor: 'var(--color-background)', color: 'var(--color-heading)' } : undefined}>
                     {bSettings.heading && (
                       <h2 className="text-4xl md:text-5xl font-bold mb-4">{bSettings.heading}</h2>
                     )}
@@ -93,12 +93,12 @@ export default function Slideshow({ settings, blocks }: { settings: any, blocks:
                     )}
                     <div className="flex gap-4 flex-wrap">
                       {bSettings.button_1_text && (
-                        <a href={bSettings.button_1_link || '#'} className={`px-6 py-3 rounded font-medium transition-colors ${style === 'layered' ? 'bg-black text-white hover:bg-gray-800' : 'bg-white text-black hover:bg-gray-100'}`}>
+                        <a href={bSettings.button_1_link || '#'} className={`px-6 py-3 rounded font-medium transition-colors ${style === 'layered' ? 'btn-primary' : 'hover:opacity-80'}`} style={style !== 'layered' ? { backgroundColor: 'var(--color-background)', color: 'var(--color-text)' } : undefined}>
                           {bSettings.button_1_text}
                         </a>
                       )}
                       {bSettings.button_2_text && (
-                        <a href={bSettings.button_2_link || '#'} className={`px-6 py-3 rounded font-medium transition-colors border ${style === 'layered' ? 'border-gray-300 hover:bg-gray-50' : 'border-white text-white hover:bg-white/10'}`}>
+                        <a href={bSettings.button_2_link || '#'} className={`px-6 py-3 rounded font-medium transition-colors border ${style === 'layered' ? 'hover:opacity-80' : 'border-white text-white hover:bg-white/10'}`} style={style === 'layered' ? { borderColor: 'var(--color-border)' } : undefined}>
                           {bSettings.button_2_text}
                         </a>
                       )}

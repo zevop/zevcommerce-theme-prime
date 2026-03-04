@@ -33,27 +33,28 @@ function HotspotDot({ block, domain }: { block: any, domain: string }) {
       {/* The Dot */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white shadow-lg flex items-center justify-center text-gray-900 transition-transform hover:scale-110 z-10"
+        className="relative -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-110 z-10"
+        style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-heading)' }}
         aria-label={`View ${product.title}`}
       >
-        <span className="w-3 h-3 bg-black rounded-full" style={{ backgroundColor: block.settings.color || '#000000' }}></span>
-        <div className="absolute inset-0 rounded-full bg-white opacity-20 animate-ping"></div>
+        <span className="w-3 h-3 rounded-full" style={{ backgroundColor: block.settings.color || 'var(--color-text)' }}></span>
+        <div className="absolute inset-0 rounded-full opacity-20 animate-ping" style={{ backgroundColor: 'var(--color-background)' }}></div>
       </button>
 
       {/* The Card (Tooltip) */}
       <div className={cn(
-        "absolute z-20 w-64 bg-white rounded-xl shadow-xl overflow-hidden transition-all duration-300 transform p-2",
+        "absolute z-20 w-64 rounded-xl shadow-xl overflow-hidden transition-all duration-300 transform p-2",
         "bottom-full mb-4 left-1/2 -translate-x-1/2", // Position above dot centered
         "opacity-0 invisible group-hover:opacity-100 group-hover:visible hover:opacity-100 hover:visible", // Show on hover dot or card
         isOpen ? "opacity-100 visible" : "" // Toggle for mobile click
-      )}>
+      )} style={{ backgroundColor: 'var(--color-background)' }}>
         <div className="flex gap-3">
-          <div className="w-16 h-16 rounded-lg bg-gray-100 overflow-hidden shrink-0">
+          <div className="w-16 h-16 rounded-lg overflow-hidden shrink-0" style={{ backgroundColor: 'var(--color-border)' }}>
             <img src={product.media?.[0]?.url} className="w-full h-full object-cover" alt="" />
           </div>
           <div className="flex flex-col justify-center min-w-0">
-            <h4 className="font-bold text-gray-900 text-sm truncate">{product.title}</h4>
-            <span className="text-gray-500 text-xs mt-1">
+            <h4 className="font-bold text-sm truncate" style={{ color: 'var(--color-heading)' }}>{product.title}</h4>
+            <span className="opacity-50 text-xs mt-1">
               {new Intl.NumberFormat('en-NG', { style: 'currency', currency: storeConfig?.currency || 'NGN' }).format(product.price)}
             </span>
             <Link
@@ -65,7 +66,7 @@ function HotspotDot({ block, domain }: { block: any, domain: string }) {
           </div>
         </div>
         {/* Triangle pointer */}
-        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white transform rotate-45"></div>
+        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 transform rotate-45" style={{ backgroundColor: 'var(--color-background)' }}></div>
       </div>
     </div>
   );
@@ -76,16 +77,16 @@ export default function ProductHotspots({ settings, blocks }: { settings: any, b
 
   if (!settings.image?.src) {
     return (
-      <div className="py-24 bg-gray-50 border-dashed border-2 border-gray-200 m-4 rounded-xl text-center text-gray-400">
+      <div className="py-24 border-dashed border-2 m-4 rounded-xl text-center opacity-40" style={{ backgroundColor: 'var(--color-border)', borderColor: 'var(--color-border)' }}>
         Select an image to add hotspots
       </div>
     );
   }
 
   return (
-    <section className="bg-white">
+    <section style={{ backgroundColor: 'var(--color-background)' }}>
       <div className="relative w-full">
-        <div className="relative aspect-[16/9] md:aspect-[21/9] w-full bg-gray-100 overflow-hidden">
+        <div className="relative aspect-[16/9] md:aspect-[21/9] w-full overflow-hidden" style={{ backgroundColor: 'var(--color-border)' }}>
           <img
             src={settings.image.src}
             alt="Shop the look"

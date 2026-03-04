@@ -340,10 +340,10 @@ export function ProductImagesBlock({ settings, sectionSettings }: { settings: an
   if (loading || !product) {
     return (
       <div className="space-y-4">
-        <div className="aspect-square bg-gray-100 rounded-xl animate-pulse" />
+        <div className="aspect-square rounded-xl animate-pulse" style={{ backgroundColor: 'var(--color-border)' }} />
         <div className="flex gap-2">
           {[1, 2, 3].map(i => (
-            <div key={i} className="w-16 h-16 bg-gray-100 rounded-lg animate-pulse" />
+            <div key={i} className="w-16 h-16 rounded-lg animate-pulse" style={{ backgroundColor: 'var(--color-border)' }} />
           ))}
         </div>
       </div>
@@ -355,7 +355,7 @@ export function ProductImagesBlock({ settings, sectionSettings }: { settings: an
 
   return (
     <div className="space-y-4 mb-8">
-      <div className={`relative overflow-hidden rounded-xl bg-gray-50 ${(settings.enable_zoom ?? true) ? 'cursor-zoom-in hover:scale-105 transition-transform' : ''}`}>
+      <div className={`relative overflow-hidden rounded-xl ${(settings.enable_zoom ?? true) ? 'cursor-zoom-in hover:scale-105 transition-transform' : ''}`} style={{ backgroundColor: 'var(--color-border)' }}>
         <img
           src={mainImage}
           alt={product.title}
@@ -369,8 +369,9 @@ export function ProductImagesBlock({ settings, sectionSettings }: { settings: an
             <button
               key={idx}
               onClick={() => setActiveIndex(idx)}
-              className={`w-16 h-16 rounded-lg overflow-hidden border-2 shrink-0 transition-all ${idx === activeIndex ? 'border-primary ring-2 ring-primary/20' : 'border-transparent hover:border-gray-300'
+              className={`w-16 h-16 rounded-lg overflow-hidden border-2 shrink-0 transition-all ${idx === activeIndex ? 'border-primary ring-2 ring-primary/20' : 'border-transparent hover:opacity-70'
                 }`}
+              style={{ borderColor: idx === activeIndex ? 'var(--color-primary)' : undefined }}
             >
               <img src={resolveImageUrl(img.url)} alt="" className="w-full h-full object-cover" />
             </button>
@@ -387,8 +388,8 @@ export function ProductTitleBlock({ settings, sectionSettings }: { settings: any
   if (loading || !product) {
     return (
       <div className="space-y-2 mb-4">
-        <div className="h-4 w-24 bg-gray-100 rounded animate-pulse" />
-        <div className="h-8 w-3/4 bg-gray-100 rounded animate-pulse" />
+        <div className="h-4 w-24 rounded animate-pulse" style={{ backgroundColor: 'var(--color-border)' }} />
+        <div className="h-8 w-3/4 rounded animate-pulse" style={{ backgroundColor: 'var(--color-border)' }} />
       </div>
     );
   }
@@ -400,7 +401,7 @@ export function ProductTitleBlock({ settings, sectionSettings }: { settings: any
   return (
     <div className={`space-y-1 mb-4 ${alignClass}`}>
       {showVendor && product.vendor && (
-        <p className="text-sm text-gray-400 uppercase tracking-widest font-medium opacity-80">{product.vendor}</p>
+        <p className="text-sm uppercase tracking-widest font-medium opacity-40">{product.vendor}</p>
       )}
       <h1
         className="text-2xl md:text-3xl font-bold tracking-tight"
@@ -417,7 +418,7 @@ export function ProductPriceBlock({ settings, sectionSettings }: { settings: any
   const { storeConfig } = useTheme();
 
   if (loading || !product) {
-    return <div className="h-8 w-32 bg-gray-100 rounded animate-pulse mb-6" />;
+    return <div className="h-8 w-32 rounded animate-pulse mb-6" style={{ backgroundColor: 'var(--color-border)' }} />;
   }
 
   const variant = selectedVariant || product.variants?.[0];
@@ -439,7 +440,7 @@ export function ProductPriceBlock({ settings, sectionSettings }: { settings: any
         {formatPrice(price)}
       </span>
       {(settings.show_compare_at ?? true) && compareAt && compareAt > price && (
-        <span className="text-lg text-gray-400 line-through font-medium">{formatPrice(compareAt)}</span>
+        <span className="text-lg line-through font-medium opacity-40">{formatPrice(compareAt)}</span>
       )}
     </div>
   );
@@ -451,10 +452,10 @@ export function ProductVariantsBlock({ settings, sectionSettings }: { settings: 
   if (loading || !product) {
     return (
       <div className="space-y-3 mb-6">
-        <div className="h-4 w-20 bg-gray-100 rounded animate-pulse" />
+        <div className="h-4 w-20 rounded animate-pulse" style={{ backgroundColor: 'var(--color-border)' }} />
         <div className="flex gap-2">
           {[1, 2, 3].map(i => (
-            <div key={i} className="w-12 h-10 bg-gray-100 rounded animate-pulse" />
+            <div key={i} className="w-12 h-10 rounded animate-pulse" style={{ backgroundColor: 'var(--color-border)' }} />
           ))}
         </div>
       </div>
@@ -468,10 +469,11 @@ export function ProductVariantsBlock({ settings, sectionSettings }: { settings: 
     <div className="space-y-6 mb-8">
       {product.options?.map((option: any, optIdx: number) => (
         <div key={optIdx} className="space-y-3">
-          <label className="text-xs font-bold uppercase tracking-wider text-gray-500">{option.name}</label>
+          <label className="text-xs font-bold uppercase tracking-wider opacity-50">{option.name}</label>
           {settings.style === 'dropdown' ? (
             <select
-              className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm bg-white shadow-sm focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+              className="w-full px-4 py-3 border rounded-xl text-sm shadow-sm focus:ring-2 focus:ring-current/20 outline-none transition-all"
+              style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }}
               value={selectedVariant?.id || variants[0]?.id}
               onChange={(e) => {
                 const v = variants.find((v: any) => v.id === e.target.value);
@@ -495,8 +497,9 @@ export function ProductVariantsBlock({ settings, sectionSettings }: { settings: 
                     onClick={() => matchingVariant && setSelectedVariant(matchingVariant)}
                     className={`px-5 py-2.5 text-sm font-semibold rounded-lg border transition-all ${isSelected
                       ? 'border-primary bg-primary text-white shadow-md shadow-primary/20'
-                      : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50'
+                      : 'hover:opacity-80'
                       }`}
+                    style={!isSelected ? { borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' } : undefined}
                   >
                     {value}
                   </button>
@@ -518,7 +521,7 @@ export function AddToCartBlock({ settings, sectionSettings }: { settings: any, s
   const router = useRouter();
 
   if (loading || !product) {
-    return <div className="h-14 w-full bg-gray-100 rounded-xl animate-pulse mb-8" />;
+    return <div className="h-14 w-full rounded-xl animate-pulse mb-8" style={{ backgroundColor: 'var(--color-border)' }} />;
   }
 
   const variant = selectedVariant || product.variants?.[0];
@@ -556,18 +559,19 @@ export function AddToCartBlock({ settings, sectionSettings }: { settings: any, s
     <div className="space-y-4 mb-8">
       {(settings.show_quantity ?? true) && (
         <div className="flex items-center gap-4">
-          <label className="text-xs font-bold uppercase tracking-wider text-gray-500">Quantity</label>
-          <div className="flex items-center border border-gray-200 rounded-xl bg-gray-50/50 p-1">
+          <label className="text-xs font-bold uppercase tracking-wider opacity-50">Quantity</label>
+          <div className="flex items-center border rounded-xl p-1" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-border)' }}>
             <button
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
-              className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-black hover:bg-white rounded-lg transition-all"
+              className="w-10 h-10 flex items-center justify-center opacity-40 hover:opacity-100 rounded-lg transition-all"
+              style={{ ['--hover-bg' as any]: 'var(--color-background)' }}
             >
               <Minus size={16} />
             </button>
             <span className="w-12 text-center font-bold text-sm">{quantity}</span>
             <button
               onClick={() => setQuantity(quantity + 1)}
-              className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-black hover:bg-white rounded-lg transition-all"
+              className="w-10 h-10 flex items-center justify-center opacity-40 hover:opacity-100 rounded-lg transition-all"
             >
               <Plus size={16} />
             </button>
@@ -586,7 +590,7 @@ export function AddToCartBlock({ settings, sectionSettings }: { settings: any, s
       </button>
 
       {settings.show_buy_now && inStock && (
-        <button className="w-full py-4 px-8 rounded-xl font-bold border border-gray-200 bg-white hover:bg-gray-50 transition-all active:scale-[0.98]">
+        <button className="w-full py-4 px-8 rounded-xl font-bold border hover:opacity-80 transition-all active:scale-[0.98]" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }}>
           Buy Now
         </button>
       )}
@@ -601,9 +605,9 @@ export function ProductDescriptionBlock({ settings, sectionSettings }: { setting
   if (loading || !product) {
     return (
       <div className="space-y-3 mb-6">
-        <div className="h-4 w-full bg-gray-50 rounded animate-pulse" />
-        <div className="h-4 w-5/6 bg-gray-50 rounded animate-pulse" />
-        <div className="h-4 w-4/6 bg-gray-50 rounded animate-pulse" />
+        <div className="h-4 w-full rounded animate-pulse" style={{ backgroundColor: 'var(--color-border)' }} />
+        <div className="h-4 w-5/6 rounded animate-pulse" style={{ backgroundColor: 'var(--color-border)' }} />
+        <div className="h-4 w-4/6 rounded animate-pulse" style={{ backgroundColor: 'var(--color-border)' }} />
       </div>
     );
   }
@@ -613,7 +617,7 @@ export function ProductDescriptionBlock({ settings, sectionSettings }: { setting
   return (
     <div className="mb-8">
       <div
-        className={`prose prose-sm max-w-none text-gray-500 leading-relaxed ${settings.enable_collapsible && !expanded ? `line-clamp-${settings.max_lines || 6}` : ''}`}
+        className={`prose prose-sm max-w-none leading-relaxed opacity-60 ${settings.enable_collapsible && !expanded ? `line-clamp-${settings.max_lines || 6}` : ''}`}
         dangerouslySetInnerHTML={{ __html: product.description }}
       />
       {settings.enable_collapsible && (
@@ -632,14 +636,14 @@ export function ProductDescriptionBlock({ settings, sectionSettings }: { setting
 
 export function CollectionHeadingBlock({ settings, sectionSettings }: { settings: any, sectionSettings?: any }) {
   const { collection, loading } = useCollection();
-  if (loading || !collection) return <div className="h-12 w-1/3 bg-gray-100 rounded animate-pulse mb-4" />;
+  if (loading || !collection) return <div className="h-12 w-1/3 rounded animate-pulse mb-4" style={{ backgroundColor: 'var(--color-border)' }} />;
 
   const alignment = settings.enable_custom_alignment ? settings.alignment : (sectionSettings?.alignment || 'center');
   const alignClass = getAlignmentClass(alignment);
 
   return (
     <div className={`mb-8 ${alignClass}`}>
-      <h1 className="text-3xl md:text-5xl font-black tracking-tight text-gray-900" style={{ color: sectionSettings?.text_color || 'var(--color-heading)' }}>
+      <h1 className="text-3xl md:text-5xl font-black tracking-tight" style={{ color: sectionSettings?.text_color || 'var(--color-heading)' }}>
         {collection.title}
       </h1>
     </div>
@@ -655,7 +659,7 @@ export function CollectionDescriptionBlock({ settings, sectionSettings }: { sett
 
   return (
     <div className={`mb-12 max-w-3xl mx-auto ${alignClass}`}>
-      <p className="text-lg text-gray-500 leading-relaxed" style={{ color: sectionSettings?.text_color || 'var(--color-text)' }}>
+      <p className="text-lg leading-relaxed opacity-60" style={{ color: sectionSettings?.text_color || 'var(--color-text)' }}>
         {collection.description}
       </p>
     </div>
@@ -671,8 +675,8 @@ export function ProductGridBlock({ settings, sectionSettings }: { settings: any,
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
         {[1, 2, 3, 4].map(i => (
           <div key={i} className="animate-pulse">
-            <div className="aspect-[4/5] bg-gray-100 rounded-2xl mb-4" />
-            <div className="h-4 bg-gray-100 w-3/4 rounded" />
+            <div className="aspect-[4/5] rounded-2xl mb-4" style={{ backgroundColor: 'var(--color-border)' }} />
+            <div className="h-4 w-3/4 rounded" style={{ backgroundColor: 'var(--color-border)' }} />
           </div>
         ))}
       </div>
@@ -684,10 +688,10 @@ export function ProductGridBlock({ settings, sectionSettings }: { settings: any,
 
   if (products.length === 0) {
     return (
-      <div className="text-center py-20 bg-gray-50 rounded-3xl border border-dashed border-gray-200 mb-16 px-4">
-        <ShoppingBag className="mx-auto h-12 w-12 text-gray-200 mb-4" />
-        <h3 className="text-lg font-bold text-gray-900">No products found</h3>
-        <p className="text-gray-400 mt-2">Try selecting a different collection or adjusting your filters.</p>
+      <div className="text-center py-20 rounded-3xl border border-dashed mb-16 px-4" style={{ backgroundColor: 'var(--color-border)', borderColor: 'var(--color-border)' }}>
+        <ShoppingBag className="mx-auto h-12 w-12 opacity-20 mb-4" />
+        <h3 className="text-lg font-bold" style={{ color: 'var(--color-heading)' }}>No products found</h3>
+        <p className="opacity-40 mt-2">Try selecting a different collection or adjusting your filters.</p>
       </div>
     );
   }
@@ -726,10 +730,12 @@ export function CartItemsBlock({ settings, sectionSettings }: { settings: any, s
   return (
     <div className="space-y-6">
       {items.map(item => (
-        <div key={item.variantId} className="flex gap-6 py-6 border-b border-gray-100 last:border-0 group">
+        <div key={item.variantId} className="flex gap-6 py-6 border-b last:border-0 group" style={{ borderColor: 'var(--color-border)' }}>
           <div
-            className="h-24 w-24 md:h-32 md:w-32 flex-shrink-0 overflow-hidden bg-gray-50 border border-gray-100 rounded-xl"
+            className="h-24 w-24 md:h-32 md:w-32 flex-shrink-0 overflow-hidden border rounded-xl"
             style={{
+              backgroundColor: 'var(--color-border)',
+              borderColor: 'var(--color-border)',
               border: 'var(--cart-media-border)',
               borderRadius: 'var(--cart-media-radius)'
             }}
@@ -743,7 +749,7 @@ export function CartItemsBlock({ settings, sectionSettings }: { settings: any, s
           <div className="flex flex-1 flex-col justify-between">
             <div className="flex justify-between items-start gap-4">
               <div className="space-y-1">
-                <h3 className="text-base md:text-lg font-bold text-gray-900 leading-tight">
+                <h3 className="text-base md:text-lg font-bold leading-tight" style={{ color: 'var(--color-heading)' }}>
                   <Link
                     href={`/products/${item.slug}`}
                     className="hover:text-primary transition-colors"
@@ -752,26 +758,26 @@ export function CartItemsBlock({ settings, sectionSettings }: { settings: any, s
                   </Link>
                 </h3>
                 {item.variantTitle !== 'Default Title' && (
-                  <p className="text-xs md:text-sm font-medium text-gray-400">{item.variantTitle}</p>
+                  <p className="text-xs md:text-sm font-medium opacity-40">{item.variantTitle}</p>
                 )}
               </div>
-              <p className="text-base md:text-lg font-black text-gray-900">
+              <p className="text-base md:text-lg font-black" style={{ color: 'var(--color-heading)' }}>
                 {currency} {item.price.toLocaleString()}
               </p>
             </div>
 
             <div className="flex items-end justify-between mt-4">
-              <div className="flex items-center gap-1 border border-gray-200 rounded-xl p-1 bg-white shadow-sm ring-1 ring-black/5">
+              <div className="flex items-center gap-1 border rounded-xl p-1 shadow-sm" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }}>
                 <button
                   onClick={() => updateQuantity(item.variantId, Math.max(0, item.quantity - 1))}
-                  className="w-8 h-8 flex items-center justify-center hover:bg-gray-50 rounded-lg text-gray-400 hover:text-black transition-all"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg opacity-40 hover:opacity-100 transition-all"
                 >
                   <Minus size={14} />
                 </button>
                 <span className="w-8 text-center font-bold text-xs">{item.quantity}</span>
                 <button
                   onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
-                  className="w-8 h-8 flex items-center justify-center hover:bg-gray-50 rounded-lg text-gray-400 hover:text-black transition-all"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg opacity-40 hover:opacity-100 transition-all"
                 >
                   <Plus size={14} />
                 </button>
@@ -779,7 +785,7 @@ export function CartItemsBlock({ settings, sectionSettings }: { settings: any, s
 
               <button
                 onClick={() => removeItem(item.variantId)}
-                className="text-xs font-bold text-gray-400 hover:text-red-500 flex items-center gap-1.5 transition-colors p-2 -mr-2"
+                className="text-xs font-bold opacity-40 hover:text-red-500 hover:opacity-100 flex items-center gap-1.5 transition-colors p-2 -mr-2"
               >
                 <Trash2 size={14} />
                 <span className="hidden sm:inline">Remove</span>
@@ -800,39 +806,39 @@ export function CartSummaryBlock({ settings, sectionSettings }: { settings: any,
 
   return (
     <div className="sticky top-24">
-      <div className="bg-gray-50/50 rounded-3xl p-6 md:p-8 border border-gray-100 backdrop-blur-sm">
-        <h2 className="text-lg font-black text-gray-900 mb-6 uppercase tracking-wider">Order Summary</h2>
+      <div className="rounded-3xl p-6 md:p-8 border backdrop-blur-sm" style={{ backgroundColor: 'var(--color-border)', borderColor: 'var(--color-border)' }}>
+        <h2 className="text-lg font-black mb-6 uppercase tracking-wider" style={{ color: 'var(--color-heading)' }}>Order Summary</h2>
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-bold text-gray-400 uppercase tracking-wide">Subtotal</span>
-            <span className="font-black text-gray-900">{currency} {subtotal.toLocaleString()}</span>
+            <span className="text-sm font-bold opacity-40 uppercase tracking-wide">Subtotal</span>
+            <span className="font-black" style={{ color: 'var(--color-heading)' }}>{currency} {subtotal.toLocaleString()}</span>
           </div>
           <div className="flex items-center justify-between text-xs">
-            <span className="text-gray-400 font-medium">Shipping</span>
-            <span className="text-gray-500">Calculated at checkout</span>
+            <span className="opacity-40 font-medium">Shipping</span>
+            <span className="opacity-50">Calculated at checkout</span>
           </div>
           <div className="flex items-center justify-between text-xs">
-            <span className="text-gray-400 font-medium">Taxes</span>
-            <span className="text-gray-500">Calculated at checkout</span>
+            <span className="opacity-40 font-medium">Taxes</span>
+            <span className="opacity-50">Calculated at checkout</span>
           </div>
 
-          <div className="pt-6 border-t border-gray-200 mt-6">
+          <div className="pt-6 border-t mt-6" style={{ borderColor: 'var(--color-border)' }}>
             <div className="flex items-center justify-between mb-8">
-              <span className="text-sm font-bold text-gray-900 uppercase tracking-widest">Total</span>
-              <span className="text-3xl font-black text-gray-900">
+              <span className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--color-heading)' }}>Total</span>
+              <span className="text-3xl font-black" style={{ color: 'var(--color-heading)' }}>
                 {currency} {subtotal.toLocaleString()}
               </span>
             </div>
 
-            <button className="w-full bg-black text-white px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-gray-900 transition-all flex items-center justify-center gap-3 shadow-xl shadow-black/10 active:scale-[0.98]">
+            <button className="w-full btn-primary px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-3 shadow-xl active:scale-[0.98]">
               Checkout
               <ArrowRight size={18} />
             </button>
 
             <div className="mt-6 flex items-center justify-center gap-2 opacity-30 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-500">
-              <div className="h-4 w-8 bg-gray-400 rounded-sm"></div>
-              <div className="h-4 w-8 bg-gray-400 rounded-sm"></div>
-              <div className="h-4 w-8 bg-gray-400 rounded-sm"></div>
+              <div className="h-4 w-8 rounded-sm opacity-40" style={{ backgroundColor: 'var(--color-text)' }}></div>
+              <div className="h-4 w-8 rounded-sm opacity-40" style={{ backgroundColor: 'var(--color-text)' }}></div>
+              <div className="h-4 w-8 rounded-sm opacity-40" style={{ backgroundColor: 'var(--color-text)' }}></div>
             </div>
           </div>
         </div>
@@ -894,15 +900,15 @@ export function CollectionItemBlock({ settings, className }: { settings: any, cl
 
   if (isLoading) {
     return (
-      <div className={`bg-gray-100 animate-pulse rounded-xl ${getAspectClass()} ${className || ''}`} />
+      <div className={`animate-pulse rounded-xl ${getAspectClass()} ${className || ''}`} style={{ backgroundColor: 'var(--color-border)' }} />
     );
   }
 
   // Fallback if no collection selected and no custom content
   if (!collectionSlug && !settings.image && !settings.title) {
     return (
-      <div className={`bg-gray-50 border border-dashed border-gray-200 rounded-xl flex items-center justify-center p-6 text-center ${getAspectClass()} ${className || ''}`}>
-        <div className="text-gray-400">
+      <div className={`border border-dashed rounded-xl flex items-center justify-center p-6 text-center ${getAspectClass()} ${className || ''}`} style={{ backgroundColor: 'var(--color-border)', borderColor: 'var(--color-border)' }}>
+        <div className="opacity-40">
           <ShoppingBag className="mx-auto h-8 w-8 mb-2 opacity-50" />
           <span className="text-xs font-semibold uppercase tracking-wider">Select Collection</span>
         </div>
@@ -918,12 +924,12 @@ export function CollectionItemBlock({ settings, className }: { settings: any, cl
       className={`group block relative ${hoverClass} ${className || ''}`}
     >
       <div className={`
-        overflow-hidden bg-gray-100 relative
+        overflow-hidden relative
         ${imageHoverClass}
         ${getAspectClass()}
         ${aspectRatio === 'circle' ? 'rounded-full' : 'rounded-xl'}
         ${isContentBelow ? 'mb-3' : ''}
-      `}>
+      `} style={{ backgroundColor: 'var(--color-border)' }}>
         {image ? (
           <img
             src={image}
@@ -935,7 +941,7 @@ export function CollectionItemBlock({ settings, className }: { settings: any, cl
             `}
           />
         ) : (
-          <div className="h-full w-full bg-gray-200 flex items-center justify-center text-gray-400">
+          <div className="h-full w-full flex items-center justify-center opacity-40" style={{ backgroundColor: 'var(--color-border)' }}>
             <ShoppingBag size={32} />
           </div>
         )}
@@ -960,8 +966,8 @@ export function CollectionItemBlock({ settings, className }: { settings: any, cl
       {/* Content Below Image */}
       {isContentBelow && (
         <div className="text-center">
-          <h3 className="text-lg font-bold text-gray-900 group-hover:text-black">{title}</h3>
-          {description && <p className="text-sm text-gray-500 mt-1 line-clamp-2">{description}</p>}
+          <h3 className="text-lg font-bold" style={{ color: 'var(--color-heading)' }}>{title}</h3>
+          {description && <p className="text-sm opacity-50 mt-1 line-clamp-2">{description}</p>}
         </div>
       )}
     </Link>
@@ -982,24 +988,24 @@ export function ProductBlock({ settings, sectionSettings }: { settings: any, sec
 
   if (!productSlug) {
     return (
-      <div className="mb-4 p-4 border border-gray-200 rounded bg-white shadow-sm flex items-center gap-4">
-        <div className="w-16 h-16 bg-gray-100 rounded flex items-center justify-center text-gray-300">
+      <div className="mb-4 p-4 border rounded shadow-sm flex items-center gap-4" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }}>
+        <div className="w-16 h-16 rounded flex items-center justify-center opacity-30" style={{ backgroundColor: 'var(--color-border)' }}>
           <ShoppingBag size={24} />
         </div>
-        <h3 className="font-medium text-gray-400 italic">Select Product</h3>
+        <h3 className="font-medium opacity-40 italic">Select Product</h3>
       </div>
     );
   }
 
   if (isLoading) {
     return (
-      <div className="mb-4 p-4 border border-gray-100 rounded bg-white shadow-sm flex items-center gap-4">
-        <div className="w-16 h-16 bg-gray-50 rounded flex items-center justify-center">
-          <Loader2 className="animate-spin h-5 w-5 text-gray-300" />
+      <div className="mb-4 p-4 border rounded shadow-sm flex items-center gap-4" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }}>
+        <div className="w-16 h-16 rounded flex items-center justify-center" style={{ backgroundColor: 'var(--color-border)' }}>
+          <Loader2 className="animate-spin h-5 w-5 opacity-30" />
         </div>
         <div className="flex-1 space-y-2">
-          <div className="h-4 bg-gray-50 rounded w-1/2"></div>
-          <div className="h-3 bg-gray-50 rounded w-1/4"></div>
+          <div className="h-4 rounded w-1/2" style={{ backgroundColor: 'var(--color-border)' }}></div>
+          <div className="h-3 rounded w-1/4" style={{ backgroundColor: 'var(--color-border)' }}></div>
         </div>
       </div>
     );
@@ -1047,9 +1053,9 @@ export function ProductListBlock({ settings, sectionSettings }: { settings: any,
       <div className={`grid ${gridClass} gap-4 mb-8`}>
         {Array.from({ length: limit }).map((_, i) => (
           <div key={i} className="animate-pulse">
-            <div className="aspect-[4/5] bg-gray-100 rounded-xl mb-3"></div>
-            <div className="h-4 bg-gray-100 rounded w-3/4 mb-2"></div>
-            <div className="h-4 bg-gray-100 rounded w-1/4"></div>
+            <div className="aspect-[4/5] rounded-xl mb-3" style={{ backgroundColor: 'var(--color-border)' }}></div>
+            <div className="h-4 rounded w-3/4 mb-2" style={{ backgroundColor: 'var(--color-border)' }}></div>
+            <div className="h-4 rounded w-1/4" style={{ backgroundColor: 'var(--color-border)' }}></div>
           </div>
         ))}
       </div>
@@ -1079,9 +1085,9 @@ export function ProductListBlock({ settings, sectionSettings }: { settings: any,
           ))}
         </div>
       ) : (
-        <div className="py-12 border border-dashed border-gray-200 rounded-xl text-center">
-          <ShoppingBag className="mx-auto h-12 w-12 text-gray-200 mb-4" />
-          <p className="text-gray-400 text-sm">No products found</p>
+        <div className="py-12 border border-dashed rounded-xl text-center" style={{ borderColor: 'var(--color-border)' }}>
+          <ShoppingBag className="mx-auto h-12 w-12 opacity-20 mb-4" />
+          <p className="opacity-40 text-sm">No products found</p>
         </div>
       )}
     </div>
@@ -1117,7 +1123,7 @@ export function LinkListBlock({ settings, sectionSettings }: { settings: any, se
           <li key={item.id}>
             <Link
               href={resolveMenuUrl(item, domain)}
-              className="text-sm text-gray-600 hover:text-black hover:underline transition-colors"
+              className="text-sm opacity-60 hover:opacity-100 hover:underline transition-colors"
             >
               {item.title}
             </Link>
@@ -1175,28 +1181,28 @@ export function IconBlock({ settings, sectionSettings }: { settings: any, sectio
 
 export function ContactFormBlock({ settings, sectionSettings }: { settings: any, sectionSettings?: any }) {
   return (
-    <div className="mb-6 p-6 border border-gray-100 rounded-xl bg-gray-50/30 shadow-sm">
+    <div className="mb-6 p-6 border rounded-xl shadow-sm" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-border)' }}>
       {settings.title && <h3 className="text-lg font-bold mb-4">{settings.title}</h3>}
       <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
         <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1 uppercase tracking-wider">Full Name</label>
-          <input type="text" className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-black outline-none transition-shadow text-sm" placeholder="John Doe" />
+          <label className="block text-xs font-medium opacity-50 mb-1 uppercase tracking-wider">Full Name</label>
+          <input type="text" className="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-current outline-none transition-shadow text-sm" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }} placeholder="John Doe" />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1 uppercase tracking-wider">Email Address</label>
-          <input type="email" className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-black outline-none transition-shadow text-sm" placeholder="john@example.com" />
+          <label className="block text-xs font-medium opacity-50 mb-1 uppercase tracking-wider">Email Address</label>
+          <input type="email" className="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-current outline-none transition-shadow text-sm" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }} placeholder="john@example.com" />
         </div>
         {settings.show_phone && (
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1 uppercase tracking-wider">Phone Number</label>
-            <input type="tel" className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-black outline-none transition-shadow text-sm" placeholder="+1 (555) 000-0000" />
+            <label className="block text-xs font-medium opacity-50 mb-1 uppercase tracking-wider">Phone Number</label>
+            <input type="tel" className="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-current outline-none transition-shadow text-sm" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }} placeholder="+1 (555) 000-0000" />
           </div>
         )}
         <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1 uppercase tracking-wider">Message</label>
-          <textarea className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-black outline-none transition-shadow text-sm min-h-[100px]" placeholder="How can we help you?"></textarea>
+          <label className="block text-xs font-medium opacity-50 mb-1 uppercase tracking-wider">Message</label>
+          <textarea className="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-current outline-none transition-shadow text-sm min-h-[100px]" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }} placeholder="How can we help you?"></textarea>
         </div>
-        <button type="submit" className="w-full bg-black text-white font-bold py-3 rounded-lg hover:bg-gray-800 transition-colors">
+        <button type="submit" className="w-full btn-primary font-bold py-3 rounded-lg transition-colors">
           {settings.button_text || 'Send Message'}
         </button>
       </form>
@@ -1212,10 +1218,11 @@ export function EmailSignupBlock({ settings, sectionSettings }: { settings: any,
         <input
           type="email"
           placeholder={settings.placeholder || 'Enter your email'}
-          className="flex-1 px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-black outline-none transition-shadow text-sm"
+          className="flex-1 px-4 py-2 rounded-lg border focus:ring-2 focus:ring-current outline-none transition-shadow text-sm"
+          style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }}
           required
         />
-        <button type="submit" className="bg-black text-white px-6 py-2 rounded-lg font-bold hover:bg-gray-800 transition-colors text-sm">
+        <button type="submit" className="btn-primary px-6 py-2 rounded-lg font-bold transition-colors text-sm">
           {settings.button_text || 'Join'}
         </button>
       </form>
@@ -1227,16 +1234,16 @@ export function AccordionBlock({ settings, sectionSettings }: { settings: any, s
   const [isOpen, setIsOpen] = useState(settings.open_by_default || false);
 
   return (
-    <div className="mb-2 border border-gray-100 rounded-lg overflow-hidden bg-white shadow-sm">
+    <div className="mb-2 border rounded-lg overflow-hidden shadow-sm" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors"
+        className="w-full flex items-center justify-between p-4 text-left hover:opacity-80 transition-colors"
       >
         <span className="font-semibold text-sm">{settings.title || 'Accordion Question'}</span>
-        {isOpen ? <Minus className="h-4 w-4 text-gray-400" /> : <Plus className="h-4 w-4 text-gray-400" />}
+        {isOpen ? <Minus className="h-4 w-4 opacity-40" /> : <Plus className="h-4 w-4 opacity-40" />}
       </button>
       {isOpen && (
-        <div className="p-4 pt-0 text-sm text-gray-600 leading-relaxed border-t border-gray-50 animate-in slide-in-from-top-1 duration-200">
+        <div className="p-4 pt-0 text-sm opacity-60 leading-relaxed border-t animate-in slide-in-from-top-1 duration-200" style={{ borderColor: 'var(--color-border)' }}>
           {settings.content || 'Accordion content goes here.'}
         </div>
       )}
@@ -1248,7 +1255,7 @@ export function CardBlock({ settings, sectionSettings }: { settings: any, sectio
   const isList = settings.style === 'list';
 
   return (
-    <div className={`mb-4 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm transition-transform hover:scale-[1.01] ${isList ? 'flex gap-4 p-2' : ''}`}>
+    <div className={`mb-4 overflow-hidden rounded-xl border shadow-sm transition-transform hover:scale-[1.01] ${isList ? 'flex gap-4 p-2' : ''}`} style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }}>
       {settings.image && (
         <div className={`${isList ? 'w-24 h-24 shrink-0' : 'aspect-video'} overflow-hidden rounded-lg`}>
           <img src={settings.image} alt={settings.title} className="w-full h-full object-cover" />
@@ -1256,9 +1263,9 @@ export function CardBlock({ settings, sectionSettings }: { settings: any, sectio
       )}
       <div className={`p-4 ${isList ? 'flex-1 py-1 px-0 flex flex-col justify-center' : ''}`}>
         <h4 className="font-bold text-base mb-1">{settings.title || 'Card Title'}</h4>
-        <p className="text-sm text-gray-500 mb-4 line-clamp-2">{settings.description || 'Add a description for your card.'}</p>
+        <p className="text-sm opacity-50 mb-4 line-clamp-2">{settings.description || 'Add a description for your card.'}</p>
         {settings.link && (
-          <Link href={settings.link} className="text-sm font-bold text-black hover:underline flex items-center gap-1">
+          <Link href={settings.link} className="text-sm font-bold hover:underline flex items-center gap-1" style={{ color: 'var(--color-heading)' }}>
             {settings.link_text || 'Learn More'} <ArrowRight className="h-3 w-3" />
           </Link>
         )}
@@ -1282,10 +1289,11 @@ export function MenuBlock({ settings, sectionSettings }: { settings: any, sectio
             <li key={item.id}>
               <Link
                 href={resolveMenuUrl(item, domain)}
-                className="group flex items-center justify-between p-3 rounded-lg border border-gray-100 hover:border-black transition-all bg-white shadow-sm hover:shadow-md"
+                className="group flex items-center justify-between p-3 rounded-lg border hover:opacity-80 transition-all shadow-sm hover:shadow-md"
+                style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }}
               >
                 <span className="font-medium text-sm">{item.title}</span>
-                <ChevronRight className="h-4 w-4 text-gray-300 group-hover:text-black transition-colors" />
+                <ChevronRight className="h-4 w-4 opacity-30 group-hover:opacity-100 transition-colors" />
               </Link>
             </li>
           ))}
@@ -1484,12 +1492,12 @@ export function ProductGridItemsBlock({ settings, sectionSettings }: { settings:
       <div className={`grid grid-cols-${columnsMobile} md:grid-cols-${columnsDesktop} gap-6`}>
         {Array.from({ length: limit }).map((_, i) => (
           <div key={i} className="animate-pulse">
-            <div className={`bg-gray-100 rounded-xl mb-4 ${aspectRatio === 'square' ? 'aspect-square' :
+            <div className={`rounded-xl mb-4 ${aspectRatio === 'square' ? 'aspect-square' :
               aspectRatio === 'portrait' ? 'aspect-[3/4]' :
                 aspectRatio === 'landscape' ? 'aspect-[16/9]' : 'aspect-video'
-              }`}></div>
-            <div className="h-4 bg-gray-100 rounded w-3/4 mb-2"></div>
-            <div className="h-4 bg-gray-100 rounded w-1/4"></div>
+              }`} style={{ backgroundColor: 'var(--color-border)' }}></div>
+            <div className="h-4 rounded w-3/4 mb-2" style={{ backgroundColor: 'var(--color-border)' }}></div>
+            <div className="h-4 rounded w-1/4" style={{ backgroundColor: 'var(--color-border)' }}></div>
           </div>
         ))}
       </div>
@@ -1500,9 +1508,9 @@ export function ProductGridItemsBlock({ settings, sectionSettings }: { settings:
 
   if (products.length === 0) {
     return (
-      <div className="py-12 bg-gray-50 rounded-lg border border-dashed border-gray-200 text-center">
-        <ShoppingBag className="mx-auto h-12 w-12 text-gray-200 mb-4" />
-        <p className="text-gray-500">No products found in this collection.</p>
+      <div className="py-12 rounded-lg border border-dashed text-center" style={{ backgroundColor: 'var(--color-border)', borderColor: 'var(--color-border)' }}>
+        <ShoppingBag className="mx-auto h-12 w-12 mb-4 opacity-20" />
+        <p className="opacity-50">No products found in this collection.</p>
       </div>
     );
   }
@@ -1533,7 +1541,7 @@ export function CheckoutPageTitleBlock({ settings, sectionSettings }: { settings
 
   return (
     <div className={`mb-8 ${alignClass}`}>
-      <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900" style={{ color: settings.color || 'inherit' }}>
+      <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight" style={{ color: settings.color || 'var(--color-heading)' }}>
         {settings.title || 'Checkout'}
       </h1>
     </div>
@@ -1612,10 +1620,10 @@ export function ThankYouHeaderBlock({ settings, sectionSettings }: { settings: a
 
   return (
     <div className={`mb-12 ${alignClass}`}>
-      <h1 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight text-gray-900" style={{ color: settings.title_color }}>
+      <h1 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight" style={{ color: settings.title_color || 'var(--color-heading)' }}>
         {settings.title || 'Order Placed!'}
       </h1>
-      <p className="text-gray-500 text-lg max-w-lg mx-auto leading-relaxed" style={{ color: settings.subtitle_color }}>
+      <p className="text-lg max-w-lg mx-auto leading-relaxed opacity-50" style={{ color: settings.subtitle_color }}>
         {settings.subtitle || 'Thank you for your purchase. Your order has been successfully placed.'}
       </p>
     </div>
@@ -1633,8 +1641,8 @@ export function OrderDetailsBlock({ settings, sectionSettings }: { settings: any
   if (!displayNum) return null;
 
   const style = {
-    backgroundColor: settings.background_color || '#f9fafb', // gray-50
-    borderColor: settings.border_color || '#e5e7eb', // gray-200
+    backgroundColor: settings.background_color || 'var(--color-border)',
+    borderColor: settings.border_color || 'var(--color-border)',
     borderWidth: settings.border_width !== undefined ? `${settings.border_width}px` : '1px',
     borderRadius: settings.border_radius !== undefined ? `${settings.border_radius}px` : '12px',
     padding: settings.padding !== undefined ? `${settings.padding}px` : '24px',
@@ -1644,14 +1652,14 @@ export function OrderDetailsBlock({ settings, sectionSettings }: { settings: any
   return (
     <div className="mx-auto mb-10 text-center" style={{ maxWidth: style.maxWidth }}>
       <div className="rounded-xl" style={style}>
-        <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: settings.label_color || '#6b7280' }}>
+        <p className="text-xs font-bold uppercase tracking-widest mb-2 opacity-50" style={{ color: settings.label_color }}>
           {settings.label || 'Order Reference'}
         </p>
-        <p className="text-2xl font-mono font-bold select-all" style={{ color: settings.number_color || '#111827' }}>
+        <p className="text-2xl font-mono font-bold select-all" style={{ color: settings.number_color || 'var(--color-heading)' }}>
           #{displayNum}
         </p>
         {isEditorMode && !number && (
-          <span className="block mt-2 text-[10px] text-gray-400 uppercase tracking-wider font-medium">
+          <span className="block mt-2 text-[10px] opacity-40 uppercase tracking-wider font-medium">
             Preview Mode
           </span>
         )}
@@ -1680,9 +1688,9 @@ export function PaymentInstructionsBlock({ settings, sectionSettings }: { settin
   if (!instructions) return null;
 
   const style = {
-    backgroundColor: settings.background_color || '#ffffff',
-    color: settings.text_color || '#4b5563',
-    borderColor: settings.border_color || '#e5e7eb',
+    backgroundColor: settings.background_color || 'var(--color-background)',
+    color: settings.text_color || 'var(--color-text)',
+    borderColor: settings.border_color || 'var(--color-border)',
     borderWidth: settings.border_width !== undefined ? `${settings.border_width}px` : '1px',
     borderRadius: settings.border_radius !== undefined ? `${settings.border_radius}px` : '12px',
     padding: settings.padding !== undefined ? `${settings.padding}px` : '32px'
@@ -1694,9 +1702,9 @@ export function PaymentInstructionsBlock({ settings, sectionSettings }: { settin
       style={style}
     >
       <div className="flex flex-col gap-4">
-        <div className="flex items-center gap-3 border-b border-gray-100 pb-4 mb-2">
-          <Info className="h-5 w-5" style={{ color: settings.icon_color || '#9ca3af' }} />
-          <h3 className="font-semibold text-sm" style={{ color: settings.heading_color || '#111827' }}>
+        <div className="flex items-center gap-3 border-b pb-4 mb-2" style={{ borderColor: 'var(--color-border)' }}>
+          <Info className="h-5 w-5 opacity-40" style={{ color: settings.icon_color }} />
+          <h3 className="font-semibold text-sm" style={{ color: settings.heading_color || 'var(--color-heading)' }}>
             {settings.title || 'Payment Instructions'}
           </h3>
         </div>
@@ -1729,31 +1737,32 @@ export function GiftCardCodesBlock({ settings, sectionSettings }: { settings: an
 
   return (
     <div className="mb-10 w-full max-w-2xl mx-auto">
-      <div className="rounded-xl border border-gray-200 bg-white p-6">
-        <div className="flex items-center gap-3 border-b border-gray-100 pb-4 mb-4">
-          <Gift className="h-5 w-5 text-gray-500" />
-          <h3 className="font-semibold text-sm text-gray-900">
+      <div className="rounded-xl border p-6" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }}>
+        <div className="flex items-center gap-3 border-b pb-4 mb-4" style={{ borderColor: 'var(--color-border)' }}>
+          <Gift className="h-5 w-5 opacity-50" />
+          <h3 className="font-semibold text-sm" style={{ color: 'var(--color-heading)' }}>
             Your Gift Card{codes.length > 1 ? 's' : ''}
           </h3>
         </div>
-        <p className="text-xs text-gray-500 mb-4">
+        <p className="text-xs opacity-50 mb-4">
           Save these codes — they can be used for future purchases.
         </p>
         <div className="space-y-3">
           {codes.map((gc, i) => (
-            <div key={i} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+            <div key={i} className="flex items-center justify-between p-3 rounded-lg" style={{ backgroundColor: 'var(--color-border)' }}>
               <div>
-                <p className="font-mono text-sm font-bold text-gray-900 tracking-wider select-all">
+                <p className="font-mono text-sm font-bold tracking-wider select-all" style={{ color: 'var(--color-heading)' }}>
                   {gc.code}
                 </p>
-                <p className="text-xs text-gray-500 mt-0.5">
+                <p className="text-xs opacity-50 mt-0.5">
                   Value: {new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', maximumFractionDigits: 0 }).format(gc.denomination)}
                   {gc.expiresAt && ` · Expires ${new Date(gc.expiresAt).toLocaleDateString()}`}
                 </p>
               </div>
               <button
                 onClick={() => copyCode(gc.code)}
-                className="text-xs text-gray-600 hover:text-gray-900 bg-white border border-gray-200 px-3 py-1.5 rounded-md hover:bg-gray-50 transition-colors"
+                className="text-xs opacity-60 hover:opacity-100 border px-3 py-1.5 rounded-md hover:opacity-80 transition-colors"
+                style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}
               >
                 Copy
               </button>
@@ -1772,7 +1781,7 @@ export function ContinueShoppingBlock({ settings, sectionSettings }: { settings:
     <div className="text-center">
       <Link
         href={getStorePermalink(storeConfig?.handle, '/')}
-        className="bg-black text-white px-10 py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-gray-800 transition-all shadow-xl shadow-black/10 active:scale-[0.98] inline-block"
+        className="btn-primary px-10 py-4 rounded-xl font-bold uppercase tracking-widest text-sm transition-all shadow-xl shadow-black/10 active:scale-[0.98] inline-block"
       >
         {settings.button_text || 'Continue Shopping'}
       </Link>

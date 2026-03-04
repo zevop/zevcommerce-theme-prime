@@ -10,11 +10,11 @@ export default function ProductList({ settings, blocks }: { settings: any; block
   if (loading) {
     return <div className="py-24 text-center max-w-7xl mx-auto px-4">
       <div className="animate-pulse flex flex-col items-center">
-        <div className="h-10 w-64 bg-gray-100 rounded mb-4"></div>
-        <div className="h-6 w-96 bg-gray-50 rounded mb-12"></div>
+        <div className="h-10 w-64 rounded mb-4" style={{ backgroundColor: 'var(--color-border)' }}></div>
+        <div className="h-6 w-96 rounded mb-12" style={{ backgroundColor: 'var(--color-border)' }}></div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 w-full">
           {[1, 2, 3, 4].map(i => (
-            <div key={i} className="aspect-[4/5] bg-gray-50 rounded-2xl"></div>
+            <div key={i} className="aspect-[4/5] rounded-2xl" style={{ backgroundColor: 'var(--color-border)' }}></div>
           ))}
         </div>
       </div>
@@ -23,8 +23,8 @@ export default function ProductList({ settings, blocks }: { settings: any; block
 
   if (!collection) {
     return (
-      <div className="py-24 text-center border-dashed border-2 border-gray-100 m-8 rounded-3xl bg-gray-50/50">
-        <p className="text-gray-400 font-medium">Collection will be displayed here.</p>
+      <div className="py-24 text-center border-dashed border-2 m-8 rounded-3xl" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-border)' }}>
+        <p className="opacity-40 font-medium">Collection will be displayed here.</p>
       </div>
     );
   }

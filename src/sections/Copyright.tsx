@@ -6,8 +6,8 @@ export default function Copyright({ settings }: { settings: any }) {
   const { storeConfig } = useTheme();
   const {
     copyrightText,
-    backgroundColor = '#F9FAFB',
-    text_color = '#9ca3af',
+    backgroundColor = 'var(--color-border)',
+    text_color = 'var(--color-text)',
     alignment = 'center',
     showBorder = true,
   } = settings;

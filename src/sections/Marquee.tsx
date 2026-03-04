@@ -18,8 +18,8 @@ export default function Marquee({ settings }: MarqueeProps) {
     text = 'Welcome to our store',
     speed = 20, // seconds
     direction = 'left',
-    background_color = '#000000',
-    text_color = '#ffffff',
+    background_color = 'var(--color-text)',
+    text_color = 'var(--color-background)',
     pause_on_hover = true,
     upper_case = true,
     font_size = 'medium'

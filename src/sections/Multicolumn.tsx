@@ -69,13 +69,13 @@ export default function Multicolumn({ settings, blocks }: MulticolumnProps) {
             } = block.settings;
 
             const hasCardBg = card_background;
-            const bgClass = hasCardBg ? 'bg-gray-100/50 p-6 rounded-2xl' : '';
+            const bgClass = hasCardBg ? 'p-6 rounded-2xl' : '';
             const imageUrl = typeof image === 'string' ? image : image?.url;
 
             return (
-              <div key={block.id || index} className={`flex flex-col ${alignClass} ${bgClass} group`}>
+              <div key={block.id || index} className={`flex flex-col ${alignClass} ${bgClass} group`} style={hasCardBg ? { backgroundColor: 'var(--color-border)' } : undefined}>
                 {imageUrl && (
-                  <div className={`w-full relative overflow-hidden mb-6 bg-gray-200 ${currentAspect} ${card_background && image_aspect_ratio !== 'circle' ? 'rounded-xl' : ''}`}>
+                  <div className={`w-full relative overflow-hidden mb-6 ${currentAspect} ${card_background && image_aspect_ratio !== 'circle' ? 'rounded-xl' : ''}`} style={{ backgroundColor: 'var(--color-border)' }}>
                     <img
                       src={imageUrl}
                       alt={heading || 'Column image'}
@@ -86,7 +86,7 @@ export default function Multicolumn({ settings, blocks }: MulticolumnProps) {
 
                 <div className="flex-1">
                   {heading && <h3 className="text-xl font-bold mb-3">{heading}</h3>}
-                  {text && <div className="text-gray-600 mb-4 whitespace-pre-wrap leading-relaxed">{text}</div>}
+                  {text && <div className="opacity-60 mb-4 whitespace-pre-wrap leading-relaxed">{text}</div>}
 
                   {link && link_text && (
                     <Link href={link} className="inline-flex items-center font-semibold text-sm hover:underline hover:opacity-70 transition-opacity mt-auto">
@@ -104,7 +104,7 @@ export default function Multicolumn({ settings, blocks }: MulticolumnProps) {
           <div className={`mt-12 ${alignClass}`}>
             <Link
               href={button_link}
-              className="inline-block px-8 py-3 bg-black text-white font-bold rounded-lg hover:bg-gray-800 transition-colors"
+              className="btn-primary inline-block px-8 py-3 font-bold rounded-lg transition-colors"
             >
               {button_text}
             </Link>

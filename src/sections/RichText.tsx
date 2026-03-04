@@ -16,8 +16,8 @@ export default function RichText({ settings, blocks }: RichTextProps) {
   const {
     alignment = 'center',
     width = 'medium',
-    background_color = '#ffffff',
-    text_color = '#000000'
+    background_color = 'var(--color-background)',
+    text_color = 'var(--color-text)'
   } = settings;
 
   const maxWidthClasses = {
