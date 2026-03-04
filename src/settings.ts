@@ -379,6 +379,19 @@ export const settingsSchema = defineSettings([
           { value: 'zoom', label: 'Zoom' },
         ],
       },
+
+      { type: 'header', id: 'animations._header_scroll', label: 'Scroll Animations' },
+      {
+        type: 'select', id: 'animations.scrollReveal', label: 'Section Entrance', default: 'fade-up',
+        options: [
+          { value: 'none', label: 'None' },
+          { value: 'fade-up', label: 'Fade Up' },
+          { value: 'fade-in', label: 'Fade In' },
+          { value: 'slide-left', label: 'Slide from Left' },
+        ],
+      },
+      { type: 'range', id: 'animations.scrollRevealDuration', label: 'Animation Duration (ms)', default: '600', min: 200, max: 1200, step: 100 },
+      { type: 'checkbox', id: 'animations.staggerChildren', label: 'Stagger grid item animations', default: true },
     ],
   },
 

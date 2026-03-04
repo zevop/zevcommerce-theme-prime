@@ -51,6 +51,12 @@ import OrderDetailsSection from './sections/OrderDetailsSection';
 import AuthSection from './sections/AuthSection';
 import SearchSection from './sections/SearchSection';
 import NotFoundSection from './sections/NotFoundSection';
+import Testimonials from './sections/Testimonials';
+import Newsletter from './sections/Newsletter';
+import LogoCloud from './sections/LogoCloud';
+import Countdown from './sections/Countdown';
+import Stats from './sections/Stats';
+import TabsSection from './sections/Tabs';
 
 import { schema as CopyrightSchema } from './sections/Copyright';
 import { schema as ColumnsSchema } from './sections/Columns';
@@ -81,6 +87,12 @@ import { schema as CheckoutSectionSchema } from './sections/CheckoutSection';
 import { schema as ThankYouSectionSchema } from './sections/ThankYouSection';
 import { schema as SearchSectionSchema } from './sections/SearchSection';
 import { schema as NotFoundSectionSchema } from './sections/NotFoundSection';
+import { schema as TestimonialsSchema } from './sections/Testimonials';
+import { schema as NewsletterSchema } from './sections/Newsletter';
+import { schema as LogoCloudSchema } from './sections/LogoCloud';
+import { schema as CountdownSchema } from './sections/Countdown';
+import { schema as StatsSchema } from './sections/Stats';
+import { schema as TabsSchema } from './sections/Tabs';
 
 export const primeSectionRegistry: Record<string, { component: any; schema: any }> = {
   'auth-section': { component: AuthSection as any, schema: AuthSectionSchema },
@@ -123,4 +135,10 @@ export const primeSectionRegistry: Record<string, { component: any; schema: any 
   'order-details-section': { component: OrderDetailsSection as any, schema: OrderDetailsSectionSchema },
   'search-section': { component: SearchSection as any, schema: SearchSectionSchema },
   'not-found-section': { component: NotFoundSection as any, schema: NotFoundSectionSchema },
+  'testimonials': { component: Testimonials as any, schema: TestimonialsSchema },
+  'newsletter': { component: Newsletter as any, schema: NewsletterSchema },
+  'logo_cloud': { component: LogoCloud as any, schema: LogoCloudSchema },
+  'countdown': { component: Countdown as any, schema: CountdownSchema },
+  'stats': { component: Stats as any, schema: StatsSchema },
+  'tabs': { component: TabsSection as any, schema: TabsSchema },
 };

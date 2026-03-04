@@ -41,49 +41,49 @@
       "subheadingFont": "Inter",
       "accentFont": "Playfair Display",
       "p": {
-        "size": "12px",
+        "size": "16px",
         "lineHeight": "1.6",
         "letterSpacing": "normal",
         "case": "default"
       },
       "h1": {
         "font": "heading",
-        "size": "24px",
-        "lineHeight": "1.2",
+        "size": "48px",
+        "lineHeight": "1.1",
         "letterSpacing": "-0.02em",
         "case": "default"
       },
       "h2": {
         "font": "heading",
-        "size": "20px",
-        "lineHeight": "1.3",
+        "size": "36px",
+        "lineHeight": "1.2",
         "letterSpacing": "-0.01em",
         "case": "default"
       },
       "h3": {
         "font": "heading",
-        "size": "16px",
-        "lineHeight": "1.4",
-        "letterSpacing": "normal",
+        "size": "30px",
+        "lineHeight": "1.3",
+        "letterSpacing": "-0.01em",
         "case": "default"
       },
       "h4": {
         "font": "heading",
-        "size": "18px",
-        "lineHeight": "1.4",
+        "size": "24px",
+        "lineHeight": "1.3",
         "letterSpacing": "normal",
         "case": "default"
       },
       "h5": {
         "font": "heading",
-        "size": "16px",
+        "size": "20px",
         "lineHeight": "1.4",
         "letterSpacing": "normal",
         "case": "default"
       },
       "h6": {
         "font": "heading",
-        "size": "14px",
+        "size": "16px",
         "lineHeight": "1.4",
         "letterSpacing": "normal",
         "case": "default"
@@ -91,13 +91,16 @@
     },
     "layout": {
       "containerWidth": "1280px",
-      "sectionSpacing": "32px",
-      "sectionSpacingMobile": "24px",
+      "sectionSpacing": "64px",
+      "sectionSpacingMobile": "40px",
       "gridGap": "32px"
     },
     "animations": {
       "pageTransition": "fade",
-      "cardHoverEffect": "lift"
+      "cardHoverEffect": "lift",
+      "scrollReveal": "fade-up",
+      "scrollRevealDuration": 600,
+      "staggerChildren": true
     },
     "buttons": {
       "primaryRadius": "6px",
@@ -232,6 +235,146 @@
             "limit": 8,
             "columns_desktop": "4",
             "image_ratio": "portrait"
+          }
+        }
+      ]
+    },
+    "icons_with_text_1": {
+      "type": "icons_with_text",
+      "settings": {
+        "title": "",
+        "columns": "3",
+        "padding_top": 48,
+        "padding_bottom": 48
+      },
+      "blocks": [
+        {
+          "type": "icon_item",
+          "settings": {
+            "icon": "truck",
+            "title": "Free Shipping",
+            "text": "On all orders over $50"
+          }
+        },
+        {
+          "type": "icon_item",
+          "settings": {
+            "icon": "shield",
+            "title": "Secure Payments",
+            "text": "100% protected checkout"
+          }
+        },
+        {
+          "type": "icon_item",
+          "settings": {
+            "icon": "headphones",
+            "title": "24/7 Support",
+            "text": "We're here to help anytime"
+          }
+        }
+      ]
+    },
+    "image_with_text_1": {
+      "type": "image_with_text",
+      "settings": {
+        "padding_top": 80,
+        "padding_bottom": 80
+      },
+      "blocks": [
+        {
+          "type": "heading",
+          "settings": {
+            "text": "Our Story",
+            "size": "h2"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "We believe in quality, craftsmanship, and timeless design. Every product in our collection is carefully curated to bring you the very best."
+          }
+        },
+        {
+          "type": "button",
+          "settings": {
+            "text": "Learn More",
+            "link": "/pages/about"
+          }
+        }
+      ]
+    },
+    "testimonials_1": {
+      "type": "testimonials",
+      "settings": {
+        "layout": "carousel",
+        "autoplay": true,
+        "autoplay_speed": 5,
+        "show_stars": true,
+        "show_quote_mark": true,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#F9FAFB"
+      },
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The quality of the products exceeded my expectations. I've been a loyal customer for over a year now.",
+            "author": "Sarah Johnson",
+            "title": "Verified Buyer",
+            "rating": 5
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Fast shipping, beautiful packaging, and the customer service is outstanding. Highly recommended!",
+            "author": "Michael Chen",
+            "title": "Repeat Customer",
+            "rating": 5
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Finally found a store that delivers on its promises. Premium quality at fair prices.",
+            "author": "Emily Rodriguez",
+            "title": "Happy Customer",
+            "rating": 5
+          }
+        }
+      ]
+    },
+    "newsletter_1": {
+      "type": "newsletter",
+      "settings": {
+        "layout": "stacked",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#111827",
+        "text_color": "#ffffff"
+      },
+      "blocks": [
+        {
+          "type": "heading",
+          "settings": {
+            "text": "Stay in the Loop",
+            "size": "h2",
+            "color": "#ffffff"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "Subscribe to get special offers, early access to new arrivals, and insider-only discounts.",
+            "color": "#D1D5DB"
+          }
+        },
+        {
+          "type": "email_signup",
+          "settings": {
+            "placeholder": "Enter your email",
+            "button_text": "Subscribe"
           }
         }
       ]
@@ -595,6 +738,20 @@
         }
       ],
       "settings": {}
+    },
+    "main-search": {
+      "type": "search-section",
+      "settings": {
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "main-not-found": {
+      "type": "not-found-section",
+      "settings": {
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
     }
   },
   "layout": {
@@ -604,7 +761,11 @@
     ],
     "content": [
       "hero_1",
-      "product_grid_1"
+      "icons_with_text_1",
+      "product_grid_1",
+      "image_with_text_1",
+      "testimonials_1",
+      "newsletter_1"
     ],
     "footer": [
       "footer_1",
@@ -660,6 +821,16 @@
     "order": {
       "order": [
         "main-order"
+      ]
+    },
+    "search": {
+      "order": [
+        "main-search"
+      ]
+    },
+    "not_found": {
+      "order": [
+        "main-not-found"
       ]
     }
   }
