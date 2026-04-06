@@ -463,50 +463,80 @@ export function ProductVariantsBlock({ settings, sectionSettings }: { settings: 
   const variants = product.variants || [];
   if (variants.length <= 1) return null;
 
+  const currentVariant = selectedVariant || variants[0];
+
+  // Find a variant that matches ALL selected options (multi-option safe)
+  const handleOptionChange = (optionName: string, value: string) => {
+    const currentOptions: Record<string, string> = {};
+    (currentVariant?.selectedOptions || []).forEach((o: any) => {
+      currentOptions[o.name] = o.value;
+    });
+    currentOptions[optionName] = value;
+
+    const match = variants.find((v: any) => {
+      const vOpts = v.selectedOptions || [];
+      return Object.entries(currentOptions).every(([name, val]) =>
+        vOpts.some((o: any) => o.name === name && o.value === val)
+      );
+    });
+
+    if (match) {
+      setSelectedVariant(match);
+    } else {
+      const fallback = variants.find((v: any) =>
+        v.selectedOptions?.some((o: any) => o.name === optionName && o.value === value)
+      );
+      if (fallback) setSelectedVariant(fallback);
+    }
+  };
+
   return (
     <div className="space-y-6 mb-8">
-      {product.options?.map((option: any, optIdx: number) => (
-        <div key={optIdx} className="space-y-3">
-          <label className="text-xs font-bold uppercase tracking-wider opacity-50">{option.name}</label>
-          {settings.style === 'dropdown' ? (
-            <select
-              className="w-full px-4 py-3 border rounded-xl text-sm shadow-sm focus:ring-2 focus:ring-current/20 outline-none transition-all"
-              style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }}
-              value={selectedVariant?.id || variants[0]?.id}
-              onChange={(e) => {
-                const v = variants.find((v: any) => v.id === e.target.value);
-                if (v) setSelectedVariant(v);
-              }}
-            >
-              {variants.map((v: any) => (
-                <option key={v.id} value={v.id}>{v.title}</option>
-              ))}
-            </select>
-          ) : (
-            <div className="flex flex-wrap gap-2">
-              {option.values?.map((value: string, valIdx: number) => {
-                const matchingVariant = variants.find((v: any) =>
-                  v.options?.some((o: string) => o === value)
-                );
-                const isSelected = selectedVariant?.options?.includes(value);
-                return (
-                  <button
-                    key={valIdx}
-                    onClick={() => matchingVariant && setSelectedVariant(matchingVariant)}
-                    className={`px-5 py-2.5 text-sm font-semibold rounded-lg border transition-all ${isSelected
-                      ? 'border-primary bg-primary text-white shadow-md shadow-primary/20'
-                      : 'hover:opacity-80'
-                      }`}
-                    style={!isSelected ? { borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' } : undefined}
-                  >
-                    {value}
-                  </button>
-                );
-              })}
-            </div>
-          )}
-        </div>
-      ))}
+      {product.options?.map((option: any, optIdx: number) => {
+        const currentValue = currentVariant?.selectedOptions?.find((o: any) => o.name === option.name)?.value;
+        return (
+          <div key={optIdx} className="space-y-3">
+            <label className="text-xs font-bold uppercase tracking-wider opacity-50">
+              {option.name}
+              {currentValue && <span className="ml-2 opacity-70 normal-case font-normal">{currentValue}</span>}
+            </label>
+            {settings.style === 'dropdown' ? (
+              <select
+                className="w-full px-4 py-3 border rounded-xl text-sm shadow-sm focus:ring-2 focus:ring-current/20 outline-none transition-all"
+                style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }}
+                value={selectedVariant?.id || variants[0]?.id}
+                onChange={(e) => {
+                  const v = variants.find((v: any) => v.id === e.target.value);
+                  if (v) setSelectedVariant(v);
+                }}
+              >
+                {variants.map((v: any) => (
+                  <option key={v.id} value={v.id}>{v.title}</option>
+                ))}
+              </select>
+            ) : (
+              <div className="flex flex-wrap gap-2">
+                {option.values?.map((value: string, valIdx: number) => {
+                  const isSelected = currentValue === value;
+                  return (
+                    <button
+                      key={valIdx}
+                      onClick={() => handleOptionChange(option.name, value)}
+                      className={`px-5 py-2.5 text-sm font-semibold rounded-lg border transition-all ${isSelected
+                        ? 'border-primary bg-primary text-white shadow-md shadow-primary/20'
+                        : 'hover:opacity-80'
+                        }`}
+                      style={!isSelected ? { borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' } : undefined}
+                    >
+                      {value}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
