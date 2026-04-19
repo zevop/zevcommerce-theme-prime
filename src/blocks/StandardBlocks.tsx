@@ -425,6 +425,10 @@ export function ProductPriceBlock({ settings, sectionSettings }: { settings: any
   const variant = selectedVariant || product.variants?.[0];
   const price = variant?.price || product.price;
   const compareAt = variant?.compareAtPrice || product.compareAtPrice;
+  // Sale state is pre-computed by the storefrontend (domain rule: sale
+  // exists when compareAt > price, possibly influenced by discounts).
+  // Theme just renders the decision.
+  const onSale = variant?.onSale ?? product?.onSale ?? false;
   const currency = storeConfig?.currency || 'NGN';
   const alignment = settings.enable_custom_alignment ? settings.alignment : (sectionSettings?.alignment || 'left');
   const flexAlign = getFlexAlignmentClass(alignment);
@@ -433,11 +437,11 @@ export function ProductPriceBlock({ settings, sectionSettings }: { settings: any
     <div className={`flex items-baseline gap-3 mb-6 ${flexAlign}`}>
       <span
         className="text-2xl font-bold"
-        style={{ color: (compareAt && compareAt > price) ? (settings.sale_color || '#EF4444') : (settings.price_color || sectionSettings?.text_color || 'var(--color-heading)') }}
+        style={{ color: onSale ? (settings.sale_color || '#EF4444') : (settings.price_color || sectionSettings?.text_color || 'var(--color-heading)') }}
       >
         {formatPrice(price, currency)}
       </span>
-      {(settings.show_compare_at ?? true) && compareAt && compareAt > price && (
+      {(settings.show_compare_at ?? true) && onSale && compareAt && (
         <span className="text-lg line-through font-medium opacity-40">{formatPrice(compareAt, currency)}</span>
       )}
     </div>
@@ -553,8 +557,10 @@ export function AddToCartBlock({ settings, sectionSettings }: { settings: any, s
   }
 
   const variant = selectedVariant || product.variants?.[0];
-  const totalStock = variant?.inventoryLevels?.reduce((sum: number, level: any) => sum + (level.available || 0), 0) ?? 0;
-  const inStock = totalStock > 0;
+  // Availability is pre-computed by the storefrontend before the theme
+  // renders. Themes must not compute stock themselves — that's domain
+  // logic (inventory tracking, multi-location, quota rules). Just read.
+  const inStock = variant?.availableForSale ?? product?.availableForSale ?? true;
 
   const handleAddToCart = async () => {
     if (!variant) return;
